@@ -22,48 +22,4 @@ class UI_TEST_API UMyLobbyWidget : public UUserWidget
 protected:
 	virtual void NativeConstruct() override;
 
-public:
-	/**
-	 * @brief UI의 재화 텍스트를 갱신합니다.
-	 * @param Gold 현재 보유 골드
-	 * @param Gem 현재 보유 쥬얼
-	 */
-	UFUNCTION(BlueprintCallable)
-	void UpdateCurrencies(int32 Gold, int32 Gem);
-
-private:
-	// --- [Top Area : 상단 재화 및 설정] ---
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UTextBlock> GoldText;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UTextBlock> GemText;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> SettingBtn;
-
-	// --- [Menu Area : 우측 메뉴 버튼들] ---
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> StageBtn;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> ShopBtn;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> CharacterBtn;
-
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> EquipmentBtn;
-
-	// --- [클릭 이벤트 함수들] ---
-	UFUNCTION() 
-	void OnStageClicked();
-	UFUNCTION() 
-	void OnShopClicked();
-	UFUNCTION() 
-	void OnCharacterClicked();
-	UFUNCTION() 
-	void OnEquipmentClicked();
-	UFUNCTION() 
-	void OnSettingClicked();
 };
