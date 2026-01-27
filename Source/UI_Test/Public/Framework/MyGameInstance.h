@@ -41,6 +41,14 @@ protected:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "UI")
 	TSubclassOf<ULoadingWidget> LoadingWidgetClass = nullptr;
 
+	/**
+	 * @brief [기획자 설정용] 로딩 화면을 보여줄 최소 시간(초)입니다.
+	 * @details 실제 로딩이 0.1초 만에 끝나도, 이 시간만큼은 로딩 바 연출을 보여줍니다.
+	 * (예: 2.0으로 설정하면 최소 2초간 로딩 화면 유지)
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Loading Config")
+	float MinLoadingTime = 2.0f;
+
 private:
 	/**
 	 * @brief 현재 화면에 떠 있는 로딩 위젯 인스턴스.
@@ -63,6 +71,11 @@ private:
 	 * @brief 진행률 체크를 위한 타이머 핸들.
 	 */
 	FTimerHandle ProgressTimerHandle;
+
+	/**
+	 * @brief 현재 로딩이 시작된 후 흐른 누적 시간 (초).
+	 */
+	float TotalElapsedTime = 0.0f;
 
 	/**
 	 * @brief 타이머에 의해 주기적으로 호출되어 로딩 진행률을 갱신하는 함수입니다.
