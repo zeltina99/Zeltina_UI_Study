@@ -4,6 +4,7 @@
 #include "UI/Title/MyTitleWidget.h"
 #include "Components/Button.h"
 #include "Kismet/GameplayStatics.h" // 레벨 이동(OpenLevel)을 위해 필요
+#include "Framework/MyGameInstance.h"// [필수] 비동기 로딩 함수 사용을 위해 추가
 
 void UMyTitleWidget::NativeConstruct()
 {
@@ -27,5 +28,17 @@ void UMyTitleWidget::NativeConstruct()
 
 void UMyTitleWidget::OnScreenTouched()
 {
-	UGameplayStatics::OpenLevel(GetWorld(), FName("Lobby"));
+	/** @brief GameInstance 캐스팅 */
+	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
+
+	if (GI)
+	{
+		/** @brief 비동기 로딩 요청 (기획자가 세팅한 목록 전달) */
+		GI->OpenLevelWithAsyncLoad(FName("Lobby"), PreloadAssets);
+	}
+	else
+	{
+		/** @brief 예외 처리: GI를 못 찾으면 즉시 이동 */
+		UGameplayStatics::OpenLevel(GetWorld(), FName("Lobby"));
+	}
 }

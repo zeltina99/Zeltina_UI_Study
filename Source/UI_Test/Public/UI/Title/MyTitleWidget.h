@@ -27,6 +27,14 @@ protected:
 	*/
 	virtual void NativeConstruct() override;
 
+	/**
+	 * @brief 로비로 넘어갈 때 미리 로딩할 에셋 목록
+	 * @details 기획자가 에디터에서 직접 텍스처, 사운드, 파티클 등을 추가할 수 있습니다.
+	 * 여기에 등록된 에셋 용량만큼 로딩 바가 차오릅니다.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Config")
+	TArray<TSoftObjectPtr<UObject>> PreloadAssets;
+
 private:
 	/**
 	* @brief 화면 전체를 덮는 투명 버튼입니다.
@@ -44,8 +52,8 @@ private:
 	TObjectPtr<UWidgetAnimation> BlinkAnim = nullptr;
 	
 	/**
-	* @brief 화면(투명 버튼)을 터치했을 때 호출되는 콜백 함수입니다.
-	* @note 로비 레벨로 이동하는 로직을 수행합니다.
+	* @brief 화면(투명 버튼)을 터치했을 때 호출됩니다.
+	* @details GameInstance를 통해 로비 레벨로 비동기 로딩을 시작합니다.
 	*/
 	UFUNCTION()
 	void OnScreenTouched();
