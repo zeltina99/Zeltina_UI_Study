@@ -32,6 +32,13 @@ public:
 	UPROPERTY(BlueprintAssignable, Category = "UI|Event")
 	FOnMenuSelected OnMenuSelected;
 
+	/**
+	 * @brief 스테이지(월드맵) 위젯 클래스입니다. (WBP_WorldMap 할당)
+	 * @details 버튼 클릭 시 이 클래스를 기반으로 위젯을 생성합니다.
+	 */
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Config")
+	TSubclassOf<UUserWidget> StageMapClass = nullptr;
+
 protected:
 	virtual void NativeConstruct() override;
 
@@ -46,6 +53,13 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> EquipmentBtn;
 #pragma endregion
+
+	/**
+	 * @brief 생성된 월드맵 위젯의 인스턴스를 저장하는 포인터입니다.
+	 * @details 매번 CreateWidget 하지 않고, 한 번 만들면 재사용합니다.
+	 */
+	UPROPERTY()
+	TObjectPtr<UUserWidget> StageMapInstance = nullptr;
 
 #pragma region 내부 클릭 핸들러 (Delegate Broadcast용)
 	UFUNCTION() void OnStageClicked();
