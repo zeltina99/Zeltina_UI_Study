@@ -36,6 +36,28 @@ void UStageNodeWidget::InitializeNode(bool bIsLocked)
 	}
 }
 
+void UStageNodeWidget::SetNodeThumbnail(UTexture2D* NewTexture)
+{
+	if (StageBtn && NewTexture)
+	{
+		// 버튼의 "Normal(평상시)" 상태 스타일을 가져와서 이미지를 교체합니다.
+		FButtonStyle Style = StageBtn->WidgetStyle;
+
+		// 슬레이트 브러시(SlateBrush)에 텍스처 설정
+		FSlateBrush Brush = Style.Normal;
+		Brush.SetResourceObject(NewTexture);
+		// 이미지 크기가 찌그러지지 않게 박스나 이미지 사이즈에 맞춤
+		Brush.DrawAs = ESlateBrushDrawType::Box;
+
+		// 변경된 스타일을 다시 버튼에 적용
+		Style.Normal = Brush;
+		Style.Hovered = Brush; // 마우스 올렸을 때도 같은 이미지
+		Style.Pressed = Brush; // 눌렀을 때도 같은 이미지 (원하면 다르게 설정 가능)
+
+		StageBtn->SetStyle(Style);
+	}
+}
+
 void UStageNodeWidget::NativeConstruct()
 {
 	Super::NativeConstruct();

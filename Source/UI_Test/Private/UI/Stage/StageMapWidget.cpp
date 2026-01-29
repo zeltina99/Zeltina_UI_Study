@@ -11,8 +11,8 @@ void UStageMapWidget::NativeConstruct()
 	Super::NativeConstruct();
 
 	// 1. 현재 유저의 클리어 정보 가져오기 (나중에는 SaveGame에서 로드)
-	// 테스트를 위해 1스테이지까지 깼다고 가정 (1번, 2번은 열림, 3번부터 잠김)
-	int32 ClearStageIndex = 1;
+	// 시작은 1-1만 열려 있음
+	int32 ClearStageIndex = 0;
 
 	// 2. 내 자식 위젯들을 전부 뒤져서 'UStageNodeWidget' 타입을 찾는다. (WidgetTree 순회)
 	// 기획자가 WBP에 노드를 100개를 박아놔도 여기서 다 찾아냅니다.
@@ -33,6 +33,24 @@ void UStageMapWidget::NativeConstruct()
 			// (내 번호가 클리어+1 보다 크면 잠금)
 			bool bIsLocked = Node->TargetStageIndex > (ClearStageIndex + 1);
 			Node->InitializeNode(bIsLocked);
+
+			// ==========================================
+			// ★ [추가된 부분] 썸네일 이미지 적용 로직 ★
+			// ==========================================
+			if (FStageData* Data = GetStageDataByIndex(Node->TargetStageIndex))
+			{
+				// 데이터 테이블에 썸네일이 설정되어 있다면?
+				if (!Data->Thumbnail.IsNull())
+				{
+					// 동기 로딩 (작은 아이콘이라 괜찮음)
+					UTexture2D* LoadedTex = Data->Thumbnail.LoadSynchronous();
+					if (LoadedTex)
+					{
+						// 노드야, 이 그림으로 옷 갈아입어라!
+						Node->SetNodeThumbnail(LoadedTex);
+					}
+				}
+			}
 		}
 	}
 }

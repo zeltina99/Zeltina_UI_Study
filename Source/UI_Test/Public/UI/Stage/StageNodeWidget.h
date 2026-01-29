@@ -48,6 +48,12 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "UI|Logic")
 	void InitializeNode(bool bIsLocked);
 
+	/**
+	 * @brief 외부에서 이미지를 받아서 버튼의 배경으로 설정하는 함수
+	 */
+	UFUNCTION(BlueprintCallable, Category = "UI|Logic")
+	void SetNodeThumbnail(UTexture2D* NewTexture);
+
 protected:
 	/**
 	 * @brief 위젯 초기화 시 버튼 이벤트를 바인딩합니다.

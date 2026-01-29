@@ -18,11 +18,30 @@ void UStagePopupWidget::UpdatePopupInfo(const FStageData& Data)
 		DescText->SetText(Data.Description);
 	}
 
-	//입장할 레벨 이름 캐싱
 	CurrentLevelName = Data.LevelToLoad;
 
-	// TODO: PreviewImage에 Data.Thumnail 비동기 로딩 적용 필요
-	// SetBrushFromSoftTexture 등을 활용하여 UI 블로킹 방지
+	// [수정] 썸네일 이미지 로딩 로직 추가
+	if (PreviewImage)
+	{
+		// 1. 데이터에 썸네일 경로가 있는지 확인
+		if (!Data.Thumbnail.IsNull())
+		{
+			// 2. 동기 로딩 (팝업 뜨는 순간 로딩)
+			// Soft Object Ptr을 실제 메모리에 올립니다.
+			UTexture2D* LoadedTexture = Data.Thumbnail.LoadSynchronous();
+
+			// 3. 이미지 위젯에 적용
+			if (LoadedTexture)
+			{
+				PreviewImage->SetBrushFromTexture(LoadedTexture);
+			}
+		}
+		else
+		{
+			// 이미지가 없으면 기본값이나 빈칸 처리 (선택사항)
+			// PreviewImage->SetBrushFromTexture(nullptr); 
+		}
+	}
 }
 
 void UStagePopupWidget::NativeConstruct()
