@@ -43,6 +43,16 @@ protected:
 
 	virtual void NativeOnInitialized() override;
 
+	/**
+	 * @brief 스테이지 노드 위젯들이 담겨 있는 컨테이너 패널입니다.
+	 * @details
+	 * - 전체 위젯 트리를 검색(GetAllWidgets)하는 비용을 줄이기 위해 사용합니다.
+	 * - 에디터에서 CanvasPanel, VerticalBox 등의 이름을 'NodeContainer'로 지정해야 합니다.
+	 * - 이 패널의 직속 자식(Direct Children)만 순회하여 성능을 최적화합니다.
+	 */
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UPanelWidget> NodeContainer;
+
 private:
 	/**
 	 * @brief 로비로 돌아가는 뒤로 가기 버튼입니다.

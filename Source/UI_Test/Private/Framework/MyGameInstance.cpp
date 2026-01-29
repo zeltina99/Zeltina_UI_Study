@@ -52,6 +52,16 @@ void UMyGameInstance::OpenLevelWithAsyncLoad(FName LevelName, const TArray<TSoft
 	}
 }
 
+void UMyGameInstance::UpdateClearProgress(int32 ClearedIndex)
+{
+	// 더 높은 스테이지를 깼을 때만 갱신 (이미 깬 거 또 깼다고 줄어들면 안 되니까)
+	if (ClearedIndex > MaxClearedStageIndex)
+	{
+		MaxClearedStageIndex = ClearedIndex;
+		// TODO: 여기서 SaveGameToSlot 호출해서 파일로 저장하면 완벽합니다.
+	}
+}
+
 void UMyGameInstance::UpdateLoadingProgress()
 {
 	// 1. [수정] 시간 직접 누적 (가장 확실한 방법)

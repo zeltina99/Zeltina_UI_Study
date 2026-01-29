@@ -34,6 +34,21 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Level System")
 	void OpenLevelWithAsyncLoad(FName LevelName, const TArray<TSoftObjectPtr<UObject>>& AssetsToLoad);
 
+	/**
+	 * @brief 스테이지 클리어 시 호출하여 진척도를 갱신합니다.
+	 * @param ClearedIndex 방금 깬 스테이지 번호 (예: 1-1을 깼으면 1)
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Game Progress")
+	void UpdateClearProgress(int32 ClearedIndex);
+
+	/**
+	 * @brief 현재까지 클리어한 최고 스테이지 인덱스입니다.
+	 * @details 0이면 "아무것도 안 깸(1-1 도전 중)", 1이면 "1-1 깸(1-2 도전 가능)"
+	 * @note 나중에는 SaveGame에서 불러와야 합니다.
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Progress")
+	int32 MaxClearedStageIndex = 0;
+
 protected:
 	/**
 	 * @brief 로딩 화면 위젯 클래스 (에디터에서 WBP_Loading 할당).

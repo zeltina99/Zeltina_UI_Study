@@ -3,6 +3,8 @@
 #include "UI/Stage/StageMapWidget.h"
 #include "UI/Stage/StageNodeWidget.h"
 #include "UI/Stage/StagePopupWidget.h"
+#include "Framework/MyGameInstance.h"
+#include "Components/PanelWidget.h"
 #include "Components/Button.h"
 #include "Blueprint/WidgetTree.h" // [중요] 위젯 트리 순회를 위해 필요
 
@@ -12,41 +14,41 @@ void UStageMapWidget::NativeConstruct()
 
 	// 1. 현재 유저의 클리어 정보 가져오기 (나중에는 SaveGame에서 로드)
 	// 시작은 1-1만 열려 있음
-	int32 ClearStageIndex = 0;
-
-	// 2. 내 자식 위젯들을 전부 뒤져서 'UStageNodeWidget' 타입을 찾는다. (WidgetTree 순회)
-	// 기획자가 WBP에 노드를 100개를 박아놔도 여기서 다 찾아냅니다.
-	TArray<UWidget*> AllWidgets;
-	WidgetTree->GetAllWidgets(AllWidgets);
-
-	for (UWidget* Widget : AllWidgets)
+	int32 CurrentClearIndex = 0;
+	if (UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance()))
 	{
-		if (UStageNodeWidget* Node = Cast<UStageNodeWidget>(Widget))
+		CurrentClearIndex = GI->MaxClearedStageIndex;
+	}
+
+	if (NodeContainer)
+	{
+		const int32 ChildCount = NodeContainer->GetChildrenCount();
+
+		for (int32 i = 0; i < ChildCount; ++i)
 		{
-			// 2-1. 이벤트 연결 (노드가 클릭되면 내 함수 OnNodeClicked 실행해라)
-			if (!Node->OnStageSelected.IsBound())
+			UWidget* Child = NodeContainer->GetChildAt(i);
+
+			if (UStageNodeWidget* Node = Cast<UStageNodeWidget>(Child))
 			{
-				Node->OnStageSelected.AddDynamic(this, &UStageMapWidget::OnNodeClicked);
-			}
+				// 2-2. 잠금/해금 상태 초기화
+				// (내 번호가 클리어+1 보다 크면 잠금)
+				const bool bIsLocked = Node->TargetStageIndex > (CurrentClearIndex + 1);
+				Node->InitializeNode(bIsLocked);
 
-			// 2-2. 잠금/해금 상태 초기화
-			// (내 번호가 클리어+1 보다 크면 잠금)
-			bool bIsLocked = Node->TargetStageIndex > (ClearStageIndex + 1);
-			Node->InitializeNode(bIsLocked);
-
-			// 썸네일 이미지 적용 로직
-			if (FStageData* Data = GetStageDataByIndex(Node->TargetStageIndex))
-			{
-				// 1. 이름 설정
-				Node->SetStageName(Data->StageName);
-
-				// 2. 아이콘 설정 (함수 이름 변경됨!)
-				if (!Data->NodeIcon.IsNull())
+				// 썸네일 및 아이콘 적용 로직
+				if (FStageData* Data = GetStageDataByIndex(Node->TargetStageIndex))
 				{
-					UTexture2D* LoadedIcon = Data->NodeIcon.LoadSynchronous();
-					if (LoadedIcon)
+					// 1. 이름 설정 (예: "1-1")
+					Node->SetStageName(Data->StageName);
+
+					// 2. 아이콘 설정 (데이터가 존재할 경우에만)
+					if (!Data->NodeIcon.IsNull())
 					{
-						Node->SetNodeIcon(LoadedIcon);
+						UTexture2D* LoadedIcon = Data->NodeIcon.LoadSynchronous();
+						if (LoadedIcon)
+						{
+							Node->SetNodeIcon(LoadedIcon);
+						}
 					}
 				}
 			}
@@ -58,6 +60,28 @@ void UStageMapWidget::NativeConstruct()
 void UStageMapWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized(); // ★ 중요: 부모 초기화 필수
+
+	// 전체 위젯 트리를 뒤지는 GetAllWidgets 대신, 지정된 컨테이너의 자식만 순회합니다. (O(N) -> O(1))
+	if (NodeContainer)
+	{
+		const int32 ChildCount = NodeContainer->GetChildrenCount();
+
+		for (int32 i = 0; i < ChildCount; ++i)
+		{
+			// 컨테이너의 i번째 자식을 가져옵니다.
+			UWidget* ChildWidget = NodeContainer->GetChildAt(i);
+
+			// 해당 자식이 스테이지 노드인지 확인합니다.
+			if (UStageNodeWidget* Node = Cast<UStageNodeWidget>(ChildWidget))
+			{
+				// 클릭 이벤트가 아직 바인딩되지 않았을 경우에만 연결합니다. (Safe Guard)
+				if (!Node->OnStageSelected.IsBound())
+				{
+					Node->OnStageSelected.AddDynamic(this, &UStageMapWidget::OnNodeClicked);
+				}
+			}
+		}
+	}
 
 	if (BackBtn)
 	{
