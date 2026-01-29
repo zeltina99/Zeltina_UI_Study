@@ -10,6 +10,7 @@
 class UStageNodeWidget;
 class UStagePopupWidget;
 class UDataTable;
+class UButton;
 
 /**
  * @class UWorldMapWidget
@@ -40,7 +41,22 @@ protected:
 	 */
 	virtual void NativeConstruct() override;
 
+	virtual void NativeOnInitialized() override;
+
 private:
+	/**
+	 * @brief 로비로 돌아가는 뒤로 가기 버튼입니다.
+	 * @note meta = (BindWidget)이 있으므로, 블루프린트에서 이름을 "BackBtn"으로 꼭 맞춰야 합니다.
+	 */
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UButton> BackBtn;
+
+	/**
+	 * @brief 뒤로 가기 버튼 클릭 시 호출됩니다.
+	 */
+	UFUNCTION()
+	void OnBackClicked();
+
 	/**
 	 * @brief 노드가 클릭되었을 때 호출되는 콜백 함수입니다.
 	 * @param StageIndex 클릭된 노드의 스테이지 번호

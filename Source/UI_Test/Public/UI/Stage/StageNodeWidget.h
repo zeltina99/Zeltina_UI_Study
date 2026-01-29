@@ -49,10 +49,18 @@ public:
 	void InitializeNode(bool bIsLocked);
 
 	/**
-	 * @brief 외부에서 이미지를 받아서 버튼의 배경으로 설정하는 함수
+	 * @brief 지도 상의 노드 버튼에 표시될 작은 아이콘을 설정합니다.
+	 * @details 데이터 테이블의 NodeIcon을 받아서 버튼 스타일(Normal, Hovered, Pressed)에 적용합니다.
+	 * @param NewIcon 데이터 테이블에서 로드된 아이콘 텍스처
 	 */
-	UFUNCTION(BlueprintCallable, Category = "UI|Logic")
-	void SetNodeThumbnail(UTexture2D* NewTexture);
+	UFUNCTION(BlueprintCallable, Category = "UI Logic")
+	void SetNodeIcon(UTexture2D* NewIcon);
+
+	/** 
+	 * @brief 데이터 테이블에 있는 진짜 스테이지 이름(예: "1-1")을 설정합니다.
+	 */
+	UFUNCTION(BlueprintCallable)
+	void SetStageName(FText NewName);
 
 protected:
 	/**

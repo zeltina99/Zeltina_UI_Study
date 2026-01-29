@@ -38,11 +38,18 @@ public:
 	FName LevelToLoad;
 
 	/**
-	 * @brief 스테이지 미리보기 이미지 (비동기 로딩용)
+	 * @brief [팝업용] 스테이지 미리보기 대형 이미지
 	 * @details TSoftObjectPtr을 사용하여 UI가 열릴 때 메모리에 로드합니다.
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visual")
 	TSoftObjectPtr<UTexture2D> Thumbnail = nullptr;
+
+	/**
+	 * @brief [지도용] 노드 버튼에 들어갈 작은 아이콘 (예: 1-1 숫자, 해골 마크)
+	 * @note ★ 새로 추가된 변수 ★
+	 */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Visual")
+	TSoftObjectPtr<UTexture2D> NodeIcon;
 
 	/**
 	 * @brief 스테이지 순서 및 해금 조건을 판단하는 인덱스입니다.

@@ -1,9 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "UI/Stage/StageMapWidget.h"
 #include "UI/Stage/StageNodeWidget.h"
 #include "UI/Stage/StagePopupWidget.h"
+#include "Components/Button.h"
 #include "Blueprint/WidgetTree.h" // [중요] 위젯 트리 순회를 위해 필요
 
 void UStageMapWidget::NativeConstruct()
@@ -34,25 +34,42 @@ void UStageMapWidget::NativeConstruct()
 			bool bIsLocked = Node->TargetStageIndex > (ClearStageIndex + 1);
 			Node->InitializeNode(bIsLocked);
 
-			// ==========================================
-			// ★ [추가된 부분] 썸네일 이미지 적용 로직 ★
-			// ==========================================
+			// 썸네일 이미지 적용 로직
 			if (FStageData* Data = GetStageDataByIndex(Node->TargetStageIndex))
 			{
-				// 데이터 테이블에 썸네일이 설정되어 있다면?
-				if (!Data->Thumbnail.IsNull())
+				// 1. 이름 설정
+				Node->SetStageName(Data->StageName);
+
+				// 2. 아이콘 설정 (함수 이름 변경됨!)
+				if (!Data->NodeIcon.IsNull())
 				{
-					// 동기 로딩 (작은 아이콘이라 괜찮음)
-					UTexture2D* LoadedTex = Data->Thumbnail.LoadSynchronous();
-					if (LoadedTex)
+					UTexture2D* LoadedIcon = Data->NodeIcon.LoadSynchronous();
+					if (LoadedIcon)
 					{
-						// 노드야, 이 그림으로 옷 갈아입어라!
-						Node->SetNodeThumbnail(LoadedTex);
+						Node->SetNodeIcon(LoadedIcon);
 					}
 				}
 			}
 		}
 	}
+	
+}
+
+void UStageMapWidget::NativeOnInitialized()
+{
+	Super::NativeOnInitialized(); // ★ 중요: 부모 초기화 필수
+
+	if (BackBtn)
+	{
+		BackBtn->OnClicked.AddDynamic(this, &UStageMapWidget::OnBackClicked);
+	}
+}
+
+void UStageMapWidget::OnBackClicked()
+{
+	// 화면에서 이 위젯(StageMap)을 치워버립니다.
+	// 그러면 뒤에 깔려있던 로비(Lobby)가 다시 짠 하고 보입니다.
+	RemoveFromParent();
 }
 
 void UStageMapWidget::OnNodeClicked(int32 StageIndex)

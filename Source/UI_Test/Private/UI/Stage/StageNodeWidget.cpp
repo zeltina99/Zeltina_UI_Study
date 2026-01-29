@@ -18,6 +18,11 @@ void UStageNodeWidget::InitializeNode(bool bIsLocked)
 		}
 		// 버튼 틴트를 어둡게 변경하여 비활성화 느낌 강조
 		StageBtn->SetBackgroundColor(FLinearColor(0.3f, 0.3f, 0.3f, 1.0f));
+		// 잠겨 있을 때 텍스트 안 보임
+		if(StageNumberText)
+		{
+			StageNumberText->SetVisibility(ESlateVisibility::Hidden);
+		}
 	}
 	else
 	{
@@ -28,33 +33,41 @@ void UStageNodeWidget::InitializeNode(bool bIsLocked)
 			LockIcon->SetVisibility(ESlateVisibility::Hidden);
 		}
 		StageBtn->SetBackgroundColor(FLinearColor::White);
-	}
-
-	if (StageNumberText)
-	{
-		StageNumberText->SetText(FText::AsNumber(TargetStageIndex));
+		// 해금 되면 텍스트가 보임
+		if (StageNumberText) 
+		{
+			StageNumberText->SetVisibility(ESlateVisibility::HitTestInvisible);
+		}
 	}
 }
 
-void UStageNodeWidget::SetNodeThumbnail(UTexture2D* NewTexture)
+void UStageNodeWidget::SetNodeIcon(UTexture2D* NewIcon)
 {
-	if (StageBtn && NewTexture)
+	if (StageBtn && NewIcon)
 	{
-		// 버튼의 "Normal(평상시)" 상태 스타일을 가져와서 이미지를 교체합니다.
+		// 버튼의 스타일 정보를 가져옵니다.
 		FButtonStyle Style = StageBtn->WidgetStyle;
 
-		// 슬레이트 브러시(SlateBrush)에 텍스처 설정
+		// 슬레이트 브러시(SlateBrush)에 아이콘 텍스처 설정
 		FSlateBrush Brush = Style.Normal;
-		Brush.SetResourceObject(NewTexture);
-		// 이미지 크기가 찌그러지지 않게 박스나 이미지 사이즈에 맞춤
-		Brush.DrawAs = ESlateBrushDrawType::Box;
+		Brush.SetResourceObject(NewIcon);
+		Brush.DrawAs = ESlateBrushDrawType::Box; // 구겨지지 않게 박스 형태로
 
-		// 변경된 스타일을 다시 버튼에 적용
+		// 변경된 이미지를 모든 상태(평상시, 마우스오버, 눌림)에 적용
 		Style.Normal = Brush;
-		Style.Hovered = Brush; // 마우스 올렸을 때도 같은 이미지
-		Style.Pressed = Brush; // 눌렀을 때도 같은 이미지 (원하면 다르게 설정 가능)
+		Style.Hovered = Brush;
+		Style.Pressed = Brush;
 
+		// 최종 스타일 적용
 		StageBtn->SetStyle(Style);
+	}
+}
+
+void UStageNodeWidget::SetStageName(FText NewName)
+{
+	if (StageNumberText)
+	{
+		StageNumberText->SetText(NewName);
 	}
 }
 
