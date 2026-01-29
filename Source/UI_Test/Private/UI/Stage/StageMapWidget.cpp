@@ -98,14 +98,25 @@ void UStageMapWidget::OnBackClicked()
 
 void UStageMapWidget::OnNodeClicked(int32 StageIndex)
 {
-	// 1. 데이터 테이블이 없거나 팝업 클래스가 없으면 중단 (안전장치)
+	// ================================================================
+	// ★ [추가] 1. 중복 방지 검문소
+	// 팝업이 이미 메모리에 있고(Valid), 화면에 떠 있다면(IsInViewport)?
+	// -> "또 만들지 말고 그냥 돌아가!"
+	// ================================================================
+	if (CurrentPopupInstance && CurrentPopupInstance->IsInViewport())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Popup is already open. Ignore click."));
+		return;
+	}
+
+	// 2. 데이터 테이블이 없거나 팝업 클래스가 없으면 중단 (안전장치)
 	if (!StageDataTable || !PopupClass)
 	{
 		UE_LOG(LogTemp, Error, TEXT("DataTable or PopupClass is missing in WorldMapWidget!"));
 		return;
 	}
 
-	// 2. 인덱스로 데이터 찾기
+	// 3. 인덱스로 데이터 찾기
 	FStageData* RowData = GetStageDataByIndex(StageIndex);
 	if (!RowData)
 	{
@@ -113,11 +124,14 @@ void UStageMapWidget::OnNodeClicked(int32 StageIndex)
 		return;
 	}
 
-	// 3. 팝업 위젯 생성 및 띄우기
-	if (UStagePopupWidget* Popup = CreateWidget<UStagePopupWidget>(GetOwningPlayer(), PopupClass))
+	// 4. 팝업 위젯 생성 및 띄우기
+	// [수정] CreateWidget 결과를 지역 변수가 아니라 '멤버 변수'에 저장합니다.
+	CurrentPopupInstance = CreateWidget<UStagePopupWidget>(GetOwningPlayer(), PopupClass);
+
+	if (CurrentPopupInstance)
 	{
-		Popup->UpdatePopupInfo(*RowData); // 데이터 전달
-		Popup->AddToViewport(); // 화면에 표시
+		CurrentPopupInstance->UpdatePopupInfo(*RowData); // 데이터 전달
+		CurrentPopupInstance->AddToViewport(); // 화면에 표시
 	}
 }
 

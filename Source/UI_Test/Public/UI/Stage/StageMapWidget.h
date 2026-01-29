@@ -53,6 +53,13 @@ protected:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UPanelWidget> NodeContainer;
 
+	/**
+	 * @brief 현재 화면에 떠 있는 팝업을 기억하는 변수입니다.
+	 * @details 이 변수가 채워져 있으면, 새로운 팝업을 만들지 않습니다.
+	 */
+	UPROPERTY()
+	TObjectPtr<UStagePopupWidget> CurrentPopupInstance = nullptr;
+
 private:
 	/**
 	 * @brief 로비로 돌아가는 뒤로 가기 버튼입니다.
