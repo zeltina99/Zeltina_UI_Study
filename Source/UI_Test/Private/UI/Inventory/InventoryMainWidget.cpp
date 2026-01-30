@@ -1,17 +1,20 @@
-// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "UI/Inventory/InventoryMainWidget.h"
 #include "UI/Inventory/InventorySlotWidget.h"
-#include "Components/WrapBox.h"
+#include "UI/Inventory/InventoryItemData.h" // 데이터 객체 헤더 필수!
+#include "Components/TileView.h"           // WrapBox 대신 TileView 사용
 #include "Components/Button.h"
-#include "Framework/Data/InventoryStructs.h" // 데이터 구조체
+#include "Framework/Data/InventoryStructs.h"
+
+// [가정] GameInstance 헤더 (보유 목록 가져오기용)
+// #include "Framework/MyGameInstance.h"
 
 void UInventoryMainWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	// 탭 버튼 이벤트 바인딩
+	// 탭 버튼 이벤트 연결
 	if (TabCharacterBtn)
 	{
 		TabCharacterBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnTabCharacterClicked);
@@ -21,73 +24,94 @@ void UInventoryMainWidget::NativeConstruct()
 		TabWeaponBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnTabWeaponClicked);
 	}
 
-	// 초기 화면: 캐릭터 리스트 표시
+	// 시작하자마자 캐릭터 탭 보여주기
 	ShowCharacterList();
 }
 
 void UInventoryMainWidget::ShowCharacterList()
 {
-	if (!ContentGrid || !SlotClass || !CharacterDT)
+	// TileView와 데이터 테이블이 연결되어 있는지 확인
+	if (!ContentTileView || !CharacterDT) return;
+
+	// 1. 기존 목록 싹 비우기
+	ContentTileView->ClearListItems();
+
+	// 2. [최적화] 보유 목록을 TMap으로 변환 (O(1) 초고속 검색을 위해)
+	// 실제로는 GameInstance에서 TArray<FOwnedHeroData>를 가져와야 합니다.
+	TArray<FOwnedHeroData> MyOwnedHeroes;
+	// 예: MyOwnedHeroes = GetGameInstance()->GetMyHeroes();
+
+	TMap<FName, const FOwnedHeroData*> OwnedMap;
+	for (const FOwnedHeroData& Hero : MyOwnedHeroes)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("InventoryMainWidget: 필수 데이터나 위젯이 바인딩되지 않았습니다."));
-		return;
+		OwnedMap.Add(Hero.HeroID, &Hero);
 	}
-
-	// 1. 기존 목록 초기화
-	ContentGrid->ClearChildren();
-
-	// 2. 보유 데이터 가져오기 (예시: 더미 데이터 또는 GameInstance 호출)
-	// 실제 구현 시: TArray<FOwnedHeroData> MyHeroes = GetGameInstance()->GetOwnedHeroes();
-	TArray<FOwnedHeroData> MyDummyHeroes; // 테스트용 빈 배열 (모두 미보유로 뜸)
 
 	// 3. 데이터 테이블의 모든 행(Row) 순회
 	TArray<FName> RowNames = CharacterDT->GetRowNames();
 	for (const FName& RowName : RowNames)
 	{
-		// 데이터 조회
-		FCharacterUIData* Data = CharacterDT->FindRow<FCharacterUIData>(RowName, TEXT("LoadCharacterData"));
+		FCharacterUIData* Data = CharacterDT->FindRow<FCharacterUIData>(RowName, TEXT("LoadCharacter"));
 		if (!Data) continue;
 
-		// 보유 여부 확인 (람다 식 활용)
-		const FOwnedHeroData* OwnedData = MyDummyHeroes.FindByPredicate([&](const FOwnedHeroData& Item) {
-			return Item.HeroID == RowName;
-			});
+		// 4. ★ 위젯을 직접 만드는 게 아니라, '데이터 객체'를 생성합니다!
+		UInventoryItemData* ItemObj = NewObject<UInventoryItemData>(this);
 
-		// 4. 슬롯 위젯 생성 및 데이터 주입
-		UInventorySlotWidget* NewSlot = CreateWidget<UInventorySlotWidget>(this, SlotClass);
-		if (NewSlot)
+		// 5. [최적화] Map에서 보유 여부 즉시 검색
+		const FOwnedHeroData* OwnedData = OwnedMap.FindRef(RowName); // 없으면 nullptr
+
+		if (OwnedData)
 		{
-			NewSlot->InitCharacterSlot(RowName, *Data, OwnedData);
-			ContentGrid->AddChildToWrapBox(NewSlot); // 그리드에 추가
+			// 보유 중이면 레벨 정보까지 넣어서 초기화
+			ItemObj->InitCharacter(RowName, *Data, true, OwnedData->Level);
 		}
+		else
+		{
+			// 미보유면 기본값으로 초기화
+			ItemObj->InitCharacter(RowName, *Data, false, 1);
+		}
+
+		// 6. Tile View에 데이터 추가 (화면 갱신은 TileView가 알아서 함)
+		ContentTileView->AddItem(ItemObj);
 	}
 }
 
 void UInventoryMainWidget::ShowWeaponList()
 {
-	if (!ContentGrid || !SlotClass || !WeaponDT) return;
+	if (!ContentTileView || !WeaponDT) return;
 
-	ContentGrid->ClearChildren();
+	ContentTileView->ClearListItems();
 
-	// TODO: 실제 보유 아이템 목록 가져오기
-	TArray<FOwnedItemData> MyDummyItems;
+	// [최적화] 무기 보유 목록 맵핑
+	TArray<FOwnedItemData> MyOwnedItems;
+	// 예: MyOwnedItems = GetGameInstance()->GetMyItems();
+
+	TMap<FName, const FOwnedItemData*> OwnedItemMap;
+	for (const FOwnedItemData& Item : MyOwnedItems)
+	{
+		OwnedItemMap.Add(Item.ItemID, &Item);
+	}
 
 	TArray<FName> RowNames = WeaponDT->GetRowNames();
 	for (const FName& RowName : RowNames)
 	{
-		FItemUIData* Data = WeaponDT->FindRow<FItemUIData>(RowName, TEXT("LoadItemData"));
+		FItemUIData* Data = WeaponDT->FindRow<FItemUIData>(RowName, TEXT("LoadItem"));
 		if (!Data) continue;
 
-		const FOwnedItemData* OwnedData = MyDummyItems.FindByPredicate([&](const FOwnedItemData& Item) {
-			return Item.ItemID == RowName;
-			});
+		UInventoryItemData* ItemObj = NewObject<UInventoryItemData>(this);
 
-		UInventorySlotWidget* NewSlot = CreateWidget<UInventorySlotWidget>(this, SlotClass);
-		if (NewSlot)
+		const FOwnedItemData* OwnedData = OwnedItemMap.FindRef(RowName);
+
+		if (OwnedData)
 		{
-			NewSlot->InitItemSlot(RowName, *Data, OwnedData);
-			ContentGrid->AddChildToWrapBox(NewSlot);
+			ItemObj->InitItem(RowName, *Data, true, OwnedData->EnhancementLevel);
 		}
+		else
+		{
+			ItemObj->InitItem(RowName, *Data, false, 0);
+		}
+
+		ContentTileView->AddItem(ItemObj);
 	}
 }
 

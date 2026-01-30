@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Blueprint/IUserObjectListEntry.h"
 #include "Framework/Data/GameEnums.h"
 #include "Framework/Data/InventoryStructs.h"
 #include "InventorySlotWidget.generated.h"
@@ -16,11 +17,11 @@ class UTextBlock;
  * @class UInventorySlotWidget
  * @brief 인벤토리 그리드 내의 단일 아이템/캐릭터 슬롯 UI입니다.
  * @details 
- * - 캐릭터 또는 아이템 데이터를 받아 아이콘, 테두리 색상, 레벨 등을 표시합니다.
+ * - 캐릭터 또는 아이템 데이터를 받아 아이콘, 테두리 색상, 레벨 등을 표시합니다.	
  * - 보유 여부(Owned)에 따라 잠금(Lock) 아이콘을 표시하거나 클릭 이벤트를 제어합니다.
  */
 UCLASS()
-class UI_TEST_API UInventorySlotWidget : public UUserWidget
+class UI_TEST_API UInventorySlotWidget : public UUserWidget, public IUserObjectListEntry
 {
 	GENERATED_BODY()
 	
@@ -31,7 +32,7 @@ public:
 	 * @param Data 캐릭터 도감 정보 (아이콘, 등급 등)
 	 * @param OwnedData 내 보유 정보 (레벨 등). 미보유 시 nullptr.
 	 */
-	void InitCharacterSlot(FName ID, const FCharacterUIData& Data, const FOwnedHeroData* OwnedData);
+	//void InitCharacterSlot(FName ID, const FCharacterUIData& Data, const FOwnedHeroData* OwnedData);
 
 	/**
 	 * @brief 아이템(무기/방어구) 데이터를 기반으로 슬롯을 초기화합니다.
@@ -39,13 +40,21 @@ public:
 	 * @param Data 아이템 도감 정보 (아이콘, 등급 등)
 	 * @param OwnedData 내 보유 정보 (강화 수치 등). 미보유 시 nullptr.
 	 */
-	void InitItemSlot(FName ID, const FItemUIData& Data, const FOwnedItemData* OwnedData);
+	//void InitItemSlot(FName ID, const FItemUIData& Data, const FOwnedItemData* OwnedData);
 
 protected:
 	/**
 	 * @brief 위젯이 초기화될 때 호출됩니다. 버튼 이벤트를 바인딩합니다.
 	 */
 	virtual void NativeOnInitialized() override;
+
+
+	/**
+	 * @brief 리스트 아이템의 데이터가 설정될 때 호출된다 (인터페이스 구현).
+	 * @details Tile View가 스크롤될 때마다 이 함수가 호출되어 UI 내용을 갈아끼운다.
+	 * @param ListItemObject 전달된 데이터 객체 (UInventoryItemData)
+	 */
+	virtual void NativeOnListItemObjectSet(UObject* ListItemObject) override;
 
 #pragma region 메인 UI 컴포넌트
 	/**

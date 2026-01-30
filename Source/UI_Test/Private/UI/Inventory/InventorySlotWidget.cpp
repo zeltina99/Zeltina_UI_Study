@@ -1,11 +1,10 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-
 #include "UI/Inventory/InventorySlotWidget.h"
+#include "UI/Inventory/InventoryItemData.h"
 #include "Components/Image.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
-
 
 void UInventorySlotWidget::NativeOnInitialized()
 {
@@ -18,77 +17,62 @@ void UInventorySlotWidget::NativeOnInitialized()
 	}
 }
 
-void UInventorySlotWidget::InitCharacterSlot(FName ID, const FCharacterUIData& Data, const FOwnedHeroData* OwnedData)
+// ★ Tile View가 데이터를 갱신할 때 호출하는 핵심 함수
+void UInventorySlotWidget::NativeOnListItemObjectSet(UObject* ListItemObject)
 {
-	MyID = ID;
-	bIsOwned = (OwnedData != nullptr);
+	UInventoryItemData* Data = Cast<UInventoryItemData>(ListItemObject);
+	if (!Data) return;
 
-	// 1. 아이콘 로드 및 설정
-	if (!Data.FaceIcon.IsNull())
+	// 내 멤버 변수 갱신
+	MyID = Data->ID;
+	bIsOwned = Data->bIsOwned;
+
+	// 1. 캐릭터 데이터 처리
+	if (Data->bIsCharacter)
 	{
-		IconImage->SetBrushFromTexture(Data.FaceIcon.LoadSynchronous());
-	}
-
-	// 2. 등급에 따른 테두리 색상 적용
-	if (RarityBorder)
-	{
-		RarityBorder->SetColorAndOpacity(GetRarityColor(Data.Rank));
-	}
-
-	// 3. 보유/미보유 상태 분기 처리
-	if (bIsOwned)
-	{
-		// [보유 상태]
-		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor::White); // 원본 색상
-		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed); // 자물쇠 숨김
-		if (SlotBtn) SlotBtn->SetIsEnabled(true); // 터치 활성화
-
-		// 레벨 표시
-		if (LevelText && OwnedData)
+		if (!Data->CharacterData.FaceIcon.IsNull())
 		{
-			LevelText->SetText(FText::AsNumber(OwnedData->Level));
+			IconImage->SetBrushFromTexture(Data->CharacterData.FaceIcon.LoadSynchronous());
+		}
+
+		if (RarityBorder)
+		{
+			RarityBorder->SetColorAndOpacity(GetRarityColor(Data->CharacterData.Rank));
+		}
+
+		if (bIsOwned && LevelText)
+		{
+			LevelText->SetText(FText::AsNumber(Data->Level));
 			LevelText->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
+	// 2. 아이템 데이터 처리
 	else
 	{
-		// [미보유 상태]
-		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor(0.2f, 0.2f, 0.2f, 1.0f)); // 어둡게
-		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Visible); // 자물쇠 표시
-		if (SlotBtn) SlotBtn->SetIsEnabled(false); // 터치 비활성화
+		if (!Data->ItemData.Icon.IsNull())
+		{
+			IconImage->SetBrushFromTexture(Data->ItemData.Icon.LoadSynchronous());
+		}
 
-		if (LevelText) LevelText->SetVisibility(ESlateVisibility::Collapsed);
-	}
-}
+		if (RarityBorder)
+		{
+			RarityBorder->SetColorAndOpacity(GetRarityColor(Data->ItemData.Rarity));
+		}
 
-void UInventorySlotWidget::InitItemSlot(FName ID, const FItemUIData& Data, const FOwnedItemData* OwnedData)
-{
-	MyID = ID;
-	bIsOwned = (OwnedData != nullptr);
-
-	if (!Data.Icon.IsNull())
-	{
-		IconImage->SetBrushFromTexture(Data.Icon.LoadSynchronous());
-	}
-
-	if (RarityBorder)
-	{
-		RarityBorder->SetColorAndOpacity(GetRarityColor(Data.Rarity));
+		if (bIsOwned && LevelText)
+		{
+			FString EnhanceStr = FString::Printf(TEXT("+%d"), Data->EnhancementLevel);
+			LevelText->SetText(FText::FromString(EnhanceStr));
+			LevelText->SetVisibility(ESlateVisibility::Visible);
+		}
 	}
 
+	// 3. 공통: 보유 여부에 따른 UI 상태 변경 (잠금 처리)
 	if (bIsOwned)
 	{
 		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor::White);
 		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
 		if (SlotBtn) SlotBtn->SetIsEnabled(true);
-
-		// 강화 수치 표시 (예: +10)
-		if (LevelText && OwnedData)
-		{
-			FString EnhanceStr = FString::Printf(TEXT("+%d"), OwnedData->EnhancementLevel);
-			LevelText->SetText(FText::FromString(EnhanceStr));
-			LevelText->SetVisibility(ESlateVisibility::Visible);
-		}
 	}
 	else
 	{
@@ -104,7 +88,7 @@ void UInventorySlotWidget::OnClicked()
 	if (bIsOwned)
 	{
 		UE_LOG(LogTemp, Log, TEXT("[Inventory] Item Selected: %s"), *MyID.ToString());
-		// TODO: 상세 팝업 요청 로직
+		// TODO: 여기서 메인 위젯이나 컨트롤러에게 "나 클릭됐어!"라고 알려주는 로직 추가 예정
 	}
 }
 

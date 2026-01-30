@@ -6,7 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "InventoryMainWidget.generated.h"
 
-class UWrapBox;
+class UTileView;
 class UButton;
 class UInventorySlotWidget;
 class UDataTable;
@@ -26,19 +26,19 @@ public:
 	 * @brief 슬롯 생성을 위한 위젯 클래스 (WBP_InventorySlot).
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Config")
-	TSubclassOf<UInventorySlotWidget> SlotClass;
+	TSubclassOf<UInventorySlotWidget> SlotClass = nullptr;
 
 	/**
 	 * @brief 캐릭터 전체 데이터가 담긴 데이터 테이블.
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Data")
-	TObjectPtr<UDataTable> CharacterDT;
+	TObjectPtr<UDataTable> CharacterDT = nullptr;
 
 	/**
 	 * @brief 아이템(무기) 전체 데이터가 담긴 데이터 테이블.
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "Data")
-	TObjectPtr<UDataTable> WeaponDT;
+	TObjectPtr<UDataTable> WeaponDT = nullptr;
 
 	/**
 	 * @brief 캐릭터 리스트를 그리드에 표시한다.
@@ -63,19 +63,19 @@ protected:
 	 * @details ScrollBox 아래에 자식으로 존재해야 스크롤이 가능하다.
 	 */
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UWrapBox> ContentGrid;
+	TObjectPtr<UTileView> ContentTileView = nullptr;
 
 	/**
 	 * @brief 캐릭터 탭 전환 버튼.
 	 */
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> TabCharacterBtn;
+	TObjectPtr<UButton> TabCharacterBtn = nullptr;
 
 	/**
 	 * @brief 무기 탭 전환 버튼.
 	 */
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> TabWeaponBtn;
+	TObjectPtr<UButton> TabWeaponBtn = nullptr;
 #pragma endregion
 
 private:
