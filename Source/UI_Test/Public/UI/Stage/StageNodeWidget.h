@@ -68,6 +68,8 @@ protected:
 	 */
 	virtual void NativeConstruct()override;
 
+	virtual void NativeOnInitialized()override;
+
 private:
 	/**
 	 * @brief 사용자가 터치하는 메인 버튼입니다.

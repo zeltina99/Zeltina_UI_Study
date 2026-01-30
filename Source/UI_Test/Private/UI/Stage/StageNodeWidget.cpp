@@ -74,6 +74,11 @@ void UStageNodeWidget::SetStageName(FText NewName)
 void UStageNodeWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
+}
+
+void UStageNodeWidget::NativeOnInitialized()
+{
+	Super::NativeOnInitialized();
 
 	if (StageBtn)
 	{
