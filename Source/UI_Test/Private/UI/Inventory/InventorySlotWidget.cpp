@@ -30,6 +30,11 @@ void UInventorySlotWidget::NativeOnListItemObjectSet(UObject* ListItemObject)
 	// 1. 캐릭터 데이터 처리
 	if (Data->bIsCharacter)
 	{
+		// ★ [디버깅용 로그 추가] 도대체 무슨 경로를 로딩하려고 하는지 찍어보자!
+		UE_LOG(LogTemp, Warning, TEXT("[InventorySlot] Loading Icon for %s: Path = %s"),
+			*MyID.ToString(),
+			*Data->CharacterData.FaceIcon.ToString());
+
 		if (!Data->CharacterData.FaceIcon.IsNull())
 		{
 			IconImage->SetBrushFromTexture(Data->CharacterData.FaceIcon.LoadSynchronous());
