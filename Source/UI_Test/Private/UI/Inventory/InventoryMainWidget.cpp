@@ -5,122 +5,127 @@
 #include "UI/Inventory/InventoryItemData.h" // 데이터 객체 헤더 필수!
 #include "Components/TileView.h"           // WrapBox 대신 TileView 사용
 #include "Components/Button.h"
+#include "Components/TextBlock.h"
+#include "Components/Image.h"
 #include "Framework/Data/InventoryStructs.h"
 
-// [가정] GameInstance 헤더 (보유 목록 가져오기용)
-// #include "Framework/MyGameInstance.h"
-
-void UInventoryMainWidget::NativeConstruct()
+void UInventoryMainWidget::NativeOnInitialized()
 {
-	Super::NativeConstruct();
+	Super::NativeOnInitialized();
 
-	// 탭 버튼 이벤트 연결
+	// 1. 탭 버튼 이벤트 연결
 	if (TabCharacterBtn)
 	{
-		TabCharacterBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnTabCharacterClicked);
+		TabCharacterBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnCharacterTabClicked);
 	}
+
 	if (TabWeaponBtn)
 	{
-		TabWeaponBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnTabWeaponClicked);
+		TabWeaponBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnWeaponTabClicked);
 	}
 
-	// 시작하자마자 캐릭터 탭 보여주기
-	ShowCharacterList();
+	// 2. 초기 화면 설정 (처음엔 캐릭터 리스트를 보여줌)
+	OnCharacterTabClicked();
 }
 
-void UInventoryMainWidget::ShowCharacterList()
+void UInventoryMainWidget::UpdateDetailInfo(UInventoryItemData* InData)
 {
-	// TileView와 데이터 테이블이 연결되어 있는지 확인
-	if (!ContentTileView || !CharacterDT) return;
+	if (!InData) return;
 
-	// 1. 기존 목록 싹 비우기
-	ContentTileView->ClearListItems();
+	// 현재 선택된 아이템 기억
+	SelectedItem = InData;
 
-	// 2. [최적화] 보유 목록을 TMap으로 변환 (O(1) 초고속 검색을 위해)
-	// 실제로는 GameInstance에서 TArray<FOwnedHeroData>를 가져와야 합니다.
-	TArray<FOwnedHeroData> MyOwnedHeroes;
-	// 예: MyOwnedHeroes = GetGameInstance()->GetMyHeroes();
-
-	TMap<FName, const FOwnedHeroData*> OwnedMap;
-	for (const FOwnedHeroData& Hero : MyOwnedHeroes)
+	// 1. 이름 텍스트 갱신
+	if (DetailNameText)
 	{
-		OwnedMap.Add(Hero.HeroID, &Hero);
+		DetailNameText->SetText(FText::FromName(InData->ID));
 	}
 
-	// 3. 데이터 테이블의 모든 행(Row) 순회
-	TArray<FName> RowNames = CharacterDT->GetRowNames();
-	for (const FName& RowName : RowNames)
+	// 2. 상세 이미지 갱신 (슬롯 때와 마찬가지로 강제 이미지 모드 적용)
+	if (DetailImage)
 	{
-		FCharacterUIData* Data = CharacterDT->FindRow<FCharacterUIData>(RowName, TEXT("LoadCharacter"));
-		if (!Data) continue;
+		UTexture2D* TargetTex = nullptr;
 
-		// 4. ★ 위젯을 직접 만드는 게 아니라, '데이터 객체'를 생성합니다!
-		UInventoryItemData* ItemObj = NewObject<UInventoryItemData>(this);
-
-		// 5. [최적화] Map에서 보유 여부 즉시 검색
-		const FOwnedHeroData* OwnedData = OwnedMap.FindRef(RowName); // 없으면 nullptr
-
-		if (OwnedData)
+		// 데이터 타입에 따라 텍스쳐 로드
+		if (InData->bIsCharacter && !InData->CharacterData.FaceIcon.IsNull())
 		{
-			// 보유 중이면 레벨 정보까지 넣어서 초기화
-			ItemObj->InitCharacter(RowName, *Data, true, OwnedData->Level);
+			TargetTex = InData->CharacterData.FaceIcon.LoadSynchronous();
+		}
+		else if (!InData->bIsCharacter && !InData->ItemData.Icon.IsNull())
+		{
+			TargetTex = InData->ItemData.Icon.LoadSynchronous();
+		}
+
+		if (TargetTex)
+		{
+			// ★ 여기도 슬롯과 동일하게 브러시를 직접 생성하여 적용 (안전장치)
+			FSlateBrush NewBrush;
+			NewBrush.SetResourceObject(TargetTex);
+			NewBrush.DrawAs = ESlateBrushDrawType::Image; // 이미지 찌그러짐 방지
+			NewBrush.TintColor = FLinearColor::White;
+
+			// 상세창 이미지는 크기를 고정하지 않고, WBP에서 설정한 크기에 맞춤
+			DetailImage->SetBrush(NewBrush);
+			DetailImage->SetVisibility(ESlateVisibility::Visible);
 		}
 		else
 		{
-			// 미보유면 기본값으로 초기화
-			ItemObj->InitCharacter(RowName, *Data, false, 1);
+			// 이미지가 없으면 숨김 처리하거나 기본 이미지 표시
+			DetailImage->SetVisibility(ESlateVisibility::Collapsed);
 		}
-
-		// 6. Tile View에 데이터 추가 (화면 갱신은 TileView가 알아서 함)
-		ContentTileView->AddItem(ItemObj);
 	}
+
+	// 로그 출력 (디버깅용)
+	UE_LOG(LogTemp, Log, TEXT("[InventoryMain] Updated Detail Info: %s"), *InData->ID.ToString());
 }
 
-void UInventoryMainWidget::ShowWeaponList()
+void UInventoryMainWidget::OnCharacterTabClicked()
 {
-	if (!ContentTileView || !WeaponDT) return;
+	RefreshList(true); // 캐릭터 리스트 로드
+}
+
+void UInventoryMainWidget::OnWeaponTabClicked()
+{
+	RefreshList(false); // 무기 리스트 로드
+}
+
+void UInventoryMainWidget::RefreshList(bool bIsCharacter)
+{
+	if (!ContentTileView) return;
 
 	ContentTileView->ClearListItems();
 
-	// [최적화] 무기 보유 목록 맵핑
-	TArray<FOwnedItemData> MyOwnedItems;
-	// 예: MyOwnedItems = GetGameInstance()->GetMyItems();
+	// TODO: 실제 게임에서는 GameInstance나 PlayerState에서 보유 목록을 가져와야 합니다.
+	// 지금은 테스트를 위해 더미(가짜) 데이터를 생성해서 넣습니다.
 
-	TMap<FName, const FOwnedItemData*> OwnedItemMap;
-	for (const FOwnedItemData& Item : MyOwnedItems)
+	for (int32 i = 1; i <= 10; i++)
 	{
-		OwnedItemMap.Add(Item.ItemID, &Item);
-	}
+		UInventoryItemData* NewItem = NewObject<UInventoryItemData>(this);
 
-	TArray<FName> RowNames = WeaponDT->GetRowNames();
-	for (const FName& RowName : RowNames)
-	{
-		FItemUIData* Data = WeaponDT->FindRow<FItemUIData>(RowName, TEXT("LoadItem"));
-		if (!Data) continue;
-
-		UInventoryItemData* ItemObj = NewObject<UInventoryItemData>(this);
-
-		const FOwnedItemData* OwnedData = OwnedItemMap.FindRef(RowName);
-
-		if (OwnedData)
+		if (bIsCharacter)
 		{
-			ItemObj->InitItem(RowName, *Data, true, OwnedData->EnhancementLevel);
+			// 캐릭터 테스트 데이터
+			NewItem->ID = FName(*FString::Printf(TEXT("Char_%d"), i));
+			NewItem->bIsCharacter = true;
+			NewItem->bIsOwned = (i % 2 != 0); // 홀수 번호만 보유 중 처리 (테스트)
+			NewItem->Level = i * 10;
+			// 텍스쳐는 데이터 테이블 연결 전이라 비워둠 (흰색 박스 나올 수 있음)
 		}
 		else
 		{
-			ItemObj->InitItem(RowName, *Data, false, 0);
+			// 무기 테스트 데이터
+			NewItem->ID = FName(*FString::Printf(TEXT("Weapon_%d"), i));
+			NewItem->bIsCharacter = false;
+			NewItem->bIsOwned = true;
+			NewItem->EnhancementLevel = i;
 		}
 
-		ContentTileView->AddItem(ItemObj);
+		ContentTileView->AddItem(NewItem);
 	}
-}
 
-void UInventoryMainWidget::OnTabCharacterClicked()
-{
-	ShowCharacterList();
-}
-
-void UInventoryMainWidget::OnTabWeaponClicked()
-{
-	ShowWeaponList();
+	// 리스트 갱신 후 첫 번째 아이템 정보를 자동으로 상세창에 띄워주면 좋습니다.
+	if (ContentTileView->GetListItems().Num() > 0)
+	{
+		UpdateDetailInfo(Cast<UInventoryItemData>(ContentTileView->GetListItems()[0]));
+	}
 }
