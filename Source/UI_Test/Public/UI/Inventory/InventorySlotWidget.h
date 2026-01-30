@@ -57,6 +57,35 @@ protected:
 	 */
 	virtual void NativeOnListItemObjectSet(UObject* ListItemObject) override;
 
+	/**
+	 * @brief 아이템의 아이콘 이미지를 로드하고 표시합니다.
+	 * 에디터 설정을 무시하고 강제로 210x340 크기의 이미지 모드로 렌더링하여
+	 * 이미지가 찌그러지거나 투명해지는 문제를 방지합니다.
+	 * @param Data 표시할 인벤토리 아이템 데이터
+	 */
+	void UpdateIcon(class UInventoryItemData* Data);
+
+	/**
+	 * @brief 등급 테두리 색상 및 레벨 텍스트 등 부가적인 정보를 갱신합니다.
+	 * @param Data 표시할 인벤토리 아이템 데이터
+	 */
+	void UpdateVisuals(class UInventoryItemData* Data);
+
+	/**
+	 * @brief 아이템의 보유/미보유 상태에 따라 UI 상호작용 및 시각 효과를 처리합니다.
+	 * 보유 중일 때는 밝게 표시하고 버튼을 활성화하며,
+	 * 미보유 중일 때는 어둡게(Dimmed) 처리하고 버튼을 비활성화합니다.
+	 * @param bOwned 아이템 보유 여부
+	 */
+	void UpdateState(bool bOwned);       
+
+	/**
+	 * @brief 등급(Enum)에 맞는 테두리 색상을 반환합니다.
+	 * @param Rarity 아이템의 등급 (Common ~ Legendary)
+	 * @return 해당 등급의 지정 색상 (FLinearColor)
+	 */
+	FLinearColor GetRarityColor(EItemRarity Rarity);
+
 #pragma region 메인 UI 컴포넌트
 	/**
 	 * @brief 터치 입력을 받는 버튼 (미보유 시 비활성화됨).
@@ -77,7 +106,7 @@ protected:
 	TObjectPtr<UBorder> RarityBorder;
 
 	/**
-	 * @brief 미보유 시 화면을 가리는 반투명 자물쇠 오버레이.
+	 * @brief 미보유 시 화면을 가리는 반투명 자물쇠 오버레이. 현재는 안 씀
 	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> LockOverlay;
@@ -107,10 +136,5 @@ private:
 	UFUNCTION()
 	void OnClicked();
 
-	/**
-	 * @brief 등급(Enum)에 맞는 테두리 색상을 반환합니다.
-	 * @param Rarity 아이템의 등급 (Common ~ Legendary)
-	 * @return 해당 등급의 지정 색상 (FLinearColor)
-	 */
-	FLinearColor GetRarityColor(EItemRarity Rarity);
+	
 };
