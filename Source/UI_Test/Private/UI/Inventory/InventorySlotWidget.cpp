@@ -100,10 +100,16 @@ void UInventorySlotWidget::NativeOnListItemObjectSet(UObject* ListItemObject)
         }
     }
 
-    // 5. 버튼 및 잠금 상태
     if (bIsOwned)
     {
-        if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
+        // [보유 중]
+        // 1. 아이콘: 원래 색상 (밝게)
+        if (IconImage)
+        {
+            IconImage->SetColorAndOpacity(FLinearColor::White);
+        }
+
+        // 2. 버튼: 활성화 (클릭 가능 -> 정보창 or 교체)
         if (SlotBtn)
         {
             SlotBtn->SetVisibility(ESlateVisibility::Visible);
@@ -112,16 +118,29 @@ void UInventorySlotWidget::NativeOnListItemObjectSet(UObject* ListItemObject)
     }
     else
     {
-        // 미보유 시 아이콘 어둡게
-        if (IconImage) IconImage->SetColorAndOpacity(FLinearColor(0.2f, 0.2f, 0.2f, 1.0f));
+        // [미보유]
+        // 1. 아이콘: 불투명하지만 어둡게 (Grayed Out)
+        // 자물쇠 이미지(LockOverlay)는 이제 안 씁니다.
+        if (IconImage)
+        {
+            // RGB를 0.3 정도로 낮추면 '어두운 상태'가 됩니다. 알파(A)는 1.0 유지.
+            IconImage->SetColorAndOpacity(FLinearColor(0.3f, 0.3f, 0.3f, 1.0f));
+        }
 
-        //if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Visible);
-
+        // 2. 버튼: 보이긴 하지만, 눌리지 않게 (Enabled = false)
+        // 혹은 눌렀을 때 '미보유입니다' 메시지를 띄우려면 true로 두고 로직에서 막아야 함.
+        // 일단 "교체만 안 되면 된다"고 하셨으니 비활성화가 깔끔합니다.
         if (SlotBtn)
         {
             SlotBtn->SetVisibility(ESlateVisibility::Visible);
-            SlotBtn->SetIsEnabled(false);
+            SlotBtn->SetIsEnabled(false); // 클릭 자체가 안 됨
         }
+    }
+
+    // 자물쇠 오버레이는 이제 영원히 꺼둡니다. (나중에 지우셔도 됨)
+    if (LockOverlay)
+    {
+        LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
     }
 }
 
