@@ -1,0 +1,11 @@
+ID,Name,Rank,FaceIcon,BodyIcon,Description
+Char_001,Ace,Legendary,,,첫번째
+Char_002,Blin,Epic,,,두번째
+Char_003,Chain,Common,,,세번째
+Char_004,Dest,Nornmal,,,네번째
+Char_005,Elf,Rare,,,다섯번째
+Char_006,Fou,Legendary,,,여섯번째
+Char_007,Glin,Epic,,,일곱번째
+Char_008,Hine,Common,,,여덟번째
+Char_009,Jack,Nornmal,,,아홉번째
+Char_010,Kein,Rare,,,열번째
