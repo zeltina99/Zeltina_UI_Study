@@ -46,7 +46,7 @@ void UStageNodeWidget::SetNodeIcon(UTexture2D* NewIcon)
 	if (StageBtn && NewIcon)
 	{
 		// 버튼의 스타일 정보를 가져옵니다.
-		FButtonStyle Style = StageBtn->WidgetStyle;
+		FButtonStyle Style = StageBtn->GetStyle();
 
 		// 슬레이트 브러시(SlateBrush)에 아이콘 텍스처 설정
 		FSlateBrush Brush = Style.Normal;

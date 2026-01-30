@@ -4,11 +4,11 @@
 #include "GameEnums.generated.h"
 
 /**
- * @enum EUnitType
+ * @enum EGameUnitType
  * @brief 몬스터, 퍼밀리어의 전투 타입 (근거리, 원거리, 보스 등)
  */
 UENUM(BlueprintType)
-enum class EUnitType : uint8
+enum class EGameUnitType : uint8
 {
 	/** @brief 타입 없음 */
 	None		UMETA(DisplayName = "None"),
@@ -63,7 +63,7 @@ enum class EItemMainType : uint8
 	/** @brief 방어구류 (방어력 보유, ArmorStats 참조) */
 	Armor		UMETA(DisplayName = "Armor"),
 };
-
+	
 /**
 * @enum EWeaponType
 * @brief 무기의 세부 종류 (Sub-Category) 정의

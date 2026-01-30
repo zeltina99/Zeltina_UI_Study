@@ -155,7 +155,7 @@ struct FAIUnitStats : public FUnitBaseStats
 	 * @details 근거리, 원거리, 보스 등 AI 행동 패턴의 기준이 됩니다.
 	 */
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Info")
-	EUnitType EUnitType;
+	EGameUnitType EUnitType;
 
 	// =========================================================
 	//   AI 전투 스탯 (AI Combat)
