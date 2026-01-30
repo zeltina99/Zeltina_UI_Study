@@ -4,6 +4,7 @@
 #include "UI/Lobby/LobbyMainWidget.h"
 #include "UI/Lobby/LobbyMenuWidget.h"
 #include "UI/Lobby/LobbyTopBarWidget.h"	
+#include "Controller/LobbyPlayerController.h"
 
 void ULobbyMainWidget::NativeConstruct()
 {
@@ -35,8 +36,16 @@ void ULobbyMainWidget::RefreshLobby()
 
 void ULobbyMainWidget::HandleMenuSelection(FName MenuName)
 {
-	UE_LOG(LogTemp, Warning, TEXT("[LobbyMain] Menu Request: %s"), *MenuName.ToString());
+	UE_LOG(LogTemp, Log, TEXT("[LobbyMain] Menu Request: %s"), *MenuName.ToString());
 
-	// 이곳에 'CommonUI'의 PushWidget 로직이 들어갈 예정입니다.
-	// if (MenuName == "Shop") { WidgetStack->PushWidget(ShopWidgetClass); }
+	// 1. 소유자 컨트롤러 캐스팅 (LobbyController인지 확인)
+	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
+	{
+		// 2. 화면 전환 요청 위임
+		PC->ShowScreen(MenuName);
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[LobbyMain] Owning Player is NOT ALobbyPlayerController!"));
+	}
 }
