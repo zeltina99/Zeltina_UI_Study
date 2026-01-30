@@ -11,18 +11,18 @@ void UResultPopupWidget::NativeOnInitialized()
 	Super::NativeOnInitialized();
 
 	// ★ 이벤트 중복 방지의 핵심: NativeConstruct가 아닌 NativeOnInitialized에서 바인딩!
-	if (ReturnToLobbyBtn)
+	if (ReturnToStageBtn)
 	{
-		ReturnToLobbyBtn->OnClicked.AddDynamic(this, &UResultPopupWidget::OnReturnClicked);
+		ReturnToStageBtn->OnClicked.AddDynamic(this, &UResultPopupWidget::OnReturnClicked);
 	}
 }
 
 void UResultPopupWidget::OnReturnClicked()
 {
 	// 1. 버튼을 비활성화해서 '따닥(Double Click)'으로 인한 중복 실행 방지
-	if (ReturnToLobbyBtn)
+	if (ReturnToStageBtn)
 	{
-		ReturnToLobbyBtn->SetIsEnabled(false);
+		ReturnToStageBtn->SetIsEnabled(false);
 	}
 
 	// 2. GameInstance에 접근하여 "나 1-1 깼어!"라고 보고

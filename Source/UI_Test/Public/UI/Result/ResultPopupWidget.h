@@ -23,7 +23,7 @@ protected:
 	 * @note UE5 표준인 TObjectPtr을 사용합니다. 에디터에서 "ReturnToLobbyBtn" 이름으로 바인딩해야 합니다.
 	 */
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> ReturnToLobbyBtn;
+	TObjectPtr<UButton> ReturnToStageBtn;
 
 	/**
 	 * @brief 위젯이 초기화될 때(메모리에 올라갈 때) 호출됩니다.

@@ -18,7 +18,12 @@ public class UI_Test : ModuleRules
             "MediaAssets",
             "CommonUI",
             "CommonInput",
-            "GameplayTags"
+            "GameplayTags",
+            "GameplayAbilities",
+            "GameplayTags",
+            "GameplayTasks",
+            "Niagara",
+            "AIModule"
         });
 
 		PrivateDependencyModuleNames.AddRange(new string[] {  });

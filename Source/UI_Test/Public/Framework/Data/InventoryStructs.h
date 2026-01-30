@@ -1,55 +1,33 @@
 #pragma once
 #include "CoreMinimal.h"
 #include "Engine/DataTable.h"
+
+#include "Framework/Data/GameEnums.h"
+#include "Framework/Data/UnitStructs.h"
+
 #include "InventoryStructs.generated.h"
 
-// =========================================================
-// 1. Enums (GameEnums.h 에서 가져옴)
-// =========================================================
 
-UENUM(BlueprintType)
-enum class EItemRarity : uint8
-{
-	Common		UMETA(DisplayName = "Common (1 Star)"),
-	Uncommon	UMETA(DisplayName = "Uncommon (2 Star)"),
-	Rare		UMETA(DisplayName = "Rare (3 Star)"),
-	Epic		UMETA(DisplayName = "Epic (4 Star)"),
-	Legendary	UMETA(DisplayName = "Legendary (5 Star)")
-};
-
-UENUM(BlueprintType)
-enum class EItemMainType : uint8
-{
-	Weapon		UMETA(DisplayName = "Weapon"),
-	Armor		UMETA(DisplayName = "Armor"),
-};
-
-// =========================================================
-// 2. Structs (UnitStructs.h + ItemStructs.h 통합 변형)
-// =========================================================
-
-/** * @brief R&D용 캐릭터 도감 데이터
- * @note 실제 프로젝트의 FUnitBaseStats + FCharacterAssets를 합친 형태입니다.
- */
+/** @brief 캐릭터 도감 표시용 데이터 */
 USTRUCT(BlueprintType)
 struct FCharacterUIData : public FTableRowBase
 {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	FText Name; // 캐릭터 이름
+	FText Name;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	EItemRarity Rank; // 태생 등급
+	EItemRarity Rank = EItemRarity::Common;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	TSoftObjectPtr<UTexture2D> FaceIcon; // 인벤토리용 아이콘
+	TSoftObjectPtr<UTexture2D> FaceIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
-	TSoftObjectPtr<UTexture2D> BodyIcon; // 상세 정보용 일러스트
+	TSoftObjectPtr<UTexture2D> BodyIcon;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI", meta = (MultiLine = true))
-	FText Description; // 배경 스토리
+	FText Description;
 };
 
 /** * @brief R&D용 아이템 도감 데이터
