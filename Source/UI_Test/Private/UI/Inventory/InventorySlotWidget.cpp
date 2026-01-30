@@ -2,6 +2,7 @@
 
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "UI/Inventory/InventoryItemData.h"
+#include "Components/Border.h"
 #include "Components/Image.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -10,7 +11,7 @@ void UInventorySlotWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	// [Event Binding] 버튼 클릭 이벤트 연결
+	// [Event Binding] 버튼 클릭 이벤트 연결	
 	if (SlotBtn)
 	{
 		SlotBtn->OnClicked.AddDynamic(this, &UInventorySlotWidget::OnClicked);
@@ -27,65 +28,101 @@ void UInventorySlotWidget::NativeOnListItemObjectSet(UObject* ListItemObject)
 	MyID = Data->ID;
 	bIsOwned = Data->bIsOwned;
 
-	// 1. 캐릭터 데이터 처리
-	if (Data->bIsCharacter)
-	{
-		// ★ [디버깅용 로그 추가] 도대체 무슨 경로를 로딩하려고 하는지 찍어보자!
-		UE_LOG(LogTemp, Warning, TEXT("[InventorySlot] Loading Icon for %s: Path = %s"),
-			*MyID.ToString(),
-			*Data->CharacterData.FaceIcon.ToString());
+    // 1. 표시할 텍스쳐와 정보 찾기
+    UTexture2D* TargetIcon = nullptr;
+    EItemRarity TargetRarity = EItemRarity::Common;
+    int32 TargetLevel = 1;
 
-		if (!Data->CharacterData.FaceIcon.IsNull())
-		{
-			IconImage->SetBrushFromTexture(Data->CharacterData.FaceIcon.LoadSynchronous());
-		}
+    if (Data->bIsCharacter)
+    {
+        if (!Data->CharacterData.FaceIcon.IsNull())
+        {
+            TargetIcon = Data->CharacterData.FaceIcon.LoadSynchronous();
+        }
+        TargetRarity = Data->CharacterData.Rank;
+        TargetLevel = Data->Level;
+    }
+    else
+    {
+        if (!Data->ItemData.Icon.IsNull())
+        {
+            TargetIcon = Data->ItemData.Icon.LoadSynchronous();
+        }
+        TargetRarity = Data->ItemData.Rarity;
+        TargetLevel = Data->EnhancementLevel;
+    }
 
-		if (RarityBorder)
-		{
-			RarityBorder->SetColorAndOpacity(GetRarityColor(Data->CharacterData.Rank));
-		}
+    // 2. ★ [핵심 해결책] 빨간 네모 코드의 "강제성"을 데이터에 적용
+    // SetBrushFromTexture 대신, 브러시를 직접 만들어서 꽂아버립니다. (가장 확실함)
+    if (TargetIcon)
+    {
+        FSlateBrush NewBrush;
+        NewBrush.SetResourceObject(TargetIcon);          // 데이터에서 가져온 진짜 얼굴
+        NewBrush.ImageSize = FVector2D(150.f, 180.f);    // 크기 고정
+        NewBrush.DrawAs = ESlateBrushDrawType::Image;    // ★ 무조건 이미지로 그려라! (Box/Border 금지)
+        NewBrush.TintColor = FLinearColor::White;        // 색상은 원본 그대로
 
-		if (bIsOwned && LevelText)
-		{
-			LevelText->SetText(FText::AsNumber(Data->Level));
-			LevelText->SetVisibility(ESlateVisibility::Visible);
-		}
-	}
-	// 2. 아이템 데이터 처리
-	else
-	{
-		if (!Data->ItemData.Icon.IsNull())
-		{
-			IconImage->SetBrushFromTexture(Data->ItemData.Icon.LoadSynchronous());
-		}
+        IconImage->SetBrush(NewBrush);
 
-		if (RarityBorder)
-		{
-			RarityBorder->SetColorAndOpacity(GetRarityColor(Data->ItemData.Rarity));
-		}
+        // 투명화 완전 차단
+        IconImage->SetColorAndOpacity(FLinearColor::White);
+        IconImage->SetRenderOpacity(1.0f);
+        IconImage->SetVisibility(ESlateVisibility::SelfHitTestInvisible);
+    }
+    else
+    {
+        // 텍스쳐가 없는 경우 (디버깅용 빨간색 표시)
+        // 만약 화면에 빨간색만 나온다면 -> csv 파일의 경로가 틀린 겁니다.
+        IconImage->SetColorAndOpacity(FLinearColor::Red);
+    }
 
-		if (bIsOwned && LevelText)
-		{
-			FString EnhanceStr = FString::Printf(TEXT("+%d"), Data->EnhancementLevel);
-			LevelText->SetText(FText::FromString(EnhanceStr));
-			LevelText->SetVisibility(ESlateVisibility::Visible);
-		}
-	}
+    // 3. 등급 테두리 (Border 전용)
+    if (RarityBorder)
+    {
+        RarityBorder->SetBrushColor(GetRarityColor(TargetRarity));
+        RarityBorder->SetContentColorAndOpacity(FLinearColor::White); // 투명화 방지
+    }
 
-	// 3. 공통: 보유 여부에 따른 UI 상태 변경 (잠금 처리)
-	if (bIsOwned)
-	{
-		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor::White);
-		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
-		if (SlotBtn) SlotBtn->SetIsEnabled(true);
-	}
-	else
-	{
-		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor(0.2f, 0.2f, 0.2f, 1.0f));
-		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Visible);
-		if (SlotBtn) SlotBtn->SetIsEnabled(false);
-		if (LevelText) LevelText->SetVisibility(ESlateVisibility::Collapsed);
-	}
+    // 4. 레벨 텍스트
+    if (LevelText)
+    {
+        if (bIsOwned)
+        {
+            FString LevelStr = Data->bIsCharacter ?
+                FText::AsNumber(TargetLevel).ToString() :
+                FString::Printf(TEXT("+%d"), TargetLevel);
+            LevelText->SetText(FText::FromString(LevelStr));
+            LevelText->SetVisibility(ESlateVisibility::Visible);
+        }
+        else
+        {
+            LevelText->SetVisibility(ESlateVisibility::Collapsed);
+        }
+    }
+
+    // 5. 버튼 및 잠금 상태
+    if (bIsOwned)
+    {
+        if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
+        if (SlotBtn)
+        {
+            SlotBtn->SetVisibility(ESlateVisibility::Visible);
+            SlotBtn->SetIsEnabled(true);
+        }
+    }
+    else
+    {
+        // 미보유 시 아이콘 어둡게
+        if (IconImage) IconImage->SetColorAndOpacity(FLinearColor(0.2f, 0.2f, 0.2f, 1.0f));
+
+        //if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Visible);
+
+        if (SlotBtn)
+        {
+            SlotBtn->SetVisibility(ESlateVisibility::Visible);
+            SlotBtn->SetIsEnabled(false);
+        }
+    }
 }
 
 void UInventorySlotWidget::OnClicked()

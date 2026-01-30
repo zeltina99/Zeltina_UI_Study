@@ -11,6 +11,7 @@
 
 class UImage;
 class UButton;
+class UBorder;
 class UTextBlock;
 
 /**
@@ -73,7 +74,7 @@ protected:
 	 * @brief 등급(Rarity)에 따라 색상이 변하는 테두리 이미지.
 	 */
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UImage> RarityBorder;
+	TObjectPtr<UBorder> RarityBorder;
 
 	/**
 	 * @brief 미보유 시 화면을 가리는 반투명 자물쇠 오버레이.
