@@ -23,14 +23,19 @@ protected:
 	virtual void BeginPlay() override;
 
 private:
-	/** 
-	 * @brief 생성할 로비 위젯 클래스 (에디터에서 WBP_LobbyMain을 넣어줄 빈 껍데기)
-	 * @note TSubclassOf를 쓰면 에디터에서 해당 클래스와 그 자식들만 목록에 뜹니다.
+	/**
+	 * @brief 기본 로비 UI (WBP_Lobby).
 	 */
 	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSubclassOf<UUserWidget> LobbyWidgetClass = nullptr;
+	TSoftClassPtr<UUserWidget> MainMenuWidgetClass = nullptr;
 
-	/** @brief 실제 생성된 위젯 인스턴스 */
+	/**
+	 * @brief 스테이지 맵 UI (WBP_StageMap) - ★ 새로 추가!.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSoftClassPtr<UUserWidget> StageMapWidgetClass = nullptr;
+
+	// 화면에 떠 있는 거 저장용
 	UPROPERTY()
-	TObjectPtr<UUserWidget> LobbyWidgetInstance = nullptr;
+	TObjectPtr<UUserWidget> CurrentWidgetInstance = nullptr;
 };

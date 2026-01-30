@@ -49,6 +49,13 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Game Progress")
 	int32 MaxClearedStageIndex = 0;
 
+	/**
+	 * @brief 로비 레벨 진입 시 처음 띄울 위젯을 결정합니다. 
+	 * @details "Main": 로비 메뉴 / "StageMap": 스테이지 선택창
+	 */
+	UPROPERTY(BlueprintReadWrite, Category = "Game State")
+	FName NextLobbyScreen = FName("Main");
+
 protected:
 	/**
 	 * @brief 로딩 화면 위젯 클래스 (에디터에서 WBP_Loading 할당).

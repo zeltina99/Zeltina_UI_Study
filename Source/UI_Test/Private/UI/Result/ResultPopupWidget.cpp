@@ -28,13 +28,13 @@ void UResultPopupWidget::OnReturnClicked()
 	// 2. GameInstance에 접근하여 "나 1-1 깼어!"라고 보고
 	if (UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance()))
 	{
-		// [TODO] 실제로는 이 팝업을 띄울 때 "몇 스테이지를 깼는지" 데이터를 받아와야 합니다.
-		// 지금은 테스트를 위해 무조건 "1단계(Index 1) 클리어"로 갱신합니다.
-		const int32 ClearedStageIndex = 1;
-		GI->UpdateClearProgress(ClearedStageIndex);
+		// [수정] 무조건 1단계 클리어 처리 (테스트용)
+		GI->UpdateClearProgress(1);
 
-		// 3. 로비(WBP_StageMap이 있는 레벨)로 비동기 로딩 이동
-		// "Lobby"는 실제 레벨 파일 이름과 일치해야 합니다.
+		// ★ [추가] "로비 도착하면 바로 스테이지 맵(StageMap) 띄워줘!" 라고 메모
+		GI->NextLobbyScreen = FName("StageMap");
+
+		// 그 다음 이동
 		GI->OpenLevelWithAsyncLoad(FName("Lobby"), {});
 	}
 }
