@@ -62,7 +62,7 @@ void ALobbyPlayerController::ShowScreen(FName ScreenName)
 	{
 		ChangeWidget(StageMapWidgetClass);
 	}
-	else if (ScreenName == "Formation") // 편성 (인벤토리)
+	else if (ScreenName == "Character") // 편성 (인벤토리)
 	{
 		ChangeWidget(InventoryWidgetClass);
 	}

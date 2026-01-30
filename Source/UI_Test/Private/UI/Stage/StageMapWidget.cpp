@@ -7,6 +7,7 @@
 #include "Components/PanelWidget.h"
 #include "Components/Button.h"
 #include "Blueprint/WidgetTree.h" // [중요] 위젯 트리 순회를 위해 필요
+#include "Controller/LobbyPlayerController.h"
 
 void UStageMapWidget::NativeConstruct()
 {
@@ -91,9 +92,16 @@ void UStageMapWidget::NativeOnInitialized()
 
 void UStageMapWidget::OnBackClicked()
 {
-	// 화면에서 이 위젯(StageMap)을 치워버립니다.
-	// 그러면 뒤에 깔려있던 로비(Lobby)가 다시 짠 하고 보입니다.
-	RemoveFromParent();
+	// 컨트롤러에게 "메인 화면(Main)으로 교체해줘"라고 요청
+	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
+	{
+		PC->ShowScreen("Main");
+	}
+	else
+	{
+		// 혹시나 컨트롤러를 못 찾으면 그냥 닫기 (안전장치)
+		RemoveFromParent();
+	}
 }
 
 void UStageMapWidget::OnNodeClicked(int32 StageIndex)
