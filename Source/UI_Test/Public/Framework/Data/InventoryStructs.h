@@ -8,7 +8,9 @@
 #include "InventoryStructs.generated.h"
 
 
-/** @brief 캐릭터 도감 표시용 데이터 */
+/**
+ * @brief 캐릭터 도감 표시용 데이터.
+ */
 USTRUCT(BlueprintType)
 struct FCharacterUIData : public FTableRowBase
 {
@@ -30,7 +32,8 @@ struct FCharacterUIData : public FTableRowBase
 	FText Description;
 };
 
-/** * @brief R&D용 아이템 도감 데이터
+/**
+ * @brief R&D용 아이템 도감 데이터
  * @note FItemBaseStats + FItemBaseAssets 합친 형태
  */
 USTRUCT(BlueprintType)
@@ -58,7 +61,9 @@ struct FItemUIData : public FTableRowBase
 // 3. Logic Structs (InventoryComponent.h 에서 가져옴)
 // =========================================================
 
-/** @brief 내 보유 영웅 정보 */
+/**
+ * @brief 내 보유 영웅 정보.
+ */
 USTRUCT(BlueprintType)
 struct FOwnedHeroData
 {
@@ -74,7 +79,9 @@ struct FOwnedHeroData
 	int32 AwakeningLevel = 0; // 초월 단계 (별 개수 표시용)
 };
 
-/** @brief 내 보유 아이템 정보 */
+/**
+ * @brief 내 보유 아이템 정보.
+ */
 USTRUCT(BlueprintType)
 struct FOwnedItemData
 {

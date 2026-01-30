@@ -47,33 +47,47 @@ protected:
 	 */
 	virtual void NativeOnInitialized() override;
 
-	// --- [UI Components] ---
-
-	/** @brief 터치 입력을 받는 버튼 (미보유 시 비활성화됨) */
+#pragma region 메인 UI 컴포넌트
+	/**
+	 * @brief 터치 입력을 받는 버튼 (미보유 시 비활성화됨).
+	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> SlotBtn;
 
-	/** @brief 아이템/캐릭터의 아이콘 이미지 */
+	/**
+	 * @brief 아이템/캐릭터의 아이콘 이미지.
+	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> IconImage;
 
-	/** @brief 등급(Rarity)에 따라 색상이 변하는 테두리 이미지 */
+	/**
+	 * @brief 등급(Rarity)에 따라 색상이 변하는 테두리 이미지.
+	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> RarityBorder;
 
-	/** @brief 미보유 시 화면을 가리는 반투명 자물쇠 오버레이 */
+	/**
+	 * @brief 미보유 시 화면을 가리는 반투명 자물쇠 오버레이.
+	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UImage> LockOverlay;
 
-	/** @brief 레벨 또는 강화 수치를 표시하는 텍스트 (+10, Lv.50) */
+	/**
+	 * @brief 레벨 또는 강화 수치를 표시하는 텍스트 (+10, Lv.50).
+	 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UTextBlock> LevelText;
+#pragma endregion
 
 private:
-	/** @brief 현재 슬롯이 담당하는 아이템의 ID */
+	/**
+	 * @brief 현재 슬롯이 담당하는 아이템의 ID.
+	 */
 	FName MyID;
 
-	/** @brief 플레이어가 이 아이템을 소유하고 있는지 여부 */
+	/**
+	 * @brief 플레이어가 이 아이템을 소유하고 있는지 여부.
+	 */
 	bool bIsOwned;
 
 	/**

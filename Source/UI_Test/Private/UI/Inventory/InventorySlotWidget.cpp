@@ -43,13 +43,10 @@ void UInventorySlotWidget::InitCharacterSlot(FName ID, const FCharacterUIData& D
 		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed); // 자물쇠 숨김
 		if (SlotBtn) SlotBtn->SetIsEnabled(true); // 터치 활성화
 
-		// 레벨 표시 (예: "Lv.10")
-		if (LevelText)
+		// 레벨 표시
+		if (LevelText && OwnedData)
 		{
-			if (OwnedData)
-			{
-				LevelText->SetText(FText::AsNumber(OwnedData->Level));
-			}
+			LevelText->SetText(FText::AsNumber(OwnedData->Level));
 			LevelText->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
@@ -85,14 +82,11 @@ void UInventorySlotWidget::InitItemSlot(FName ID, const FItemUIData& Data, const
 		if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
 		if (SlotBtn) SlotBtn->SetIsEnabled(true);
 
-		// 강화 수치 표시 (예: "+10")
-		if (LevelText)
+		// 강화 수치 표시 (예: +10)
+		if (LevelText && OwnedData)
 		{
-			if (OwnedData)
-			{
-				FString EnhanceStr = FString::Printf(TEXT("+%d"), OwnedData->EnhancementLevel);
-				LevelText->SetText(FText::FromString(EnhanceStr));
-			}
+			FString EnhanceStr = FString::Printf(TEXT("+%d"), OwnedData->EnhancementLevel);
+			LevelText->SetText(FText::FromString(EnhanceStr));
 			LevelText->SetVisibility(ESlateVisibility::Visible);
 		}
 	}
