@@ -65,9 +65,9 @@ void USummonPopupWidget::OnClickSingleSummon()
 {
 	if (CachedGachaComp)
 	{
-		// TODO: GachaComponent에 가챠 타입(CurrentTab)도 같이 넘기는 구조 권장
-		// 예: CachedGachaComp->RequestSummon(1, CurrentTab);
-		CachedGachaComp->RequestSummon(1);
+		// [FIX] 두 번째 인자로 현재 탭(CurrentTab)을 넘겨줍니다.
+		// (1회 소환, 캐릭터/무기 타입)
+		CachedGachaComp->RequestSummon(1, CurrentTab);
 
 		UpdateCurrencyInfo(); // 소모 후 재화 갱신
 	}
@@ -81,7 +81,10 @@ void USummonPopupWidget::OnClickMultiSummon()
 {
 	if (CachedGachaComp)
 	{
-		CachedGachaComp->RequestSummon(10);
+		// [FIX] 여기도 마찬가지로 2개를 넘깁니다.
+		// (10회 소환, 캐릭터/무기 타입)
+		CachedGachaComp->RequestSummon(10, CurrentTab);
+
 		UpdateCurrencyInfo();
 	}
 }
