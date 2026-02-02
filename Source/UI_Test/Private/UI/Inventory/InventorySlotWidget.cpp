@@ -78,10 +78,21 @@ void UInventorySlotWidget::UpdateIcon(UInventoryItemData* Data)
 
 void UInventorySlotWidget::UpdateVisuals(UInventoryItemData* Data)
 {
+	// A. 등급 테두리 표시
 	if (RarityBorder)
 	{
-		EItemRarity Rarity = Data->bIsCharacter ? Data->CharacterData.Rank : Data->ItemData.Rarity;
-		RarityBorder->SetBrushColor(GetRarityColor(Rarity));
+		if (bIsOwned)
+		{
+			// 보유 중이면 원래 등급 색상 표시
+			EItemRarity Rarity = Data->bIsCharacter ? Data->CharacterData.Rank : Data->ItemData.Rarity;
+			RarityBorder->SetBrushColor(GetRarityColor(Rarity));
+		}
+		else
+		{
+			// ★ [수정] 미보유 시 회색 테두리로 덮어씀
+			RarityBorder->SetBrushColor(FLinearColor(0.3f, 0.3f, 0.3f, 1.0f));
+		}
+
 		RarityBorder->SetContentColorAndOpacity(FLinearColor::White);
 	}
 
@@ -107,8 +118,12 @@ void UInventorySlotWidget::UpdateVisuals(UInventoryItemData* Data)
 
 void UInventorySlotWidget::UpdateState(bool bOwned)
 {
-	// A. 자물쇠 오버레이 (이제 안 씀 -> 숨김)
-	if (LockOverlay) LockOverlay->SetVisibility(ESlateVisibility::Collapsed);
+	// A. 자물쇠 오버레이 (미보유 시 블러 처리용)
+	// ★ [수정] 여기가 핵심입니다. 미보유 시 보이게(Visible), 보유 시 숨김(Collapsed)
+	if (LockOverlay)
+	{
+		LockOverlay->SetVisibility(bOwned ? ESlateVisibility::Collapsed : ESlateVisibility::Visible);
+	}
 
 	// B. 보유 상태 처리
 	if (bOwned)
@@ -125,6 +140,7 @@ void UInventorySlotWidget::UpdateState(bool bOwned)
 	else
 	{
 		// [미보유] 어둡게 표시(Dimmed), 버튼 비활성
+		// ★ 아이콘을 어둡게(0.3) 죽여서 회색 느낌을 더해줍니다.
 		if (IconImage) IconImage->SetColorAndOpacity(FLinearColor(0.3f, 0.3f, 0.3f, 1.0f));
 
 		if (SlotBtn)

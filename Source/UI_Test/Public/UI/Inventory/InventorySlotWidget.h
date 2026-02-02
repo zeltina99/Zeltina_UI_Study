@@ -127,7 +127,7 @@ private:
 	/**
 	 * @brief 플레이어가 이 아이템을 소유하고 있는지 여부.
 	 */
-	bool bIsOwned;
+	bool bIsOwned = false;
 
 	/**
 	 * @brief 슬롯 버튼 클릭 시 호출되는 핸들러입니다.
