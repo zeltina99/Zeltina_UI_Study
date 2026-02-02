@@ -1,0 +1,5 @@
+Name,Rarity,Weight,PityThreshold
+Common_Rate,Common,74,0
+Rare_Rate,Rare,20,0
+Epic_Rate,Epic,5,0
+Legend_Rate,Legendary,1,50
