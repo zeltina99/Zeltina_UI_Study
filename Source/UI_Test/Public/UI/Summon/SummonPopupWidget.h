@@ -4,25 +4,17 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Framework/Data/GachaStructs.h"
 #include "SummonPopupWidget.generated.h"
 
 #pragma region 전방선언
+class USummonTabWidget;
+class USummonActionWidget;
 class UButton;
-class UTextBlock;
 class UImage;
+class UTextBlock;
 class UGachaComponent;
 #pragma endregion
-
-/**
- * @enum EGachaType
- * @brief 현재 선택된 가챠 탭의 종류 (캐릭터 vs 무기)
- */
-UENUM(BlueprintType)
-enum class EGachaType : uint8
-{
-	Character UMETA(DisplayName = "Character"),
-	Weapon    UMETA(DisplayName = "Weapon")
-};
 
 /**
  * @class USummonPopupWidget
