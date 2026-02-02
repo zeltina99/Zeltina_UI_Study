@@ -7,9 +7,9 @@
 #include "Framework/Data/GachaStructs.h"
 #include "SummonTabWidget.generated.h"
 
-#pragma region 전방 선언
+#pragma region Forward Declarations
 class UButton;
-#pragma endregion
+#pragma endregion 전방선언
 
 /**
  * @brief 탭 변경 이벤트 델리게이트
@@ -33,12 +33,12 @@ class UI_TEST_API USummonTabWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
-#pragma region 초기화
+#pragma region Initialization
 	/**
 	 * @brief 위젯 초기화 (버튼 바인딩 수행)
 	 */
 	virtual void NativeOnInitialized() override;
-#pragma endregion
+#pragma endregion 초기화
 
 public:
 #pragma region Public API
@@ -48,10 +48,10 @@ public:
 	 */
 	UFUNCTION(BlueprintCallable, Category = "Summon|Tab")
 	void SetSelectedTab(EGachaType NewType);
-#pragma endregion
+#pragma endregion 공개 API
 
 protected:
-#pragma region 이벤트 핸들러
+#pragma region Event Handlers
 	/**
 	 * @brief 캐릭터 탭 버튼 클릭 시 호출.
 	 */
@@ -63,17 +63,17 @@ protected:
 	 */
 	UFUNCTION()
 	void OnClickWeapon();
-#pragma endregion
+#pragma endregion 이벤트 핸들러
 
 public:
-#pragma region 델리게이트
+#pragma region Delegates
 	/** @brief 탭이 변경되었을 때 호출되는 이벤트 디스패처 */
 	UPROPERTY(BlueprintAssignable, Category = "Summon|Events")
 	FOnTabChanged OnTabChanged;
-#pragma endregion
+#pragma endregion 델리게이트
 
 protected:
-#pragma region 바인드 위젯
+#pragma region Bind Widgets
 	/** @brief 캐릭터 소환 탭 버튼 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> BtnTabCharacter = nullptr;
@@ -81,5 +81,5 @@ protected:
 	/** @brief 무기 소환 탭 버튼 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> BtnTabWeapon = nullptr;
-#pragma endregion
+#pragma endregion 바인드 위젯
 };

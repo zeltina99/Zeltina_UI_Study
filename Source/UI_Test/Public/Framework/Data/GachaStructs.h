@@ -5,8 +5,23 @@
 #include "Framework/Data/ItemStructs.h" // EItemRarity
 #include "GachaStructs.generated.h"
 
-#pragma region 가챠 데이터 구조체
+#pragma region Enums
 
+/**
+ * @enum EGachaType
+ * @brief 가챠 소환의 종류를 구분하는 열거형.
+ * @details 캐릭터 소환인지, 무기 소환인지 판별할 때 사용한다.
+ */
+UENUM(BlueprintType)
+enum class EGachaType : uint8
+{
+	Character UMETA(DisplayName = "Character"),
+	Weapon    UMETA(DisplayName = "Weapon")
+};
+
+#pragma endregion 열거형
+
+#pragma region Structs
 /**
  * @struct FGachaResult
  * @brief 가챠 1회의 결과를 담는 데이터 구조체.
@@ -59,4 +74,4 @@ struct FGachaProbabilityData : public FTableRowBase
 	int32 PityThreshold = 0;
 };
 
-#pragma endregion
+#pragma endregion 구조체
