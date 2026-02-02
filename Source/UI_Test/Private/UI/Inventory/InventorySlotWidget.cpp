@@ -137,10 +137,18 @@ void UInventorySlotWidget::UpdateState(bool bOwned)
 
 void UInventorySlotWidget::OnClicked()
 {
-	if (bIsOwned)
+	if (!bIsOwned) return; // 미보유 시 반응 X
+
+	UInventoryItemData* MyData = Cast<UInventoryItemData>(GetListItem());
+	if (!MyData) return;
+
+	// 상위 위젯 호출 (직통 전화)
+	UInventoryMainWidget* MainWidget = Cast<UInventoryMainWidget>(GetTypedOuter<UInventoryMainWidget>());
+	if (MainWidget)
 	{
-		UE_LOG(LogTemp, Log, TEXT("[Inventory] Item Selected: %s"), *MyID.ToString());
-		// TODO: 여기서 메인 위젯이나 컨트롤러에게 "나 클릭됐어!"라고 알려주는 로직 추가 예정
+		// ★ 함수 이름이 바뀌었습니다! (UpdateDetailInfo -> OnInventorySlotClicked)
+		// 이제 메인이 알아서 판단합니다 (정보를 보여줄지, 교체할지).
+		MainWidget->OnInventorySlotClicked(MyData);
 	}
 }
 

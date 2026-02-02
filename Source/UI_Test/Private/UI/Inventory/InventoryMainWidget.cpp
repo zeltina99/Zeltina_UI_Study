@@ -3,6 +3,7 @@
 #include "UI/Inventory/InventoryMainWidget.h"
 #include "UI/Inventory/InventorySlotWidget.h"
 #include "UI/Inventory/InventoryItemData.h" // 데이터 객체 헤더 필수!
+#include "UI/Inventory/InventoryDetailWidget.h"
 #include "Components/TileView.h"           // WrapBox 대신 TileView 사용
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
@@ -13,119 +14,130 @@ void UInventoryMainWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	// 1. 탭 버튼 이벤트 연결
-	if (TabCharacterBtn)
+	// 1. 탭 버튼 바인딩
+	if (TabCharacterBtn) TabCharacterBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnCharacterTabClicked);
+	if (TabWeaponBtn) TabWeaponBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnWeaponTabClicked);
+
+	// 2. ★ [수정] 파티 슬롯 바인딩 (AddDynamic 사용)
+	// 람다 대신, 아까 만든 래퍼 함수를 각각 연결합니다.
+	if (PartySlot_0) PartySlot_0->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnPartySlot0_Clicked);
+	if (PartySlot_1) PartySlot_1->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnPartySlot1_Clicked);
+	if (PartySlot_2) PartySlot_2->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnPartySlot2_Clicked);
+
+	// 3. 상세 패널 이벤트 구독 (느슨한 결합)
+	if (WBP_DetailPanel)
 	{
-		TabCharacterBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnCharacterTabClicked);
+		WBP_DetailPanel->OnSwapButtonClicked.AddDynamic(this, &UInventoryMainWidget::OnSwapRequestReceived);
 	}
 
-	if (TabWeaponBtn)
-	{
-		TabWeaponBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnWeaponTabClicked);
-	}
-
-	// 2. 초기 화면 설정 (처음엔 캐릭터 리스트를 보여줌)
-	OnCharacterTabClicked();
+	// 4. 데이터 초기화
+	PartyData.Init(nullptr, 3);
+	RefreshInventoryList(true);
 }
 
-void UInventoryMainWidget::UpdateDetailInfo(UInventoryItemData* InData)
+void UInventoryMainWidget::OnInventorySlotClicked(UInventoryItemData* InData)
 {
 	if (!InData) return;
 
-	// 현재 선택된 아이템 기억
-	SelectedItem = InData;
-
-	// 1. 이름 텍스트 갱신
-	if (DetailNameText)
+	// [로직 분기 1] 교체 모드인가? -> 교체 실행
+	if (bIsSwapping)
 	{
-		DetailNameText->SetText(FText::FromName(InData->ID));
-	}
-
-	// 2. 상세 이미지 갱신 (슬롯 때와 마찬가지로 강제 이미지 모드 적용)
-	if (DetailImage)
-	{
-		UTexture2D* TargetTex = nullptr;
-
-		// 데이터 타입에 따라 텍스쳐 로드
-		if (InData->bIsCharacter && !InData->CharacterData.FaceIcon.IsNull())
+		if (PartyData.IsValidIndex(SelectedPartyIndex))
 		{
-			TargetTex = InData->CharacterData.FaceIcon.LoadSynchronous();
-		}
-		else if (!InData->bIsCharacter && !InData->ItemData.Icon.IsNull())
-		{
-			TargetTex = InData->ItemData.Icon.LoadSynchronous();
-		}
+			// 데이터 교체
+			PartyData[SelectedPartyIndex] = InData;
 
-		if (TargetTex)
-		{
-			// ★ 여기도 슬롯과 동일하게 브러시를 직접 생성하여 적용 (안전장치)
-			FSlateBrush NewBrush;
-			NewBrush.SetResourceObject(TargetTex);
-			NewBrush.DrawAs = ESlateBrushDrawType::Image; // 이미지 찌그러짐 방지
-			NewBrush.TintColor = FLinearColor::White;
+			// UI 갱신
+			RefreshPartySlots();
 
-			// 상세창 이미지는 크기를 고정하지 않고, WBP에서 설정한 크기에 맞춤
-			DetailImage->SetBrush(NewBrush);
-			DetailImage->SetVisibility(ESlateVisibility::Visible);
-		}
-		else
-		{
-			// 이미지가 없으면 숨김 처리하거나 기본 이미지 표시
-			DetailImage->SetVisibility(ESlateVisibility::Collapsed);
+			// 상세창도 교체된 캐릭터로 갱신
+			if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(InData);
+
+			// 교체 종료
+			bIsSwapping = false;
+			UE_LOG(LogTemp, Log, TEXT("파티원 교체 완료: %s"), *InData->ID.ToString());
 		}
 	}
+	// [로직 분기 2] 일반 모드 -> 단순 정보 확인
+	else
+	{
+		// 이땐 파티 슬롯 선택을 해제할지 말지는 기획에 따라 다름.
+		// 지금은 단순히 정보만 보여줍니다.
+		if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(InData);
+	}
+}
 
-	// 로그 출력 (디버깅용)
-	UE_LOG(LogTemp, Log, TEXT("[InventoryMain] Updated Detail Info: %s"), *InData->ID.ToString());
+void UInventoryMainWidget::OnPartySlotClicked(int32 SlotIndex)
+{
+	// 슬롯 선택 시 교체 모드 초기화 (안전장치)
+	SelectedPartyIndex = SlotIndex;
+	bIsSwapping = false;
+
+	UE_LOG(LogTemp, Log, TEXT("Party Slot %d Selected"), SlotIndex);
+
+	// 상세 정보창 갱신
+	if (WBP_DetailPanel)
+	{
+		// 데이터가 있으면 표시, 없으면 nullptr 전달(숨김)
+		UInventoryItemData* Data = PartyData.IsValidIndex(SlotIndex) ? PartyData[SlotIndex] : nullptr;
+		WBP_DetailPanel->UpdateInfo(Data);
+	}
+}
+
+void UInventoryMainWidget::OnSwapRequestReceived()
+{
+	// 파티 슬롯이 선택되지 않았다면 교체 불가
+	if (SelectedPartyIndex < 0 || SelectedPartyIndex >= PartyData.Num())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("파티 슬롯을 먼저 선택해주세요."));
+		return;
+	}
+
+	// 교체 모드 진입
+	bIsSwapping = true;
+	UE_LOG(LogTemp, Warning, TEXT("교체 모드 활성화! 인벤토리에서 대상을 선택하세요."));
+}
+
+void UInventoryMainWidget::RefreshPartySlots()
+{
+	// 반복되는 코드를 배열로 처리하여 최적화 및 가독성 확보
+	TArray<UImage*> Icons = { PartyIcon_0, PartyIcon_1, PartyIcon_2 };
+
+	for (int32 i = 0; i < Icons.Num(); i++)
+	{
+		if (Icons[i] && PartyData.IsValidIndex(i) && PartyData[i])
+		{
+			// 데이터가 있으면 이미지 표시
+			UInventoryItemData* Data = PartyData[i];
+			UTexture2D* IconTex = nullptr;
+
+			if (Data->bIsCharacter && !Data->CharacterData.FaceIcon.IsNull())
+				IconTex = Data->CharacterData.FaceIcon.LoadSynchronous();
+			else if (!Data->bIsCharacter && !Data->ItemData.Icon.IsNull())
+				IconTex = Data->ItemData.Icon.LoadSynchronous();
+
+			if (IconTex)
+			{
+				Icons[i]->SetBrushFromTexture(IconTex);
+				Icons[i]->SetVisibility(ESlateVisibility::Visible);
+			}
+		}
+		else if (Icons[i])
+		{
+			// 데이터 없으면 숨김 or 기본 이미지
+			Icons[i]->SetVisibility(ESlateVisibility::Hidden);
+		}
+	}
+}
+
+void UInventoryMainWidget::RefreshInventoryList(bool bIsCharacter)
+{
 }
 
 void UInventoryMainWidget::OnCharacterTabClicked()
 {
-	RefreshList(true); // 캐릭터 리스트 로드
 }
 
 void UInventoryMainWidget::OnWeaponTabClicked()
 {
-	RefreshList(false); // 무기 리스트 로드
-}
-
-void UInventoryMainWidget::RefreshList(bool bIsCharacter)
-{
-	if (!ContentTileView) return;
-
-	ContentTileView->ClearListItems();
-
-	// TODO: 실제 게임에서는 GameInstance나 PlayerState에서 보유 목록을 가져와야 합니다.
-	// 지금은 테스트를 위해 더미(가짜) 데이터를 생성해서 넣습니다.
-
-	for (int32 i = 1; i <= 10; i++)
-	{
-		UInventoryItemData* NewItem = NewObject<UInventoryItemData>(this);
-
-		if (bIsCharacter)
-		{
-			// 캐릭터 테스트 데이터
-			NewItem->ID = FName(*FString::Printf(TEXT("Char_%d"), i));
-			NewItem->bIsCharacter = true;
-			NewItem->bIsOwned = (i % 2 != 0); // 홀수 번호만 보유 중 처리 (테스트)
-			NewItem->Level = i * 10;
-			// 텍스쳐는 데이터 테이블 연결 전이라 비워둠 (흰색 박스 나올 수 있음)
-		}
-		else
-		{
-			// 무기 테스트 데이터
-			NewItem->ID = FName(*FString::Printf(TEXT("Weapon_%d"), i));
-			NewItem->bIsCharacter = false;
-			NewItem->bIsOwned = true;
-			NewItem->EnhancementLevel = i;
-		}
-
-		ContentTileView->AddItem(NewItem);
-	}
-
-	// 리스트 갱신 후 첫 번째 아이템 정보를 자동으로 상세창에 띄워주면 좋습니다.
-	if (ContentTileView->GetListItems().Num() > 0)
-	{
-		UpdateDetailInfo(Cast<UInventoryItemData>(ContentTileView->GetListItems()[0]));
-	}
 }
