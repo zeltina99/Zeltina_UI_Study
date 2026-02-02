@@ -8,6 +8,7 @@
 
 // 전방 선언
 class UUserWidget;
+class UGachaComponent;
 class ULobbyMainWidget;
 
 /**
@@ -19,6 +20,9 @@ UCLASS()
 class UI_TEST_API ALobbyPlayerController : public APlayerController
 {
 	GENERATED_BODY()
+
+public:
+	ALobbyPlayerController();
 
 public:
 	/**
@@ -52,6 +56,12 @@ private:
 	TSoftClassPtr<UUserWidget> InventoryWidgetClass = nullptr;
 
 	/**
+	 * @brief 가챠 소환 팝업 위젯 클래스.
+	 */
+	UPROPERTY(EditDefaultsOnly, Category = "UI")
+	TSoftClassPtr<UUserWidget> SummonPopupWidgetClass = nullptr;
+
+	/**
 	 * @brief 현재 화면에 띄워져 있는 위젯 인스턴스 (관리용).
 	 */
 	UPROPERTY()
@@ -63,4 +73,9 @@ private:
 	 * @param NewWidgetClass 교체할 위젯의 Soft Class Pointer.
 	 */
 	void ChangeWidget(TSoftClassPtr<UUserWidget> NewWidgetClass);
+
+public:
+	/** @brief 가챠 로직을 담당하는 컴포넌트 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UGachaComponent> GachaComponent = nullptr;
 };

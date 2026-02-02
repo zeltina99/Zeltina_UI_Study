@@ -4,6 +4,14 @@
 #include "Controller/LobbyPlayerController.h"
 #include "Blueprint/UserWidget.h"
 #include "Framework/MyGameInstance.h"
+#include "Component/GachaComponent.h" // ★ 헤더 파일 포함 필수!
+
+ALobbyPlayerController::ALobbyPlayerController()
+{
+	bShowMouseCursor = true;
+
+	GachaComponent = CreateDefaultSubobject<UGachaComponent>(TEXT("GachaComponent"));
+}
 
 void ALobbyPlayerController::BeginPlay()
 {
@@ -66,9 +74,10 @@ void ALobbyPlayerController::ShowScreen(FName ScreenName)
 	{
 		ChangeWidget(InventoryWidgetClass);
 	}
-	else if (ScreenName == "Summon") // 소환 (미구현)
+	else if (ScreenName == "Summon") // ★ [수정] 이제 구현됨!
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[LobbyController] Summon UI Not Implemented yet!"));
+		// 가챠 팝업 위젯으로 교체
+		ChangeWidget(SummonPopupWidgetClass);
 	}
 	else
 	{
