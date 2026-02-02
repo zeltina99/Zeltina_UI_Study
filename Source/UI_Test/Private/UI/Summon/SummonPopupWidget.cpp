@@ -2,11 +2,13 @@
 
 
 #include "UI/Summon/SummonPopupWidget.h"
+#include "UI/Summon/SummonTabWidget.h"
+#include "UI/Summon/SummonActionWidget.h"
+#include "UI/Summon/SummonBannerWidget.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
-#include "Components/Image.h"
-#include "Controller/LobbyPlayerController.h" // [Navigation Rule] 필수
-#include "Component/GachaComponent.h"         // [Logic] 필수
+#include "Controller/LobbyPlayerController.h"
+#include "Component/GachaComponent.h"
 
 #pragma region 초기화
 
@@ -14,16 +16,24 @@ void USummonPopupWidget::NativeOnInitialized()
 {
 	Super::NativeOnInitialized();
 
-	// 1. 탭 버튼 바인딩
-	if (BtnTabCharacter) BtnTabCharacter->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickTabCharacter);
-	if (BtnTabWeapon)    BtnTabWeapon->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickTabWeapon);
+	// 1. 하위 위젯(부품)들과 이벤트 연결 (Wiring)
+	if (WBP_SummonTab)
+	{
+		WBP_SummonTab->OnTabChanged.AddDynamic(this, &USummonPopupWidget::HandleTabChanged);
+	}
 
-	// 2. 액션 버튼 바인딩
-	if (BtnSingleSummon) BtnSingleSummon->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickSingleSummon);
-	if (BtnMultiSummon)  BtnMultiSummon->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickMultiSummon);
-	if (BtnClose)        BtnClose->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickClose);
+	if (WBP_SummonAction)
+	{
+		WBP_SummonAction->OnSummonRequest.AddDynamic(this, &USummonPopupWidget::HandleSummonRequest);
+	}
 
-	// 3. 컴포넌트 캐싱 (최적화)
+	// 2. 공통 버튼 연결
+	if (BtnClose)
+	{
+		BtnClose->OnClicked.AddDynamic(this, &USummonPopupWidget::OnClickClose);
+	}
+
+	// 3. 로직 컴포넌트 캐싱 (최적화)
 	if (APlayerController* PC = GetOwningPlayer())
 	{
 		CachedGachaComp = PC->FindComponentByClass<UGachaComponent>();
@@ -34,121 +44,98 @@ void USummonPopupWidget::NativeConstruct()
 {
 	Super::NativeConstruct();
 
-	// UI가 켜질 때 기본 상태로 리셋
+	// 화면이 열릴 때 초기 상태 리셋
 	CurrentTab = EGachaType::Character;
 
-	UpdateView();         // 탭 UI 갱신
-	UpdateCurrencyInfo(); // 재화 정보 갱신
+	// 하위 위젯들도 초기 상태로 동기화
+	if (WBP_SummonTab)
+	{
+		WBP_SummonTab->SetSelectedTab(CurrentTab);
+	}
+
+	UpdateAllViews();
 }
 
-#pragma endregion
+#pragma endregion 초기화
 
 #pragma region 이벤트 핸들러
 
-void USummonPopupWidget::OnClickTabCharacter()
+void USummonPopupWidget::HandleTabChanged(EGachaType NewType)
 {
-	if (CurrentTab == EGachaType::Character) return; // 최적화: 이미 선택된 탭 무시
+	// [최적화] 변경사항이 없으면 무시
+	if (CurrentTab == NewType)
+	{
+		return;
+	}
 
-	CurrentTab = EGachaType::Character;
-	UpdateView();
+	CurrentTab = NewType;
+	UpdateAllViews(); // 탭이 바뀌었으니 화면 전체 갱신
 }
 
-void USummonPopupWidget::OnClickTabWeapon()
-{
-	if (CurrentTab == EGachaType::Weapon) return;
-
-	CurrentTab = EGachaType::Weapon;
-	UpdateView();
-}
-
-void USummonPopupWidget::OnClickSingleSummon()
+void USummonPopupWidget::HandleSummonRequest(int32 Count)
 {
 	if (CachedGachaComp)
 	{
-		// [FIX] 두 번째 인자로 현재 탭(CurrentTab)을 넘겨줍니다.
-		// (1회 소환, 캐릭터/무기 타입)
-		CachedGachaComp->RequestSummon(1, CurrentTab);
+		// 중재자 역할: ActionWidget의 요청(Count)에 현재 상태(Tab)를 더해서 컴포넌트로 전달
+		CachedGachaComp->RequestSummon(Count, CurrentTab);
 
-		UpdateCurrencyInfo(); // 소모 후 재화 갱신
+		// 소환 후 재화 갱신
+		UpdateCurrencyDisplay();
 	}
 	else
 	{
-		UE_LOG(LogTemp, Error, TEXT("❌ [SummonPopup] GachaComponent is nullptr!"));
-	}
-}
-
-void USummonPopupWidget::OnClickMultiSummon()
-{
-	if (CachedGachaComp)
-	{
-		// [FIX] 여기도 마찬가지로 2개를 넘깁니다.
-		// (10회 소환, 캐릭터/무기 타입)
-		CachedGachaComp->RequestSummon(10, CurrentTab);
-
-		UpdateCurrencyInfo();
+		UE_LOG(LogTemp, Error, TEXT("❌ [SummonPopup] GachaComponent is Missing!"));
 	}
 }
 
 void USummonPopupWidget::OnClickClose()
 {
-	// [Zeltina Rule] Navigation via Controller
+	// [네비게이션 규칙] 컨트롤러를 통해 화면 전환
 	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
 	{
 		PC->ShowScreen(TEXT("Main"));
 	}
-	else
-	{
-		// Fallback (Should rarely happen)
-		RemoveFromParent();
-	}
 }
 
-#pragma endregion
+#pragma endregion 이벤트 핸들러
 
-#pragma region UI 로직
+#pragma region 화면 갱신
 
-void USummonPopupWidget::UpdateView()
+void USummonPopupWidget::UpdateAllViews()
 {
-	// 1. 배너 타이틀 및 이미지 변경 (Data-Driven: 테이블에서 가져오는 것이 좋음)
-	FText TitleText;
-	if (CurrentTab == EGachaType::Character)
+	// 1. 배너 위젯 갱신 (이미지, 타이틀, 천장)
+	if (WBP_SummonBanner)
 	{
-		TitleText = FText::FromString(TEXT("캐릭터 픽업 소환"));
-		// 버튼 상태: 선택된 탭은 비활성화(눌린 느낌), 나머지는 활성화
-		if (BtnTabCharacter) BtnTabCharacter->SetIsEnabled(false);
-		if (BtnTabWeapon)    BtnTabWeapon->SetIsEnabled(true);
-	}
-	else
-	{
-		TitleText = FText::FromString(TEXT("무기 픽업 소환"));
-		if (BtnTabCharacter) BtnTabCharacter->SetIsEnabled(true);
-		if (BtnTabWeapon)    BtnTabWeapon->SetIsEnabled(false);
+		WBP_SummonBanner->UpdateBannerView(CurrentTab);
+
+		// 천장 정보는 컴포넌트에서 가져옴 (데이터 바인딩)
+		if (CachedGachaComp)
+		{
+			// TODO: GachaComponent에 GetMaxPity() 등이 구현되어 있다고 가정
+			int32 CurrentPity = CachedGachaComp->GetCurrentPityCount();
+			WBP_SummonBanner->UpdatePityText(CurrentPity, 50);
+		}
 	}
 
-	if (TextBannerTitle) TextBannerTitle->SetText(TitleText);
+	// 2. 액션 위젯 갱신 (비용)
+	if (WBP_SummonAction)
+	{
+		// 임시 하드코딩된 비용 (나중엔 테이블에서 로드)
+		WBP_SummonAction->UpdateCostText(160, 1600);
+	}
 
-	// 2. 비용 텍스트 갱신
-	if (TextSingleCost) TextSingleCost->SetText(FText::AsNumber(COST_SINGLE));
-	if (TextMultiCost)  TextMultiCost->SetText(FText::AsNumber(COST_MULTI));
+	// 3. 재화 정보 갱신
+	UpdateCurrencyDisplay();
 }
 
-void USummonPopupWidget::UpdateCurrencyInfo()
+void USummonPopupWidget::UpdateCurrencyDisplay()
 {
-	// 1. 보유 재화 갱신 (임시 Mock Data -> 실제로는 GameInstance/PlayerState에서 로드)
-	int32 CurrentGem = 5000;
 	if (TextCurrentGem)
 	{
-		TextCurrentGem->SetText(FText::AsNumber(CurrentGem));
-	}
-
-	// 2. 천장 카운트 갱신
-	if (CachedGachaComp && TextPityCount)
-	{
-		// 예: Component에서 Getter로 가져오기 (캡슐화)
-		// int32 Pity = CachedGachaComp->GetCurrentPityCount();
-		// TextPityCount->SetText(FText::Format(FText::FromString(TEXT("천장까지 {0}회")), 50 - Pity));
-		TextPityCount->SetText(FText::FromString(TEXT("전설 확정까지 50회"))); // 임시
+		// TODO: 실제 유저 데이터 연동 (GameInstance 등)
+		int32 MyGem = 5000;
+		TextCurrentGem->SetText(FText::AsNumber(MyGem));
 	}
 }
 
-#pragma endregion
+#pragma endregion 화면 갱신
