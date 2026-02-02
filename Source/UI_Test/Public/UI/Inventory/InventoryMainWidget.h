@@ -60,6 +60,10 @@ protected:
 	 */
 	void RefreshInventoryList(bool bIsCharacter);
 
+	/** @brief 뒤로가기 버튼 클릭 시 호출 (컨트롤러에게 화면 전환 요청) */
+	UFUNCTION()
+	void OnBackBtnClicked();
+
 	/** @brief 탭 버튼 핸들러 */
 	UFUNCTION() 
 	void OnCharacterTabClicked();
@@ -76,6 +80,9 @@ protected:
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UTileView> ContentTileView;
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UButton> TabCharacterBtn;
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UButton> TabWeaponBtn;
+	/** @brief 뒤로가기 버튼 */
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<UButton> BackBtn;
 
 	// 분리된 상세 위젯
 	UPROPERTY(meta = (BindWidget))
@@ -90,6 +97,15 @@ protected:
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UImage> PartyIcon_0;
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UImage> PartyIcon_1;
 	UPROPERTY(meta = (BindWidget)) TObjectPtr<UImage> PartyIcon_2;
+
+protected:
+	/** @brief 캐릭터 정보가 담긴 데이터 테이블 (DT_Character) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data Source")
+	TObjectPtr<class UDataTable> CharacterDataTable = nullptr;
+
+	/** @brief 무기 정보가 담긴 데이터 테이블 (DT_Weapon) */
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Data Source")
+	TObjectPtr<class UDataTable> WeaponDataTable = nullptr;
 
 private:
 	// --- 내부 상태 (캡슐화) ---

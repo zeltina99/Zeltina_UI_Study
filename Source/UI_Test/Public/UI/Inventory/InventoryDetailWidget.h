@@ -43,21 +43,22 @@ protected:
 	void HandleSwapButtonClicked();
 
 protected:
-	/**
-	 * @brief 선택된 대상의 큰 이미지.
-	 */
-	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<class UImage> DetailImage = nullptr;
+	// ★ [수정] 배경 이미지는 코드로 안 건드립니다! (WBP에서 고정)
+	// 대신 '내용물'을 담는 상자를 껐다 켰다 할 겁니다.
 
-	/**
-	 * @brief 선택된 대상의 이름 텍스트.
-	 */
+	/** @brief 텍스트와 버튼이 들어있는 컨테이너 (Overlay나 VerticalBox) */
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UWidget> ContentBox = nullptr;
+
+	/** @brief 클릭했을 때 뜨는 연하늘색 블러 이미지 */
+	UPROPERTY(meta = (BindWidget))
+	TObjectPtr<class UImage> BlurImage = nullptr;
+
+	/** @brief 상세 설명 텍스트 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UTextBlock> DetailNameText = nullptr;
 
-	/**
-	 * @brief 장착 또는 교체 버튼.
-	 */
+	/** @brief 교체 버튼 */
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<class UButton> BtnEquip = nullptr;
 };

@@ -20,42 +20,25 @@ void UInventoryDetailWidget::NativeOnInitialized()
 
 void UInventoryDetailWidget::UpdateInfo(UInventoryItemData* InData)
 {
+	// 1. 데이터가 없으면? -> 그냥 하늘색 배경만 보여야 함 (내용물 숨김)
 	if (!InData)
 	{
-		SetVisibility(ESlateVisibility::Hidden);
+		if (ContentBox) ContentBox->SetVisibility(ESlateVisibility::Collapsed);
+		if (BlurImage) BlurImage->SetVisibility(ESlateVisibility::Collapsed);
 		return;
 	}
 
-	SetVisibility(ESlateVisibility::Visible);
+	// 2. 데이터가 있으면? -> 내용물과 블러를 켬!
+	if (ContentBox) ContentBox->SetVisibility(ESlateVisibility::Visible);
+	if (BlurImage) BlurImage->SetVisibility(ESlateVisibility::Visible);
 
-	// 1. 이름 갱신
+	// 3. 텍스트 갱신 (이미지 변경 코드는 삭제됨!)
 	if (DetailNameText)
 	{
-		DetailNameText->SetText(FText::FromName(InData->ID));
-	}
-
-	// 2. 이미지 갱신
-	if (DetailImage)
-	{
-		UTexture2D* TargetTex = nullptr;
-
-		// 데이터 타입 확인 및 텍스쳐 로드
-		if (InData->bIsCharacter && !InData->CharacterData.FaceIcon.IsNull())
-			TargetTex = InData->CharacterData.FaceIcon.LoadSynchronous();
-		else if (!InData->bIsCharacter && !InData->ItemData.Icon.IsNull())
-			TargetTex = InData->ItemData.Icon.LoadSynchronous();
-
-		if (TargetTex)
-		{
-			// 브러시 최적화: 매번 새로 만들기보다, 텍스쳐만 교체하는 것이 좋으나
-			// 안전성을 위해 브러시 재생성 방식을 사용 (UI 찌그러짐 방지)
-			FSlateBrush NewBrush;
-			NewBrush.SetResourceObject(TargetTex);
-			NewBrush.DrawAs = ESlateBrushDrawType::Image;
-			NewBrush.TintColor = FLinearColor::White;
-
-			DetailImage->SetBrush(NewBrush);
-		}
+		// FCharacterUIData나 FItemUIData 안의 이름이나 설명 텍스트를 가져오세요.
+		// 예시: 
+		FText InfoText = InData->bIsCharacter ? InData->CharacterData.Name : InData->ItemData.DisplayName;
+		DetailNameText->SetText(InfoText);
 	}
 }
 

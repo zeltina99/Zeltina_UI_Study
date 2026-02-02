@@ -8,6 +8,7 @@
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
 #include "Components/Image.h"
+#include "Controller/LobbyPlayerController.h"
 #include "Framework/Data/InventoryStructs.h"
 
 void UInventoryMainWidget::NativeOnInitialized()
@@ -28,6 +29,12 @@ void UInventoryMainWidget::NativeOnInitialized()
 	if (WBP_DetailPanel)
 	{
 		WBP_DetailPanel->OnSwapButtonClicked.AddDynamic(this, &UInventoryMainWidget::OnSwapRequestReceived);
+	}
+
+	// 4. ★ [수정] 뒤로가기 버튼 바인딩 (람다 삭제 -> AddDynamic 사용)
+	if (BackBtn)
+	{
+		BackBtn->OnClicked.AddDynamic(this, &UInventoryMainWidget::OnBackBtnClicked);
 	}
 
 	// 4. 데이터 초기화
@@ -132,12 +139,119 @@ void UInventoryMainWidget::RefreshPartySlots()
 
 void UInventoryMainWidget::RefreshInventoryList(bool bIsCharacter)
 {
+	if (!ContentTileView) return;
+
+	ContentTileView->ClearListItems();
+
+	UDataTable* TargetTable = bIsCharacter ? CharacterDataTable : WeaponDataTable;
+
+	if (!TargetTable)
+	{
+		UE_LOG(LogTemp, Error, TEXT("❌ [InventoryMain] 데이터 테이블이 연결되지 않았습니다! WBP에서 할당해주세요."));
+		return;
+	}
+
+	// 1. 캐릭터 리스트 처리
+	if (bIsCharacter)
+	{
+		if (TargetTable->GetRowStruct() != FCharacterUIData::StaticStruct())
+		{
+			UE_LOG(LogTemp, Error, TEXT("❌ [Character] 테이블 구조가 FCharacterUIData가 아닙니다!"));
+			return;
+		}
+
+		const TMap<FName, uint8*>& RowMap = TargetTable->GetRowMap();
+		for (auto& Pair : RowMap)
+		{
+			FName RowID = Pair.Key;
+			FCharacterUIData* Data = reinterpret_cast<FCharacterUIData*>(Pair.Value);
+
+			if (Data)
+			{
+				UInventoryItemData* NewItem = NewObject<UInventoryItemData>(this);
+				// ★ 지원님의 기존 함수 사용: InitCharacter(ID, Data, Owned, Level)
+				NewItem->InitCharacter(RowID, *Data, true, 1);
+				ContentTileView->AddItem(NewItem);
+			}
+		}
+	}
+	// 2. 무기(아이템) 리스트 처리
+	else
+	{
+		if (TargetTable->GetRowStruct() != FItemUIData::StaticStruct())
+		{
+			UE_LOG(LogTemp, Error, TEXT("❌ [Weapon] 테이블 구조가 FItemUIData가 아닙니다!"));
+			return;
+		}
+
+		const TMap<FName, uint8*>& RowMap = TargetTable->GetRowMap();
+		for (auto& Pair : RowMap)
+		{
+			FName RowID = Pair.Key;
+			FItemUIData* Data = reinterpret_cast<FItemUIData*>(Pair.Value);
+
+			if (Data)
+			{
+				UInventoryItemData* NewItem = NewObject<UInventoryItemData>(this);
+				// ★ 지원님의 기존 함수 사용: InitItem(ID, Data, Owned, EnhanceLevel)
+				// 인자 4개를 맞춰서 넣어줍니다. (강화 수치는 일단 0)
+				NewItem->InitItem(RowID, *Data, true, 0);
+				ContentTileView->AddItem(NewItem);
+			}
+		}
+	}
+
+	UE_LOG(LogTemp, Log, TEXT("리스트 갱신 완료: %d개"), ContentTileView->GetListItems().Num());
+
+	if (ContentTileView->GetListItems().Num() > 0)
+	{
+		UInventoryItemData* FirstItem = Cast<UInventoryItemData>(ContentTileView->GetListItems()[0]);
+		if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(FirstItem);
+	}
+}
+
+void UInventoryMainWidget::OnBackBtnClicked()
+{
+	// 컨트롤러에게 "메인 화면(Main)으로 교체해줘"라고 정중하게 요청
+	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
+	{
+		PC->ShowScreen(TEXT("Main")); // ★ 지원님이 만드신 ShowScreen 함수 호출
+	}
+	else
+	{
+		// 혹시나 컨트롤러를 못 찾으면 비상 탈출
+		RemoveFromParent();
+	}
 }
 
 void UInventoryMainWidget::OnCharacterTabClicked()
 {
+	// 1. 캐릭터 리스트로 갱신 (true = Character)
+	RefreshInventoryList(true);
+
+	// 2. 탭을 바꿨으니 보고 있던 상세 정보는 끕니다. (하늘색 배경만 나오게)
+	if (WBP_DetailPanel)
+	{
+		WBP_DetailPanel->UpdateInfo(nullptr);
+	}
+
+	// 3. (안전장치) 탭을 이동했으므로 진행 중이던 '교체 모드'는 취소합니다.
+	bIsSwapping = false;
+	SelectedPartyIndex = -1;
 }
 
 void UInventoryMainWidget::OnWeaponTabClicked()
 {
+	// 1. 무기 리스트로 갱신 (false = Weapon)
+	RefreshInventoryList(false);
+
+	// 2. 상세 정보 초기화
+	if (WBP_DetailPanel)
+	{
+		WBP_DetailPanel->UpdateInfo(nullptr);
+	}
+
+	// 3. 교체 모드 취소
+	bIsSwapping = false;
+	SelectedPartyIndex = -1;
 }
