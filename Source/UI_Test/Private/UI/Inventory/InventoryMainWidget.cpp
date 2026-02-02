@@ -40,6 +40,41 @@ void UInventoryMainWidget::NativeOnInitialized()
 	// 4. 데이터 초기화
 	PartyData.Init(nullptr, 3);
 	RefreshInventoryList(true);
+
+	if (CharacterDataTable)
+	{
+		// 안전장치: 구조체 확인
+		if (CharacterDataTable->GetRowStruct() == FCharacterUIData::StaticStruct())
+		{
+			const TMap<FName, uint8*>& RowMap = CharacterDataTable->GetRowMap();
+			int32 Index = 0;
+
+			// 앞에서부터 3명만 가져와서 파티 슬롯에 채워넣음
+			for (auto& Pair : RowMap)
+			{
+				if (Index >= 3) break;
+
+				FName RowID = Pair.Key;
+				FCharacterUIData* Data = reinterpret_cast<FCharacterUIData*>(Pair.Value);
+
+				if (Data)
+				{
+					UInventoryItemData* NewItem = NewObject<UInventoryItemData>(this);
+					NewItem->InitCharacter(RowID, *Data, true, 1);
+					PartyData[Index] = NewItem; // ★ 데이터 주입!
+				}
+				Index++;
+			}
+		}
+	}
+
+	// 3. UI 갱신 (파티 슬롯 얼굴 + 리스트)
+	RefreshPartySlots();
+	RefreshInventoryList(true);
+
+	// ★ [수정] 시작할 땐 상세창을 강제로 끕니다. (하늘색 배경만 남게)
+	if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(nullptr);
+
 }
 
 void UInventoryMainWidget::OnInventorySlotClicked(UInventoryItemData* InData)
@@ -51,25 +86,51 @@ void UInventoryMainWidget::OnInventorySlotClicked(UInventoryItemData* InData)
 	{
 		if (PartyData.IsValidIndex(SelectedPartyIndex))
 		{
-			// 데이터 교체
-			PartyData[SelectedPartyIndex] = InData;
+			// 1. 중복 검사: 선택한 캐릭터가 이미 파티에 있는지 확인
+			int32 ExistingIndex = -1;
+			for (int32 i = 0; i < PartyData.Num(); i++)
+			{
+				// ID로 비교 (포인터 비교는 객체가 달라서 안 될 수 있음)
+				if (PartyData[i] && PartyData[i]->ID == InData->ID)
+				{
+					ExistingIndex = i;
+					break;
+				}
+			}
+
+			// 2. 이미 존재하는 멤버라면? -> 자리 교체 (Swap)
+			if (ExistingIndex >= 0 && ExistingIndex != SelectedPartyIndex)
+			{
+				// A자리(기존)와 B자리(선택)를 맞바꿉니다.
+				// 예: [0:기사] [1:궁수] 상황에서 1번 슬롯에 '기사'를 넣으려 함
+				// -> [0:궁수] [1:기사] 로 변경
+				UInventoryItemData* TempData = PartyData[SelectedPartyIndex];
+				PartyData[SelectedPartyIndex] = InData; // 선택한 슬롯에 새 캐릭터
+				PartyData[ExistingIndex] = TempData;    // 기존 슬롯엔 밀려난 캐릭터(혹은 빈값)
+
+				UE_LOG(LogTemp, Warning, TEXT("파티원 위치 교체: 슬롯 %d <-> %d"), ExistingIndex, SelectedPartyIndex);
+			}
+			// 3. 중복이 아니면? -> 그냥 덮어쓰기
+			else if (ExistingIndex == -1)
+			{
+				PartyData[SelectedPartyIndex] = InData;
+				UE_LOG(LogTemp, Log, TEXT("파티원 장착 완료: %s"), *InData->ID.ToString());
+			}
+			// (ExistingIndex == SelectedPartyIndex 인 경우는 자기 자신을 찍은 거니 아무것도 안 함)
 
 			// UI 갱신
 			RefreshPartySlots();
 
-			// 상세창도 교체된 캐릭터로 갱신
+			// 상세창도 갱신
 			if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(InData);
 
 			// 교체 종료
 			bIsSwapping = false;
-			UE_LOG(LogTemp, Log, TEXT("파티원 교체 완료: %s"), *InData->ID.ToString());
 		}
 	}
 	// [로직 분기 2] 일반 모드 -> 단순 정보 확인
 	else
 	{
-		// 이땐 파티 슬롯 선택을 해제할지 말지는 기획에 따라 다름.
-		// 지금은 단순히 정보만 보여줍니다.
 		if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(InData);
 	}
 }
@@ -203,11 +264,11 @@ void UInventoryMainWidget::RefreshInventoryList(bool bIsCharacter)
 
 	UE_LOG(LogTemp, Log, TEXT("리스트 갱신 완료: %d개"), ContentTileView->GetListItems().Num());
 
-	if (ContentTileView->GetListItems().Num() > 0)
+	/*if (ContentTileView->GetListItems().Num() > 0)
 	{
 		UInventoryItemData* FirstItem = Cast<UInventoryItemData>(ContentTileView->GetListItems()[0]);
 		if (WBP_DetailPanel) WBP_DetailPanel->UpdateInfo(FirstItem);
-	}
+	}*/
 }
 
 void UInventoryMainWidget::OnBackBtnClicked()
