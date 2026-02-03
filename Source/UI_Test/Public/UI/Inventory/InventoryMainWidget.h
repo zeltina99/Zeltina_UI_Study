@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "InventoryMainWidget.generated.h"
 
 class UTileView;
@@ -16,7 +16,7 @@ class UImage;
  * * 로직: [선택] -> [교체 요청] -> [대상 선택] -> [교체 실행]의 흐름을 관리합니다.
  */
 UCLASS()
-class UI_TEST_API UInventoryMainWidget : public UUserWidget
+class UI_TEST_API UInventoryMainWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 

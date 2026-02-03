@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "LobbyMainWidget.generated.h"
 
 // 전방 선언
@@ -16,7 +16,7 @@ class ULobbyMenuWidget;
  * @details TopBar와 MainMenu 위젯을 포함하며, 데이터 갱신 및 화면 전환 로직을 담당합니다.
  */
 UCLASS()
-class UI_TEST_API ULobbyMainWidget : public UUserWidget
+class UI_TEST_API ULobbyMainWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 

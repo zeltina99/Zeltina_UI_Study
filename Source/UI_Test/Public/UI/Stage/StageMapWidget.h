@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "Framework/Data/FStageData.h"
 #include "StageMapWidget.generated.h"
 
@@ -18,7 +18,7 @@ class UButton;
  * @details 자식으로 배치된 StageNode들을 자동으로 찾아서 이벤트를 연결하고, 클릭 시 팝업을 띄웁니다.
  */
 UCLASS()
-class UI_TEST_API UStageMapWidget : public UUserWidget
+class UI_TEST_API UStageMapWidget : public UCommonActivatableWidget
 {	
 	GENERATED_BODY()
 public:

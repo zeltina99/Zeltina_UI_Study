@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "MyTitleWidget.generated.h"
 
 class UButton;
@@ -16,7 +16,7 @@ class UWidgetAnimation;	// 애니메이션용 전방 선언
  * 텍스트 깜빡임 애니메이션을 재생합니다.
  */
 UCLASS()
-class UI_TEST_API UMyTitleWidget : public UUserWidget
+class UI_TEST_API UMyTitleWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 	

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "Framework/Data/GachaStructs.h"
 #include "SummonPopupWidget.generated.h"
 
@@ -25,7 +25,7 @@ class UGachaComponent;
  * - 컴포넌트의 데이터 변경 사항을 각 부품에 전파하여 UI를 갱신시킨다.
  */
 UCLASS()
-class UI_TEST_API USummonPopupWidget : public UUserWidget
+class UI_TEST_API USummonPopupWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 

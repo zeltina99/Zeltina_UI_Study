@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Blueprint/UserWidget.h"
+#include "CommonActivatableWidget.h"
 #include "ResultPopupWidget.generated.h"
 
 
@@ -14,7 +14,7 @@ class UButton;
  * @details '로비로 돌아가기' 버튼을 누르면 클리어 정보를 저장하고 레벨을 이동합니다.
  */
 UCLASS()
-class UI_TEST_API UResultPopupWidget : public UUserWidget
+class UI_TEST_API UResultPopupWidget : public UCommonActivatableWidget
 {
 	GENERATED_BODY()
 protected:
