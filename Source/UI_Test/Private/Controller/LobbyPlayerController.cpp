@@ -48,8 +48,9 @@ void ALobbyPlayerController::ShowScreen(FName ScreenName)
 
 	if (ScreenName == "Main")           TargetClass = MainMenuWidgetClass;
 	else if (ScreenName == "StageMap")  TargetClass = StageMapWidgetClass;
-	else if (ScreenName == "Character") TargetClass = InventoryWidgetClass;
+	else if (ScreenName == "Party")		TargetClass = InventoryWidgetClass;
 	else if (ScreenName == "Summon")    TargetClass = SummonPopupWidgetClass;
+	//else if (ScreenName == "Enhance")   TargetClass = SummonPopupWidgetClass;
 	else
 	{
 		UE_LOG(LogTemp, Warning, TEXT("[LobbyController] Unknown Screen: %s"), *ScreenName.ToString());
