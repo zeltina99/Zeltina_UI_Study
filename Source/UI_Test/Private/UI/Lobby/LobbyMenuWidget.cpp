@@ -41,36 +41,18 @@ void ULobbyMenuWidget::NativeConstruct()
 
 void ULobbyMenuWidget::OnStageClicked()
 {
-	// 1. 이벤트 전파 (선택 사항)
+	// 1. 이벤트 방송 (필요시 사용)
 	if (OnMenuSelected.IsBound())
 	{
 		OnMenuSelected.Broadcast(FName("Stage"));
 	}
 
-	// 2. 스테이지 맵 위젯 띄우기 (Lazy Loading 패턴)
-	// A. 데이터 유효성 검사
-	if (!StageMapClass)
+	// 2. [SRP 준수] 컨트롤러에게 화면 전환 위임 (직접 생성 X)
+	// 컨트롤러가 ShowScreen을 통해 기존 위젯을 제거하고 StageMap을 띄워줍니다. -> 겹침 해결
+	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
 	{
-		UE_LOG(LogTemp, Error, TEXT("[LobbyMenu] StageMapClass is NOT set! Check WBP properties."));
-		return;
-	}
-
-	// B. 인스턴스가 없으면 생성 (최초 1회)
-	if (!StageMapInstance)
-	{
-		StageMapInstance = CreateWidget<UUserWidget>(GetOwningPlayer(), StageMapClass);
-	}
-
-	// C. 화면 표시
-	if (StageMapInstance)
-	{
-		if (!StageMapInstance->IsInViewport())
-		{
-			StageMapInstance->AddToViewport();
-		}
-		StageMapInstance->SetVisibility(ESlateVisibility::Visible);
-
-		UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Opened Stage Map."));
+		PC->ShowScreen(FName("StageMap"));
+		UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Request 'StageMap' Screen via Controller."));
 	}
 }
 
@@ -81,15 +63,10 @@ void ULobbyMenuWidget::OnSummonClicked()
 		OnMenuSelected.Broadcast(FName("Summon"));
 	}
 
-	// ★ [핵심] 컨트롤러에게 소환 화면 요청 (비동기 로딩 트리거)
 	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
 	{
 		PC->ShowScreen(FName("Summon"));
-		UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Request 'Summon' Screen -> Controller"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Error, TEXT("[LobbyMenu] Controller is NOT ALobbyPlayerController!"));
+		UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Request 'Summon' Screen via Controller."));
 	}
 }
 
@@ -115,8 +92,11 @@ void ULobbyMenuWidget::OnEnhanceClicked()
 		OnMenuSelected.Broadcast(FName("Enhance"));
 	}
 
-	// 강화 화면 요청 (아직 기능 구현 중이라면 로그 출력)
-	UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Enhance Clicked (Feature In Progress)"));
+	if (ALobbyPlayerController* PC = GetOwningPlayer<ALobbyPlayerController>())
+	{
+		PC->ShowScreen(FName("Enhance"));
+		UE_LOG(LogTemp, Log, TEXT("[LobbyMenu] Request 'Enhance' Screen via Controller."));
+	}
 }
 
 #pragma endregion 이벤트 핸들러
