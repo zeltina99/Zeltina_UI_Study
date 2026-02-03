@@ -1,0 +1,22 @@
+<map id="Source/UI_Test/Private/Framework/MyGameInstance.cpp" name="Source/UI_Test/Private/Framework/MyGameInstance.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="519,5,741,48"/>
+<area shape="rect" id="Node000002" href="$_my_game_instance_8h.html" title=" " alt="" coords="313,96,518,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="577,48,464,93,462,88,572,49"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="541,96,719,123"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="632,47,632,82,628,79,628,51"/>
+<area shape="rect" id="Node000008" href="$_loading_widget_8h.html" title=" " alt="" coords="743,96,928,123"/>
+<area shape="poly" id="edge7_Node000001_Node000008" title=" " alt="" coords="683,46,792,90,786,90,682,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="628,171,733,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="462,121,622,166,617,166,461,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,171,167,197"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="358,126,159,169,158,164,357,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="191,171,384,197"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="396,123,324,165,322,160,390,124"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="408,171,604,197"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="432,121,481,162,476,161,430,126"/>
+<area shape="poly" id="edge8_Node000008_Node000003" title=" " alt="" coords="811,123,722,166,721,161,806,124"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="757,171,914,197"/>
+<area shape="poly" id="edge9_Node000008_Node000009" title=" " alt="" coords="837,121,837,157,833,153,833,125"/>
+<area shape="rect" id="Node000010" title=" " alt="" coords="938,171,1117,197"/>
+<area shape="poly" id="edge10_Node000008_Node000010" title=" " alt="" coords="869,121,982,165,977,164,868,126"/>
+</map>

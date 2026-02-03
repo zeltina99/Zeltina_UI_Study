@@ -1,0 +1,11 @@
+<map id="UInventorySlotWidget::NativeOnListItemObjectSet" name="UInventorySlotWidget::NativeOnListItemObjectSet">
+<area shape="rect" id="Node000001" title="리스트 아이템의 데이터가 설정될 때 호출된다 (인터페이스 구현)." alt="" coords="5,72,195,115"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_slot_widget.html#a96f14c41c6dd3eb5eb229574ee834a39" title="아이템의 아이콘 이미지를 로드하고 표시합니다. 에디터 설정을 무시하고 강제로 210x340 크기의 이미지 모드로 렌더링하여 이미지가 찌그러지거나 투명해지는 문제를 방지합니다." alt="" coords="243,5,392,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="171,69,233,52,229,54,173,74"/>
+<area shape="rect" id="Node000003" href="$class_u_inventory_slot_widget.html#a003af71a4e94430b30dbbdb42d4cd0e5" title="아이템의 보유/미보유 상태에 따라 UI 상호작용 및 시각 효과를 처리합니다. 보유 중일 때는 밝게 표시하고 버튼을 활성화하며, 미보유 중일 때는 어둡게(Dimmed) 처리하고 버튼을..." alt="" coords="243,72,392,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="194,91,229,93,224,94,195,96"/>
+<area shape="rect" id="Node000004" href="$class_u_inventory_slot_widget.html#abaf2d40f8e15a5e1e302bd7b7a28a113" title="등급 테두리 색상 및 레벨 텍스트 등 부가적인 정보를 갱신합니다." alt="" coords="243,139,392,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="172,113,234,133,228,134,171,118"/>
+<area shape="rect" id="Node000005" href="$class_u_inventory_slot_widget.html#a471b3a36d8ef9f84fc0c1cb4e88d5bf8" title="등급(Enum)에 맞는 테두리 색상을 반환합니다." alt="" coords="440,139,589,181"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="392,157,427,160,422,160,392,163"/>
+</map>

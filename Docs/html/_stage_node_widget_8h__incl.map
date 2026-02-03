@@ -1,0 +1,16 @@
+<map id="Source/UI_Test/Public/UI/Stage/StageNodeWidget.h" name="Source/UI_Test/Public/UI/Stage/StageNodeWidget.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="104,5,302,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="21,171,126,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,42,53,62,31,78,13,97,8,113,14,129,26,145,43,160,38,162,22,149,9,132,3,113,8,95,28,74,51,58,105,37"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="23,96,180,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="175,50,131,88,128,84,179,47"/>
+<area shape="rect" id="Node000004" href="$_f_stage_data_8h.html" title=" " alt="" coords="204,96,407,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="230,46,280,86,275,87,229,51"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="431,96,630,123"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="287,46,467,91,462,93,287,51"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="266,126,129,168,128,163,264,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="151,171,286,197"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="293,122,247,163,244,158,288,124"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="310,171,474,197"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="321,121,368,161,363,160,320,126"/>
+</map>

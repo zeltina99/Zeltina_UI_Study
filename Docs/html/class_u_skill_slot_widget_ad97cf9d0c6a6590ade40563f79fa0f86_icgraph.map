@@ -1,0 +1,7 @@
+<map id="USkillSlotWidget::SetSlotEnabled" name="USkillSlotWidget::SetSlotEnabled">
+<area shape="rect" id="Node000001" title="버튼의 활성/비활성 상태를 설정합니다. (마나 부족, 침묵 상태 등)" alt="" coords="268,35,439,77"/>
+<area shape="rect" id="Node000002" href="$class_u_skill_slot_widget.html#a8cbabec0b8c61a60924ed40deaa131f8" title="스킬 슬롯을 데이터 기반으로 초기화합니다." alt="" coords="24,5,201,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="250,44,201,40,201,35,255,43"/>
+<area shape="rect" id="Node000003" href="$class_u_skill_slot_widget.html#a061a87e34d19a4cdd65316226be88288" title="쿨타임을 시작합니다. (스킬 사용 직후 호출)" alt="" coords="5,72,220,99"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="254,68,220,75,220,70,249,69"/>
+</map>

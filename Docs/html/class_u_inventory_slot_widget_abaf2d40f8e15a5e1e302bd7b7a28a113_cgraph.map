@@ -1,0 +1,5 @@
+<map id="UInventorySlotWidget::UpdateVisuals" name="UInventorySlotWidget::UpdateVisuals">
+<area shape="rect" id="Node000001" title="등급 테두리 색상 및 레벨 텍스트 등 부가적인 정보를 갱신합니다." alt="" coords="5,5,155,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_slot_widget.html#a471b3a36d8ef9f84fc0c1cb4e88d5bf8" title="등급(Enum)에 맞는 테두리 색상을 반환합니다." alt="" coords="203,5,352,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="155,24,190,26,185,27,155,29"/>
+</map>

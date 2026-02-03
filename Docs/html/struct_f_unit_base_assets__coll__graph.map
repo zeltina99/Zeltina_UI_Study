@@ -1,0 +1,5 @@
+<map id="FUnitBaseAssets" name="FUnitBaseAssets">
+<area shape="rect" id="Node000001" title="모든 유닛(플레이어, 몬스터, 퍼밀리어)의 공통 리소스 정의한 부모 구조체" alt="" coords="5,80,130,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="9,5,126,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,46,70,80,65,79,66,50"/>
+</map>

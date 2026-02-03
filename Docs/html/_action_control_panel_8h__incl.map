@@ -1,0 +1,15 @@
+<map id="Source/UI_Test/Public/UI/InGame/Panel/ActionControlPanel.h" name="Source/UI_Test/Public/UI/InGame/Panel/ActionControlPanel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="187,5,396,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,187,111,213"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="200,66,161,88,121,114,94,144,73,175,69,172,89,140,118,110,158,83,205,63"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="341,187,498,213"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="315,62,403,174,397,174,312,67"/>
+<area shape="rect" id="Node000004" href="$_skill_slot_widget_8h.html" title=" " alt="" coords="131,112,321,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="272,63,246,101,242,97,268,66"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="395,112,601,139"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="359,62,457,105,452,106,358,67"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="199,141,102,183,100,178,194,138"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="260,137,374,180,369,181,259,142"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="135,187,317,213"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="228,137,228,172,224,170,224,141"/>
+</map>

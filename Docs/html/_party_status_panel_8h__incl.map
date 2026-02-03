@@ -1,0 +1,15 @@
+<map id="Source/UI_Test/Public/UI/InGame/Panel/PartyStatusPanel.h" name="Source/UI_Test/Public/UI/InGame/Panel/PartyStatusPanel.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="214,5,414,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,203,111,229"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="230,66,189,88,148,114,107,152,77,191,73,188,104,149,144,110,187,83,234,63"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="389,203,546,229"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="335,62,407,153,445,193,439,191,403,156,333,67"/>
+<area shape="rect" id="Node000004" href="$_character_status_widget_8h.html" title=" " alt="" coords="158,112,342,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="297,63,274,101,270,97,293,66"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="416,120,612,147"/>
+<area shape="poly" id="edge7_Node000001_Node000006" title=" " alt="" coords="374,62,477,113,472,113,373,67"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="203,157,103,199,101,194,198,154"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="306,153,422,197,417,197,305,158"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="135,203,365,229"/>
+<area shape="poly" id="edge6_Node000004_Node000005" title=" " alt="" coords="252,153,252,188,248,185,248,157"/>
+</map>

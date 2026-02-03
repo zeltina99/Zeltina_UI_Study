@@ -1,0 +1,5 @@
+<map id="UInventoryItemData" name="UInventoryItemData">
+<area shape="rect" id="Node000001" title="타일 뷰(Tile View) 리스트 항목에 데이터를 전달하기 위한 래퍼(Wrapper) 클래스." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="40,5,110,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,46,78,80,72,79,73,50"/>
+</map>

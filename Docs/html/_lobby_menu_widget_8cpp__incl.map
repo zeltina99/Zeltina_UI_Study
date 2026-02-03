@@ -1,0 +1,20 @@
+<map id="Source/UI_Test/Private/UI/Lobby/LobbyMenuWidget.cpp" name="Source/UI_Test/Private/UI/Lobby/LobbyMenuWidget.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="370,5,586,48"/>
+<area shape="rect" id="Node000002" href="$_lobby_menu_widget_8h.html" title=" " alt="" coords="182,96,380,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="430,48,327,92,325,87,425,49"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="404,96,552,123"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="480,47,480,82,476,79,476,51"/>
+<area shape="rect" id="Node000007" href="$_lobby_player_controller_8h.html" title=" " alt="" coords="576,96,796,123"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="532,46,642,90,637,90,531,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="428,171,534,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="316,121,434,165,429,165,315,126"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="5,171,162,197"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="249,124,133,167,132,162,244,123"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="186,171,387,197"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="284,121,286,156,282,154,280,125"/>
+<area shape="poly" id="edge7_Node000007_Node000003" title=" " alt="" coords="653,123,532,168,530,163,648,124"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="568,171,797,197"/>
+<area shape="poly" id="edge8_Node000007_Node000008" title=" " alt="" coords="687,121,686,157,682,153,684,125"/>
+<area shape="rect" id="Node000009" title=" " alt="" coords="821,171,1042,197"/>
+<area shape="poly" id="edge9_Node000007_Node000009" title=" " alt="" coords="729,121,877,166,871,166,729,126"/>
+</map>

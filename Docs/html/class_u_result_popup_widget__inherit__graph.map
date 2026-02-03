@@ -1,0 +1,5 @@
+<map id="UResultPopupWidget" name="UResultPopupWidget">
+<area shape="rect" id="Node000001" title="전투 결과 화면을 표시하는 팝업 위젯입니다." alt="" coords="27,80,174,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>

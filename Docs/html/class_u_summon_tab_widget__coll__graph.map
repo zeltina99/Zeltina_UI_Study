@@ -1,0 +1,5 @@
+<map id="USummonTabWidget" name="USummonTabWidget">
+<area shape="rect" id="Node000001" title="소환 화면의 좌측 탭(카테고리 선택)을 전담하는 위젯." alt="" coords="5,80,151,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="28,5,128,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="80,46,81,80,75,79,76,50"/>
+</map>

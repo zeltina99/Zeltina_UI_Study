@@ -1,0 +1,5 @@
+<map id="UInventoryDetailWidget::HandleSwapButtonClicked" name="UInventoryDetailWidget::HandleSwapButtonClicked">
+<area shape="rect" id="Node000001" title="내부 버튼 클릭 핸들러" alt="" coords="214,5,399,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_detail_widget.html#afaca4d909a32b5e8eb36309a0e8c7e6c" title=" " alt="" coords="5,5,166,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="195,27,166,29,166,24,201,26"/>
+</map>

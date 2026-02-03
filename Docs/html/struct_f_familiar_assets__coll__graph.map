@@ -1,0 +1,9 @@
+<map id="FFamiliarAssets" name="FFamiliarAssets">
+<area shape="rect" id="Node000001" title="몬스터 전용 스탯 테이블 구조체" alt="" coords="9,229,126,256"/>
+<area shape="rect" id="Node000002" href="$struct_f_a_i_unit_assets.html" title="AI 제어 유닛(적, 퍼밀리어) 공통 리소스" alt="" coords="14,155,121,181"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,195,70,230,65,228,66,199"/>
+<area shape="rect" id="Node000003" href="$struct_f_unit_base_assets.html" title="모든 유닛(플레이어, 몬스터, 퍼밀리어)의 공통 리소스 정의한 부모 구조체" alt="" coords="5,80,130,107"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="68,120,70,155,65,154,67,125"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="9,5,126,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="68,45,70,80,65,79,67,50"/>
+</map>

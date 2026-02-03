@@ -1,0 +1,9 @@
+<map id="FItemBaseStats" name="FItemBaseStats">
+<area shape="rect" id="Node000001" title="아이템의 수치(Data)와 로직적인 속성을 담당하는 최상위 부모 구조체입니다." alt="" coords="57,80,173,107"/>
+<area shape="rect" id="Node000003" href="$struct_f_armor_stats.html" title="방어구 전용 수치 데이터 구조체" alt="" coords="5,155,100,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="97,118,65,156,61,152,92,119"/>
+<area shape="rect" id="Node000004" href="$struct_f_weapon_stats.html" title="무기 전용 수치 데이터 구조체" alt="" coords="124,155,232,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="137,116,170,154,164,154,135,121"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="56,5,174,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="116,45,118,80,113,79,114,50"/>
+</map>

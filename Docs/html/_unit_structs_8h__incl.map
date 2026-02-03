@@ -1,0 +1,14 @@
+<map id="Source/UI_Test/Public/Framework/Data/UnitStructs.h" name="Source/UI_Test/Public/Framework/Data/UnitStructs.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="88,5,292,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,171,111,197"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="87,47,47,67,30,81,15,97,10,112,13,128,35,159,30,161,8,130,5,112,10,95,26,77,45,62,89,42"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="25,96,160,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="163,50,121,88,118,84,167,47"/>
+<area shape="rect" id="Node000004" href="$_game_enums_8h.html" title=" " alt="" coords="184,96,393,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="216,46,264,86,259,86,215,51"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="417,96,576,123"/>
+<area shape="poly" id="edge6_Node000001_Node000006" title=" " alt="" coords="269,46,436,90,431,93,269,51"/>
+<area shape="poly" id="edge4_Node000004_Node000002" title=" " alt="" coords="249,126,114,168,112,163,248,121"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="204,171,373,197"/>
+<area shape="poly" id="edge5_Node000004_Node000005" title=" " alt="" coords="291,121,291,157,286,154,287,125"/>
+</map>

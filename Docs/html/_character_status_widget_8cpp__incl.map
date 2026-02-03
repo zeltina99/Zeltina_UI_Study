@@ -1,0 +1,15 @@
+<map id="Source/UI_Test/Private/UI/InGame/CharacterStatusWidget.cpp" name="Source/UI_Test/Private/UI/InGame/CharacterStatusWidget.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="275,5,529,48"/>
+<area shape="rect" id="Node000002" href="$_character_status_widget_8h.html" title=" " alt="" coords="120,96,305,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="355,50,272,92,269,87,360,48"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="329,104,475,131"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="404,46,404,90,400,87,400,50"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="499,104,681,131"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="447,46,552,97,547,97,446,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,187,111,213"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="176,139,97,181,95,177,170,139"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="134,187,291,213"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="215,137,215,172,210,169,211,141"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="315,187,545,213"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="269,137,385,181,379,181,268,142"/>
+</map>

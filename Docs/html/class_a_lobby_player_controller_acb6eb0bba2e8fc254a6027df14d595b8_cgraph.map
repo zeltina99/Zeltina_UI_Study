@@ -1,0 +1,7 @@
+<map id="ALobbyPlayerController::ShowScreen" name="ALobbyPlayerController::ShowScreen">
+<area shape="rect" id="Node000001" title="화면 전환을 요청한다. (Main, StageMap, Character, Summon)" alt="" coords="5,5,164,48"/>
+<area shape="rect" id="Node000002" href="$class_a_lobby_player_controller.html#a09b08650416510dd89b82ff1b561c47c" title="기존 위젯을 내리고 새로운 위젯을 **비동기**로 로드하여 띄운다." alt="" coords="212,5,370,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="164,24,199,26,193,27,164,29"/>
+<area shape="rect" id="Node000003" href="$class_a_lobby_player_controller.html#ae99ff0b1c38eeba5bc8152a85976426d" title="비동기 로딩이 완료되었을 때 호출되는 콜백 함수." alt="" coords="418,5,576,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="370,24,405,27,400,27,370,29"/>
+</map>

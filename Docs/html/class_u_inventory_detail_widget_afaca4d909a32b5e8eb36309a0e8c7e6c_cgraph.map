@@ -1,0 +1,5 @@
+<map id="UInventoryDetailWidget::NativeOnInitialized" name="UInventoryDetailWidget::NativeOnInitialized">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,5,166,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_detail_widget.html#aceb80b546623de79a14f767243c79d1e" title="내부 버튼 클릭 핸들러" alt="" coords="214,5,399,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="166,24,201,26,195,27,166,29"/>
+</map>

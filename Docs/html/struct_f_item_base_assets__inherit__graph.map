@@ -1,0 +1,9 @@
+<map id="FItemBaseAssets" name="FItemBaseAssets">
+<area shape="rect" id="Node000001" title="아이템의 외형(Visual)과 UI 리소스를 관리하는 부모 구조체" alt="" coords="61,80,187,107"/>
+<area shape="rect" id="Node000003" href="$struct_f_armor_assets.html" title="방어구 전용 에셋 데이터" alt="" coords="5,155,110,181"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="105,118,71,156,67,152,100,119"/>
+<area shape="rect" id="Node000004" href="$struct_f_weapon_assets.html" title="무기 전용 에셋 데이터" alt="" coords="134,155,251,181"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="148,116,183,154,178,154,145,121"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="66,5,183,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="125,46,127,80,122,79,123,50"/>
+</map>

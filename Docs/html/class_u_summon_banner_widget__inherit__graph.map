@@ -1,0 +1,5 @@
+<map id="USummonBannerWidget" name="USummonBannerWidget">
+<area shape="rect" id="Node000001" title="가챠 배너 이미지와 천장(Pity) 정보를 표시하는 위젯. [SRP 준수]" alt="" coords="5,80,171,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="38,5,138,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="90,46,90,81,86,79,86,50"/>
+</map>

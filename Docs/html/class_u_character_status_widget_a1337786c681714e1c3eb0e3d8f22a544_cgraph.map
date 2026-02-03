@@ -1,0 +1,7 @@
+<map id="UCharacterStatusWidget::InitializeCharacter" name="UCharacterStatusWidget::InitializeCharacter">
+<area shape="rect" id="Node000001" title="캐릭터 데이터 초기화" alt="" coords="5,39,173,81"/>
+<area shape="rect" id="Node000002" href="$class_u_character_status_widget.html#a2851139e721d3d5fcdbb11486a4de29b" title="태그 상태 변경 (활성/대기/사망 시각화)" alt="" coords="221,5,388,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,44,208,41,203,43,174,50"/>
+<area shape="rect" id="Node000003" href="$class_u_character_status_widget.html#aab318574205087a5e92d583c0df66cb4" title="HP/MP 바 갱신" alt="" coords="221,72,388,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="173,70,208,78,202,78,173,76"/>
+</map>

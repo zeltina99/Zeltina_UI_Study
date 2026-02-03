@@ -1,0 +1,5 @@
+<map id="USkillSlotWidget::StartCooldown" name="USkillSlotWidget::StartCooldown">
+<area shape="rect" id="Node000001" title="쿨타임을 시작합니다. (스킬 사용 직후 호출)" alt="" coords="5,13,220,40"/>
+<area shape="rect" id="Node000002" href="$class_u_skill_slot_widget.html#ad97cf9d0c6a6590ade40563f79fa0f86" title="버튼의 활성/비활성 상태를 설정합니다. (마나 부족, 침묵 상태 등)" alt="" coords="268,5,439,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="220,24,255,27,249,27,220,29"/>
+</map>

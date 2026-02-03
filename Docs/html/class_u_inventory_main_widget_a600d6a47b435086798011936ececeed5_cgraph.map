@@ -1,0 +1,5 @@
+<map id="UInventoryMainWidget::OnInventorySlotClicked" name="UInventoryMainWidget::OnInventorySlotClicked">
+<area shape="rect" id="Node000001" title="(Slot &#45;&gt; Main) 인벤토리 슬롯 클릭 시 호출. 현재 상태(단순 조회 vs 교체 대기)에 따라 다른 동작을 수행합니다." alt="" coords="5,5,173,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#a4f05d8780984c0246b79155c7c8842c4" title="파티 슬롯 UI를 갱신합니다.." alt="" coords="221,5,375,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="173,24,208,26,203,27,173,29"/>
+</map>

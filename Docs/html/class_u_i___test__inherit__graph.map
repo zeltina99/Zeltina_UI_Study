@@ -1,0 +1,5 @@
+<map id="UI_Test" name="UI_Test">
+<area shape="rect" id="Node000001" title=" " alt="" coords="20,80,88,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,103,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="56,46,57,80,51,79,52,50"/>
+</map>

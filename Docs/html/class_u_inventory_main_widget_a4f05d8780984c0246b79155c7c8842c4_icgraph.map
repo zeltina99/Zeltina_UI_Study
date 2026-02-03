@@ -1,0 +1,7 @@
+<map id="UInventoryMainWidget::RefreshPartySlots" name="UInventoryMainWidget::RefreshPartySlots">
+<area shape="rect" id="Node000001" title="파티 슬롯 UI를 갱신합니다.." alt="" coords="221,39,375,81"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#ad5a3240ebb660cda24dfff4d624c8041" title=" " alt="" coords="12,5,166,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,46,167,42,166,36,208,45"/>
+<area shape="rect" id="Node000003" href="$class_u_inventory_main_widget.html#a600d6a47b435086798011936ececeed5" title="(Slot &#45;&gt; Main) 인벤토리 슬롯 클릭 시 호출. 현재 상태(단순 조회 vs 교체 대기)에 따라 다른 동작을 수행합니다." alt="" coords="5,72,173,115"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="203,75,174,83,173,77,208,74"/>
+</map>

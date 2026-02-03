@@ -1,0 +1,5 @@
+<map id="UInventorySlotWidget::UpdateIcon" name="UInventorySlotWidget::UpdateIcon">
+<area shape="rect" id="Node000001" title="아이템의 아이콘 이미지를 로드하고 표시합니다. 에디터 설정을 무시하고 강제로 210x340 크기의 이미지 모드로 렌더링하여 이미지가 찌그러지거나 투명해지는 문제를 방지합니다." alt="" coords="243,5,392,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_slot_widget.html#a0bdbdc170539819edf4af6e62db5e8bf" title="리스트 아이템의 데이터가 설정될 때 호출된다 (인터페이스 구현)." alt="" coords="5,5,195,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,27,195,29,195,24,230,26"/>
+</map>

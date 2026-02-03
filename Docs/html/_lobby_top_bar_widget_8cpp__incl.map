@@ -1,0 +1,19 @@
+<map id="Source/UI_Test/Private/UI/Lobby/LobbyTopBarWidget.cpp" name="Source/UI_Test/Private/UI/Lobby/LobbyTopBarWidget.cpp">
+<area shape="rect" id="Node000001" title=" " alt="" coords="374,5,598,48"/>
+<area shape="rect" id="Node000002" href="$_lobby_top_bar_widget_8h.html" title=" " alt="" coords="382,96,589,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="487,47,488,82,483,79,484,51"/>
+<area shape="rect" id="Node000006" href="$_currency_unit_widget_8h.html" title=" " alt="" coords="151,96,359,123"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="424,49,307,93,305,88,429,48"/>
+<area shape="rect" id="Node000008" title=" " alt="" coords="613,96,761,123"/>
+<area shape="poly" id="edge9_Node000001_Node000008" title=" " alt="" coords="538,46,644,90,639,90,537,51"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="241,171,346,197"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="455,123,342,167,341,162,450,124"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="370,171,526,197"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="481,122,463,159,460,155,477,125"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="551,171,762,197"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="516,121,615,164,610,164,515,126"/>
+<area shape="poly" id="edge6_Node000006_Node000003" title=" " alt="" coords="263,121,282,158,277,156,260,126"/>
+<area shape="poly" id="edge7_Node000006_Node000004" title=" " alt="" coords="289,121,403,164,398,165,288,126"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="5,171,217,197"/>
+<area shape="poly" id="edge8_Node000006_Node000007" title=" " alt="" coords="233,123,151,166,149,161,227,124"/>
+</map>

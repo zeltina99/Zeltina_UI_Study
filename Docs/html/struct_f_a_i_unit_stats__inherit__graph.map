@@ -1,0 +1,11 @@
+<map id="FAIUnitStats" name="FAIUnitStats">
+<area shape="rect" id="Node000001" title="AI가 제어하는 유닛(몬스터, 패밀리어)이 추가로 가지는 전투 정보 구조체입니다." alt="" coords="72,155,168,181"/>
+<area shape="rect" id="Node000004" href="$struct_f_enemy_stats.html" title=" " alt="" coords="5,229,107,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="101,193,69,231,65,227,96,194"/>
+<area shape="rect" id="Node000005" href="$struct_f_familiar_stats.html" title=" " alt="" coords="131,229,237,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="142,191,176,229,170,229,140,196"/>
+<area shape="rect" id="Node000002" href="$struct_f_unit_base_stats.html" title="모든 유닛(플레이어, 몬스터, 소환수)의 공통 기초 능력치를 정의하는 부모 구조체" alt="" coords="63,80,177,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="121,120,123,155,117,153,119,125"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="61,5,179,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="121,45,123,80,117,79,119,50"/>
+</map>

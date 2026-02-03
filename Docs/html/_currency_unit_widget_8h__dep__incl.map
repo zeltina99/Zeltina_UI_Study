@@ -1,0 +1,7 @@
+<map id="Source/UI_Test/Public/UI/Lobby/CurrencyUnitWidget.h" name="Source/UI_Test/Public/UI/Lobby/CurrencyUnitWidget.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="136,5,348,48"/>
+<area shape="rect" id="Node000002" href="$_currency_unit_widget_8cpp.html" title=" " alt="" coords="5,96,231,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="203,56,148,98,146,93,198,58"/>
+<area shape="rect" id="Node000003" href="$_lobby_top_bar_widget_8cpp.html" title=" " alt="" coords="255,96,480,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="284,55,341,96,335,95,283,60"/>
+</map>

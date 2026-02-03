@@ -1,0 +1,5 @@
+<map id="UInventoryMainWidget::OnWeaponTabClicked" name="UInventoryMainWidget::OnWeaponTabClicked">
+<area shape="rect" id="Node000001" title=" " alt="" coords="208,5,366,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#ad5a3240ebb660cda24dfff4d624c8041" title=" " alt="" coords="5,5,160,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,27,160,29,160,24,195,26"/>
+</map>

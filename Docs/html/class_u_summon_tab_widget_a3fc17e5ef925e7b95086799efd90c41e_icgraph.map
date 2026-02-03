@@ -1,0 +1,10 @@
+<map id="USummonTabWidget::SetSelectedTab" name="USummonTabWidget::SetSelectedTab">
+<area shape="rect" id="Node000001" title="외부에서 탭을 강제로 선택할 때 사용 (초기화 등)." alt="" coords="493,47,738,73"/>
+<area shape="rect" id="Node000002" href="$class_u_summon_tab_widget.html#adc0b70bde64001f3d5449716df93b943" title="캐릭터 탭 버튼 클릭 시 호출." alt="" coords="245,5,445,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="484,44,446,42,446,36,489,44"/>
+<area shape="rect" id="Node000004" href="$class_u_summon_tab_widget.html#a4694ffe4024389168bc65e046f8da059" title="무기 탭 버튼 클릭 시 호출." alt="" coords="245,72,445,115"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="489,76,446,84,445,78,484,76"/>
+<area shape="rect" id="Node000003" href="$class_u_summon_tab_widget.html#a4b2a16cd338022a643240dd5322cd8c0" title="위젯 초기화 (버튼 바인딩 수행)" alt="" coords="5,39,197,81"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="226,43,198,49,197,44,232,42"/>
+<area shape="poly" id="edge4_Node000004_Node000003" title=" " alt="" coords="226,78,197,76,197,70,232,77"/>
+</map>

@@ -1,0 +1,20 @@
+<map id="Source/UI_Test/Public/Framework/Data/UnitStructs.h" name="Source/UI_Test/Public/Framework/Data/UnitStructs.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="346,5,550,48"/>
+<area shape="rect" id="Node000002" href="$_inventory_structs_8h.html" title=" " alt="" coords="331,96,564,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="449,61,450,97,445,94,446,66"/>
+<area shape="rect" id="Node000003" href="$_gacha_component_8cpp.html" title=" " alt="" coords="5,195,232,237"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="361,146,190,197,188,192,364,141"/>
+<area shape="rect" id="Node000004" href="$_inventory_main_widget_8cpp.html" title=" " alt="" coords="522,301,771,344"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="580,134,621,154,639,168,654,185,666,214,669,246,664,276,656,303,653,299,659,275,663,246,661,215,650,188,635,172,618,158,579,139"/>
+<area shape="rect" id="Node000005" href="$_inventory_item_data_8h.html" title=" " alt="" coords="256,187,437,245"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="418,148,378,188,375,184,413,151"/>
+<area shape="rect" id="Node000008" href="$_inventory_slot_widget_8h.html" title=" " alt="" coords="461,187,640,245"/>
+<area shape="poly" id="edge8_Node000002_Node000008" title=" " alt="" coords="481,147,523,187,518,186,480,152"/>
+<area shape="poly" id="edge6_Node000005_Node000004" title=" " alt="" coords="444,248,590,301,584,301,443,254"/>
+<area shape="rect" id="Node000006" href="$_inventory_detail_widget_8cpp.html" title=" " alt="" coords="40,293,229,352"/>
+<area shape="poly" id="edge5_Node000005_Node000006" title=" " alt="" coords="277,252,194,295,192,290,272,253"/>
+<area shape="rect" id="Node000007" href="$_inventory_slot_widget_8cpp.html" title=" " alt="" coords="254,301,498,344"/>
+<area shape="poly" id="edge7_Node000005_Node000007" title=" " alt="" coords="360,258,373,302,368,300,357,263"/>
+<area shape="poly" id="edge9_Node000008_Node000004" title=" " alt="" coords="588,254,630,302,625,300,586,259"/>
+<area shape="poly" id="edge10_Node000008_Node000007" title=" " alt="" coords="492,253,411,303,409,298,487,254"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="USummonActionWidget" name="USummonActionWidget">
+<area shape="rect" id="Node000001" title="가챠 소환 버튼(1회/10회) 및 비용 표시를 전담하는 위젯. [SRP 준수]" alt="" coords="5,80,167,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="36,5,136,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="88,46,88,81,84,79,84,50"/>
+</map>

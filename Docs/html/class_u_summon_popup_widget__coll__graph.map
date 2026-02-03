@@ -1,0 +1,5 @@
+<map id="USummonPopupWidget" name="USummonPopupWidget">
+<area shape="rect" id="Node000001" title="가챠 시스템의 최상위 컨테이너 위젯 (Mediator Pattern 적용)." alt="" coords="20,80,181,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>

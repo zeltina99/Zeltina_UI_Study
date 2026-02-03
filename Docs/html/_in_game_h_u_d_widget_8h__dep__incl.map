@@ -1,0 +1,7 @@
+<map id="Source/UI_Test/Public/UI/InGame/InGameHUDWidget.h" name="Source/UI_Test/Public/UI/InGame/InGameHUDWidget.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="143,5,364,48"/>
+<area shape="rect" id="Node000002" href="$_stage_player_controller_8cpp.html" title=" " alt="" coords="5,96,243,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="214,56,156,98,153,93,209,58"/>
+<area shape="rect" id="Node000003" href="$_in_game_h_u_d_widget_8cpp.html" title=" " alt="" coords="266,96,502,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="297,54,356,96,351,95,295,59"/>
+</map>

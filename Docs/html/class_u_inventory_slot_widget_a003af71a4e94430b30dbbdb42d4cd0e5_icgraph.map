@@ -1,0 +1,5 @@
+<map id="UInventorySlotWidget::UpdateState" name="UInventorySlotWidget::UpdateState">
+<area shape="rect" id="Node000001" title="아이템의 보유/미보유 상태에 따라 UI 상호작용 및 시각 효과를 처리합니다. 보유 중일 때는 밝게 표시하고 버튼을 활성화하며, 미보유 중일 때는 어둡게(Dimmed) 처리하고 버튼을..." alt="" coords="243,5,392,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_slot_widget.html#a0bdbdc170539819edf4af6e62db5e8bf" title="리스트 아이템의 데이터가 설정될 때 호출된다 (인터페이스 구현)." alt="" coords="5,5,195,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="224,27,195,29,195,24,230,26"/>
+</map>

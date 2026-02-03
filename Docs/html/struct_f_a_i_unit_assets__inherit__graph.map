@@ -1,0 +1,11 @@
+<map id="FAIUnitAssets" name="FAIUnitAssets">
+<area shape="rect" id="Node000001" title="AI 제어 유닛(적, 퍼밀리어) 공통 리소스" alt="" coords="76,155,182,181"/>
+<area shape="rect" id="Node000004" href="$struct_f_enemy_assets.html" title="몬스터 전용 에셋 테이블 구조체" alt="" coords="5,229,117,256"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="109,192,74,231,71,227,104,194"/>
+<area shape="rect" id="Node000005" href="$struct_f_familiar_assets.html" title="몬스터 전용 스탯 테이블 구조체" alt="" coords="140,229,256,256"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="152,190,189,229,184,229,150,195"/>
+<area shape="rect" id="Node000002" href="$struct_f_unit_base_assets.html" title="모든 유닛(플레이어, 몬스터, 퍼밀리어)의 공통 리소스 정의한 부모 구조체" alt="" coords="67,80,191,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="130,120,132,155,126,153,128,125"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="70,5,188,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="130,45,132,80,126,79,128,50"/>
+</map>

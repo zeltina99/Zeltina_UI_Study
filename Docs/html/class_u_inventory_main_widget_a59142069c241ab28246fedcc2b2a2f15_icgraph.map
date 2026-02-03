@@ -1,0 +1,6 @@
+<map id="UInventoryMainWidget::OnPartySlot2_Clicked" name="UInventoryMainWidget::OnPartySlot2_Clicked">
+<area shape="rect" id="Node000001" title=" " alt="" coords="208,29,366,72"/>
+<area shape="poly" id="edge2_Node000001_Node000001" title=" " alt="" coords="318,13,307,10,287,8,268,10,256,15,251,21,253,30,248,27,246,19,253,10,266,5,287,3,309,5,324,14"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#ad5a3240ebb660cda24dfff4d624c8041" title=" " alt="" coords="5,29,160,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="190,51,160,53,160,48,195,50"/>
+</map>

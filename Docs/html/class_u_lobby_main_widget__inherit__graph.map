@@ -1,0 +1,5 @@
+<map id="ULobbyMainWidget" name="ULobbyMainWidget">
+<area shape="rect" id="Node000001" title="게임의 메인 로비 화면 전체를 관장하는 최상위 위젯입니다." alt="" coords="33,80,168,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="USkillSlotWidget::InitializeSkill" name="USkillSlotWidget::InitializeSkill">
+<area shape="rect" id="Node000001" title="스킬 슬롯을 데이터 기반으로 초기화합니다." alt="" coords="5,5,182,48"/>
+<area shape="rect" id="Node000002" href="$class_u_skill_slot_widget.html#ad97cf9d0c6a6590ade40563f79fa0f86" title="버튼의 활성/비활성 상태를 설정합니다. (마나 부족, 침묵 상태 등)" alt="" coords="230,5,401,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="182,24,217,26,212,27,182,29"/>
+</map>

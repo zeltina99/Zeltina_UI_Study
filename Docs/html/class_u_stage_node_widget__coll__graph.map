@@ -1,0 +1,5 @@
+<map id="UStageNodeWidget" name="UStageNodeWidget">
+<area shape="rect" id="Node000001" title="월드맵 상에 배치되는 개별 스테이지 버튼 위젯입니다." alt="" coords="5,80,143,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="24,5,124,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="76,46,77,80,71,79,72,50"/>
+</map>

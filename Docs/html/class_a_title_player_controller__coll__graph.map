@@ -1,0 +1,5 @@
+<map id="ATitlePlayerController" name="ATitlePlayerController">
+<area shape="rect" id="Node000001" title="타이틀 레벨 전용 플레이어 컨트롤러입니다." alt="" coords="5,80,153,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="17,5,141,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="81,46,82,80,76,79,77,50"/>
+</map>

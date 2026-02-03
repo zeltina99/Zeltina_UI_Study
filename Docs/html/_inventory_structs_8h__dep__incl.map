@@ -1,0 +1,18 @@
+<map id="Source/UI_Test/Public/Framework/Data/InventoryStructs.h" name="Source/UI_Test/Public/Framework/Data/InventoryStructs.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="331,5,564,48"/>
+<area shape="rect" id="Node000002" href="$_gacha_component_8cpp.html" title=" " alt="" coords="5,104,232,147"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="361,55,190,106,188,101,364,51"/>
+<area shape="rect" id="Node000003" href="$_inventory_main_widget_8cpp.html" title=" " alt="" coords="522,211,771,253"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="580,43,621,63,639,77,654,95,666,123,669,155,664,186,656,212,653,208,659,185,663,155,661,125,650,97,635,81,618,68,579,48"/>
+<area shape="rect" id="Node000004" href="$_inventory_item_data_8h.html" title=" " alt="" coords="256,96,437,155"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="418,57,378,98,375,93,413,60"/>
+<area shape="rect" id="Node000007" href="$_inventory_slot_widget_8h.html" title=" " alt="" coords="461,96,640,155"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="481,56,523,96,518,95,480,61"/>
+<area shape="poly" id="edge5_Node000004_Node000003" title=" " alt="" coords="444,158,590,210,584,210,443,163"/>
+<area shape="rect" id="Node000005" href="$_inventory_detail_widget_8cpp.html" title=" " alt="" coords="40,203,229,261"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="277,161,194,205,192,200,272,163"/>
+<area shape="rect" id="Node000006" href="$_inventory_slot_widget_8cpp.html" title=" " alt="" coords="254,211,498,253"/>
+<area shape="poly" id="edge6_Node000004_Node000006" title=" " alt="" coords="360,168,373,212,368,209,357,172"/>
+<area shape="poly" id="edge8_Node000007_Node000003" title=" " alt="" coords="588,164,630,211,625,210,586,169"/>
+<area shape="poly" id="edge9_Node000007_Node000006" title=" " alt="" coords="492,162,411,213,409,208,487,164"/>
+</map>

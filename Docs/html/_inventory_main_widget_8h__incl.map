@@ -1,0 +1,9 @@
+<map id="Source/UI_Test/Public/UI/Inventory/InventoryMainWidget.h" name="Source/UI_Test/Public/UI/Inventory/InventoryMainWidget.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="138,5,322,64"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,112,111,139"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,65,97,107,95,102,171,65"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="134,112,326,139"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="232,62,232,98,228,95,228,66"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="350,112,566,139"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="305,62,414,106,409,106,304,67"/>
+</map>

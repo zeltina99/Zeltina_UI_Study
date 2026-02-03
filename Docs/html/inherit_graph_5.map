@@ -1,0 +1,37 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,5,149,32"/>
+<area shape="rect" id="Node000001" href="$class_u_inventory_slot_widget.html" title="인벤토리 그리드 내의 단일 아이템/캐릭터 슬롯 UI입니다." alt="" coords="206,5,355,32"/>
+<area shape="poly" id="edge26_Node000000_Node000001" title=" " alt="" coords="163,17,207,17,203,20,166,21"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="27,385,127,412"/>
+<area shape="poly" id="edge31_Node000002_Node000001" title=" " alt="" coords="77,369,84,303,102,215,117,169,137,123,163,80,195,42,214,30,211,35,198,46,167,83,142,125,122,170,107,217,89,304,82,370"/>
+<area shape="rect" id="Node000003" href="$class_u_action_control_panel.html" title="우측 하단 전투 조작(공격, 스킬, 태그)을 전담하는 패널." alt="" coords="209,56,352,83"/>
+<area shape="poly" id="edge27_Node000002_Node000003" title=" " alt="" coords="79,369,88,312,109,237,124,198,143,160,166,124,195,93,215,81,212,85,198,97,171,127,148,163,129,200,114,239,94,313,84,370"/>
+<area shape="rect" id="Node000004" href="$class_u_character_status_widget.html" title="인게임 좌측 상단 파티원 1명의 상태(HP/MP/초상화)를 표시하는 위젯." alt="" coords="197,107,364,133"/>
+<area shape="poly" id="edge28_Node000002_Node000004" title=" " alt="" coords="81,369,94,321,116,260,149,197,170,169,195,143,216,132,213,136,198,147,174,172,153,200,121,262,99,322,86,371"/>
+<area shape="rect" id="Node000005" href="$class_u_currency_unit_widget.html" title="재화 아이콘 1개와 수량 텍스트 1개를 관리하는 최소 단위 위젯 클래스입니다." alt="" coords="206,157,355,184"/>
+<area shape="poly" id="edge29_Node000002_Node000005" title=" " alt="" coords="85,370,100,331,123,283,155,235,195,194,217,183,214,187,198,198,159,239,128,286,105,333,90,372"/>
+<area shape="rect" id="Node000006" href="$class_u_inventory_detail_widget.html" title="상세 정보 패널을 담당하는 위젯 클래스." alt="" coords="200,208,360,235"/>
+<area shape="poly" id="edge30_Node000002_Node000006" title=" " alt="" coords="90,371,132,307,161,273,195,244,220,233,217,237,198,249,165,277,136,310,95,373"/>
+<area shape="rect" id="Node000007" href="$class_u_loading_widget.html" title="비동기 로딩 진행률을 시각적으로 표시하는 위젯 클래스입니다." alt="" coords="222,259,339,285"/>
+<area shape="poly" id="edge32_Node000002_Node000007" title=" " alt="" coords="99,373,142,333,195,295,225,284,221,288,198,300,145,337,103,375"/>
+<area shape="rect" id="Node000008" href="$class_u_lobby_menu_widget.html" title="로비 우측의 메인 메뉴 버튼들(스테이지, 상점, 캐릭터 등)을 관리하는 위젯입니다." alt="" coords="211,309,350,336"/>
+<area shape="poly" id="edge33_Node000002_Node000008" title=" " alt="" coords="120,377,196,346,233,335,229,338,198,350,124,381"/>
+<area shape="rect" id="Node000009" href="$class_u_lobby_top_bar_widget.html" title="로비 상단에 위치하여 골드, 쥬얼 등의 재화 정보와 설정 버튼을 포함하는 위젯입니다." alt="" coords="206,360,354,387"/>
+<area shape="poly" id="edge34_Node000002_Node000009" title=" " alt="" coords="141,388,208,381,204,384,144,393"/>
+<area shape="rect" id="Node000010" href="$class_u_party_status_panel.html" title="좌측 상단 파티원 3명의 상태창을 그룹화한 패널." alt="" coords="214,411,347,437"/>
+<area shape="poly" id="edge35_Node000002_Node000010" title=" " alt="" coords="142,404,216,414,211,417,144,409"/>
+<area shape="rect" id="Node000011" href="$class_u_skill_slot_widget.html" title="인게임 HUD에서 개별 스킬 슬롯의 UI 표시 및 상호작용을 담당하는 위젯." alt="" coords="220,461,340,488"/>
+<area shape="poly" id="edge36_Node000002_Node000011" title=" " alt="" coords="121,416,198,447,233,460,228,462,196,452,122,421"/>
+<area shape="rect" id="Node000012" href="$class_u_stage_node_widget.html" title="월드맵 상에 배치되는 개별 스테이지 버튼 위젯입니다." alt="" coords="212,512,349,539"/>
+<area shape="poly" id="edge37_Node000002_Node000012" title=" " alt="" coords="101,421,145,460,198,498,225,511,220,512,195,502,142,465,102,426"/>
+<area shape="rect" id="Node000013" href="$class_u_stage_popup_widget.html" title="스테이지 선택 시 상세 정보를 표시하고 입장을 처리하는 팝업 위젯입니다." alt="" coords="209,563,352,589"/>
+<area shape="poly" id="edge38_Node000002_Node000013" title=" " alt="" coords="92,423,136,487,165,520,198,548,221,561,216,563,195,553,161,524,132,490,92,428"/>
+<area shape="rect" id="Node000014" href="$class_u_summon_action_widget.html" title="가챠 소환 버튼(1회/10회) 및 비용 표시를 전담하는 위젯. [SRP 준수]" alt="" coords="200,613,361,640"/>
+<area shape="poly" id="edge39_Node000002_Node000014" title=" " alt="" coords="87,424,105,465,128,511,159,559,198,599,218,612,213,613,195,603,155,562,123,514,100,467,87,429"/>
+<area shape="rect" id="Node000015" href="$class_u_summon_banner_widget.html" title="가챠 배너 이미지와 천장(Pity) 정보를 표시하는 위젯. [SRP 준수]" alt="" coords="198,664,363,691"/>
+<area shape="poly" id="edge40_Node000002_Node000015" title=" " alt="" coords="84,425,99,475,121,535,153,597,174,625,198,650,217,663,212,664,195,654,170,629,149,600,116,538,94,477,84,430"/>
+<area shape="rect" id="Node000016" href="$class_u_summon_control_panel.html" title="중앙 하단 소환 시스템(슬롯 5개 + 코스트) 관리 패널." alt="" coords="201,715,360,741"/>
+<area shape="poly" id="edge41_Node000002_Node000016" title=" " alt="" coords="82,425,94,485,114,558,129,597,148,635,171,670,198,701,216,714,211,714,195,705,166,673,143,637,124,599,109,560,88,486,81,430"/>
+<area shape="rect" id="Node000017" href="$class_u_summon_tab_widget.html" title="소환 화면의 좌측 탭(카테고리 선택)을 전담하는 위젯." alt="" coords="208,765,353,792"/>
+<area shape="poly" id="edge42_Node000002_Node000017" title=" " alt="" coords="80,425,89,494,107,581,122,627,142,672,167,714,198,751,215,765,210,764,195,755,163,717,137,675,117,629,102,582,84,494,79,430"/>
+</map>

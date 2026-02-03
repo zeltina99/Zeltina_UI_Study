@@ -1,0 +1,7 @@
+<map id="FArmorStats" name="FArmorStats">
+<area shape="rect" id="Node000001" title="방어구 전용 수치 데이터 구조체" alt="" coords="17,155,111,181"/>
+<area shape="rect" id="Node000002" href="$struct_f_item_base_stats.html" title="아이템의 수치(Data)와 로직적인 속성을 담당하는 최상위 부모 구조체입니다." alt="" coords="6,80,122,107"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,121,67,155,61,154,62,124"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="5,5,123,32"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="65,45,67,80,61,79,63,50"/>
+</map>

@@ -1,0 +1,35 @@
+<map id="UInventoryMainWidget::NativeOnInitialized" name="UInventoryMainWidget::NativeOnInitialized">
+<area shape="rect" id="Node000001" title=" " alt="" coords="5,296,160,339"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_item_data.html#a128840bf1cbb8c650e2321b8bdd8ee87" title="이 객체를 &#39;캐릭터&#39; 데이터로 초기화합니다." alt="" coords="641,67,781,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="84,295,93,242,114,173,130,137,151,104,176,73,206,49,260,22,319,8,379,3,440,6,499,15,554,28,648,60,643,62,553,33,498,20,439,11,379,8,320,13,262,27,209,53,179,77,155,107,135,140,119,175,99,243,89,296"/>
+<area shape="rect" id="Node000003" href="$class_u_inventory_main_widget.html#a63835969a6a3a9850160b90cd9bfd44b" title="뒤로가기 버튼 클릭 시 호출 (컨트롤러에게 화면 전환 요청)" alt="" coords="222,63,376,105"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="89,295,106,256,131,208,164,159,206,115,214,112,211,116,209,119,168,162,135,211,110,259,94,296"/>
+<area shape="rect" id="Node000004" href="$class_u_inventory_main_widget.html#afa6dad7fba0e60f1854ed77b85fb6bb7" title="탭 버튼 핸들러" alt="" coords="215,196,384,239"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,294,207,255,236,244,232,247,209,260,130,298"/>
+<area shape="rect" id="Node000005" href="$class_u_inventory_main_widget.html#ab5f5a8681c9a4aa0fc376c4a98d993a6" title="우측 리스트 갱신." alt="" coords="439,163,593,205"/>
+<area shape="poly" id="edge19_Node000001_Node000005" title=" " alt="" coords="159,305,270,283,331,267,390,248,430,231,470,212,466,215,432,236,392,253,332,273,271,288,161,309"/>
+<area shape="rect" id="Node000007" href="$class_u_inventory_main_widget.html#a9e6b31fa73e05898c0af4294ce2f6f9a" title=" " alt="" coords="220,337,378,380"/>
+<area shape="poly" id="edge7_Node000001_Node000007" title=" " alt="" coords="159,330,207,339,203,342,161,335"/>
+<area shape="rect" id="Node000009" href="$class_u_inventory_main_widget.html#abe10b3ab97136017af50fe7ff017a62d" title=" " alt="" coords="220,428,378,471"/>
+<area shape="poly" id="edge10_Node000001_Node000009" title=" " alt="" coords="119,337,252,418,247,421,119,342"/>
+<area shape="rect" id="Node000010" href="$class_u_inventory_main_widget.html#a59142069c241ab28246fedcc2b2a2f15" title=" " alt="" coords="220,585,378,628"/>
+<area shape="poly" id="edge13_Node000001_Node000010" title=" " alt="" coords="91,337,110,380,135,435,168,494,210,548,244,577,238,577,206,551,164,497,130,437,105,382,91,342"/>
+<area shape="rect" id="Node000011" href="$class_u_inventory_main_widget.html#ab90e4bb815cfd15d3ec934be89cbaadb" title="(Detail &#45;&gt; Main) 교체 버튼 클릭 핸들러." alt="" coords="208,495,391,537"/>
+<area shape="poly" id="edge16_Node000001_Node000011" title=" " alt="" coords="95,337,140,408,172,447,209,481,216,486,211,487,206,485,168,450,136,411,95,342"/>
+<area shape="rect" id="Node000012" href="$class_u_inventory_main_widget.html#a5d6f694ec7c9866a26295f83b36c6040" title=" " alt="" coords="220,129,378,172"/>
+<area shape="poly" id="edge17_Node000001_Node000012" title=" " alt="" coords="97,294,142,239,172,208,206,182,217,177,213,182,209,186,176,212,146,242,101,297"/>
+<area shape="rect" id="Node000013" href="$class_u_inventory_main_widget.html#a4f05d8780984c0246b79155c7c8842c4" title="파티 슬롯 UI를 갱신합니다.." alt="" coords="222,652,376,695"/>
+<area shape="poly" id="edge20_Node000001_Node000013" title=" " alt="" coords="86,337,98,398,119,478,135,521,155,563,180,603,210,638,213,643,208,642,206,642,175,606,150,566,130,523,114,479,93,399,86,342"/>
+<area shape="poly" id="edge4_Node000004_Node000005" title=" " alt="" coords="383,202,426,197,421,200,385,207"/>
+<area shape="poly" id="edge5_Node000005_Node000002" title=" " alt="" coords="560,160,655,115,651,118,563,165"/>
+<area shape="rect" id="Node000006" href="$class_u_inventory_item_data.html#a12fb3c1de3382ca88ea37645ba4047b6" title="이 객체를 &#39;아이템(무기)&#39; 데이터로 초기화합니다." alt="" coords="641,163,781,205"/>
+<area shape="poly" id="edge6_Node000005_Node000006" title=" " alt="" coords="593,182,629,183,624,185,594,187"/>
+<area shape="poly" id="edge8_Node000007_Node000007" title=" " alt="" coords="258,336,256,327,263,318,278,313,299,311,323,313,338,321,333,322,321,318,299,316,279,318,266,323,262,329,263,337"/>
+<area shape="rect" id="Node000008" href="$class_u_inventory_main_widget.html#a9c8949fb02c78c8ab061c0876501bd2f" title="파티 슬롯(A, B, C) 클릭 핸들러." alt="" coords="439,428,593,471"/>
+<area shape="poly" id="edge9_Node000007_Node000008" title=" " alt="" coords="362,378,392,390,459,421,454,422,390,395,362,383"/>
+<area shape="poly" id="edge12_Node000009_Node000008" title=" " alt="" coords="378,447,426,449,421,450,379,452"/>
+<area shape="poly" id="edge11_Node000009_Node000009" title=" " alt="" coords="258,427,256,418,263,409,278,403,299,401,323,404,338,412,333,413,321,409,299,407,279,409,266,413,262,419,263,428"/>
+<area shape="poly" id="edge15_Node000010_Node000008" title=" " alt="" coords="336,582,389,547,476,482,481,480,393,552,339,587"/>
+<area shape="poly" id="edge14_Node000010_Node000010" title=" " alt="" coords="258,584,256,575,263,566,278,561,299,559,323,561,338,570,333,570,321,566,299,564,279,566,266,571,262,577,263,586"/>
+<area shape="poly" id="edge18_Node000012_Node000005" title=" " alt="" coords="378,160,426,169,421,171,379,165"/>
+</map>

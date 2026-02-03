@@ -1,0 +1,9 @@
+<map id="UInventoryMainWidget::OnCharacterTabClicked" name="UInventoryMainWidget::OnCharacterTabClicked">
+<area shape="rect" id="Node000001" title="탭 버튼 핸들러" alt="" coords="5,39,174,81"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#ab5f5a8681c9a4aa0fc376c4a98d993a6" title="우측 리스트 갱신." alt="" coords="222,39,376,81"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="174,57,208,59,203,61,175,63"/>
+<area shape="rect" id="Node000003" href="$class_u_inventory_item_data.html#a128840bf1cbb8c650e2321b8bdd8ee87" title="이 객체를 &#39;캐릭터&#39; 데이터로 초기화합니다." alt="" coords="424,5,563,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,44,411,41,406,42,377,49"/>
+<area shape="rect" id="Node000004" href="$class_u_inventory_item_data.html#a12fb3c1de3382ca88ea37645ba4047b6" title="이 객체를 &#39;아이템(무기)&#39; 데이터로 초기화합니다." alt="" coords="424,72,563,115"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="376,71,411,79,406,79,376,76"/>
+</map>

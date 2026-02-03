@@ -1,0 +1,5 @@
+<map id="ULobbyMenuWidget" name="ULobbyMenuWidget">
+<area shape="rect" id="Node000001" title="로비 우측의 메인 메뉴 버튼들(스테이지, 상점, 캐릭터 등)을 관리하는 위젯입니다." alt="" coords="5,80,145,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="25,5,125,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="77,46,78,80,72,79,73,50"/>
+</map>

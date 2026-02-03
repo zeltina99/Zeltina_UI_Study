@@ -1,0 +1,5 @@
+<map id="UStagePopupWidget" name="UStagePopupWidget">
+<area shape="rect" id="Node000001" title="스테이지 선택 시 상세 정보를 표시하고 입장을 처리하는 팝업 위젯입니다." alt="" coords="5,80,149,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="27,5,127,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="79,46,80,80,74,79,75,50"/>
+</map>

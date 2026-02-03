@@ -1,0 +1,5 @@
+<map id="USkillSlotWidget" name="USkillSlotWidget">
+<area shape="rect" id="Node000001" title="인게임 HUD에서 개별 스킬 슬롯의 UI 표시 및 상호작용을 담당하는 위젯." alt="" coords="5,80,126,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="15,5,116,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="67,46,68,80,63,79,64,50"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="ALobbyPlayerController" name="ALobbyPlayerController">
+<area shape="rect" id="Node000001" title="로비 레벨 전용 플레이어 컨트롤러입니다." alt="" coords="5,80,164,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="23,5,146,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="86,46,87,81,82,79,83,50"/>
+</map>

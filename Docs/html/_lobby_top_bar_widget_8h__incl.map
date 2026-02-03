@@ -1,0 +1,9 @@
+<map id="Source/UI_Test/Public/UI/Lobby/LobbyTopBarWidget.h" name="Source/UI_Test/Public/UI/Lobby/LobbyTopBarWidget.h">
+<area shape="rect" id="Node000001" title=" " alt="" coords="108,5,318,48"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,96,111,123"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="176,48,97,91,95,86,170,49"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="134,96,291,123"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="215,47,215,82,210,79,211,51"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="316,96,526,123"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="267,46,376,90,371,90,266,51"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="UInGameHUDWidget" name="UInGameHUDWidget">
+<area shape="rect" id="Node000001" title="인게임 전체 UI를 총괄. 하위 패널들에게 데이터를 분배하는 역할(Dispatcher)을 수행." alt="" coords="26,80,175,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>

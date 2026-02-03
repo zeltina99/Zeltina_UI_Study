@@ -1,0 +1,14 @@
+<map id="UInventoryItemData::InitCharacter" name="UInventoryItemData::InitCharacter">
+<area shape="rect" id="Node000001" title="이 객체를 &#39;캐릭터&#39; 데이터로 초기화합니다." alt="" coords="626,5,766,48"/>
+<area shape="rect" id="Node000002" href="$class_u_inventory_main_widget.html#ad5a3240ebb660cda24dfff4d624c8041" title=" " alt="" coords="5,31,160,73"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="608,23,426,21,317,24,208,32,161,39,159,34,207,27,316,19,426,16,613,21"/>
+<area shape="rect" id="Node000003" href="$class_u_inventory_main_widget.html#ab5f5a8681c9a4aa0fc376c4a98d993a6" title="우측 리스트 갱신." alt="" coords="424,35,578,77"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="608,40,579,47,578,42,614,39"/>
+<area shape="poly" id="edge3_Node000003_Node000002" title=" " alt="" coords="406,50,376,51,263,50,161,52,160,46,263,44,376,45,412,49"/>
+<area shape="rect" id="Node000004" href="$class_u_inventory_main_widget.html#afa6dad7fba0e60f1854ed77b85fb6bb7" title="탭 버튼 핸들러" alt="" coords="208,60,376,103"/>
+<area shape="poly" id="edge4_Node000003_Node000004" title=" " alt="" coords="406,68,377,74,376,68,411,67"/>
+<area shape="rect" id="Node000005" href="$class_u_inventory_main_widget.html#a5d6f694ec7c9866a26295f83b36c6040" title=" " alt="" coords="213,127,371,169"/>
+<area shape="poly" id="edge6_Node000003_Node000005" title=" " alt="" coords="444,84,377,117,350,129,348,123,375,112,439,85"/>
+<area shape="poly" id="edge5_Node000004_Node000002" title=" " alt="" coords="189,68,161,65,160,60,195,67"/>
+<area shape="poly" id="edge7_Node000005_Node000002" title=" " alt="" coords="218,120,207,117,124,76,125,71,209,112,223,120"/>
+</map>

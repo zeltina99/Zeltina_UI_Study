@@ -1,0 +1,5 @@
+<map id="UMyGameInstance" name="UMyGameInstance">
+<area shape="rect" id="Node000001" title="게임의 전역 데이터 및 레벨 이동 간의 비동기 로딩을 관리하는 클래스입니다." alt="" coords="5,80,140,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="14,5,131,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="74,46,75,80,70,79,71,50"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="USummonTabWidget::OnClickWeapon" name="USummonTabWidget::OnClickWeapon">
+<area shape="rect" id="Node000001" title="무기 탭 버튼 클릭 시 호출." alt="" coords="5,5,206,48"/>
+<area shape="rect" id="Node000002" href="$class_u_summon_tab_widget.html#a3fc17e5ef925e7b95086799efd90c41e" title="외부에서 탭을 강제로 선택할 때 사용 (초기화 등)." alt="" coords="254,13,499,40"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="206,24,241,26,236,27,206,29"/>
+</map>

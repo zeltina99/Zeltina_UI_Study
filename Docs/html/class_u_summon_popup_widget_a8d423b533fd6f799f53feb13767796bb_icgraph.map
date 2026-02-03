@@ -1,0 +1,5 @@
+<map id="USummonPopupWidget::HandleTabChanged" name="USummonPopupWidget::HandleTabChanged">
+<area shape="rect" id="Node000001" title="탭 위젯에서 탭 변경 요청이 왔을 때 호출." alt="" coords="215,5,376,48"/>
+<area shape="rect" id="Node000002" href="$class_u_summon_popup_widget.html#a5d227c31e5c1d967a6e9074cbe1d45f1" title="위젯 초기화 (하위 위젯 이벤트 바인딩 및 컴포넌트 캐싱)." alt="" coords="5,5,167,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="196,27,167,29,167,24,202,26"/>
+</map>

@@ -1,0 +1,5 @@
+<map id="UInventoryMainWidget" name="UInventoryMainWidget">
+<area shape="rect" id="Node000001" title="스쿼드 편성 및 인벤토리 시스템의 메인 컨트롤러." alt="" coords="23,80,178,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>

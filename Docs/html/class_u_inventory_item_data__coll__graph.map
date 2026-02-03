@@ -1,0 +1,12 @@
+<map id="UInventoryItemData" name="UInventoryItemData">
+<area shape="rect" id="Node000001" title="타일 뷰(Tile View) 리스트 항목에 데이터를 전달하기 위한 래퍼(Wrapper) 클래스." alt="" coords="93,180,232,207"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,81,75,108"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="69,115,149,178,144,181,67,120"/>
+<area shape="rect" id="Node000003" href="$struct_f_character_u_i_data.html" title="캐릭터 도감 표시용 데이터." alt="" coords="98,81,227,108"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="165,122,165,181,160,179,161,125"/>
+<area shape="rect" id="Node000004" title=" " alt="" coords="172,5,289,32"/>
+<area shape="poly" id="edge3_Node000003_Node000004" title=" " alt="" coords="211,41,176,83,172,79,207,45"/>
+<area shape="rect" id="Node000005" href="$struct_f_item_u_i_data.html" title="R&amp;D용 아이템 도감 데이터" alt="" coords="251,81,349,108"/>
+<area shape="poly" id="edge5_Node000005_Node000004" title=" " alt="" coords="253,41,291,81,286,81,252,46"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="290,120,279,142,263,158,241,172,217,182,215,177,238,167,260,154,274,138,286,123"/>
+</map>

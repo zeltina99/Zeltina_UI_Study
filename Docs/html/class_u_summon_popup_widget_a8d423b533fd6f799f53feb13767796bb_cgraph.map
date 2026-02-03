@@ -1,0 +1,7 @@
+<map id="USummonPopupWidget::HandleTabChanged" name="USummonPopupWidget::HandleTabChanged">
+<area shape="rect" id="Node000001" title="탭 위젯에서 탭 변경 요청이 왔을 때 호출." alt="" coords="5,5,167,48"/>
+<area shape="rect" id="Node000002" href="$class_u_summon_popup_widget.html#a6db5bdd28a4f02634f63a442ece2607d" title="현재 상태(CurrentTab)에 맞춰 모든 하위 위젯의 뷰를 일괄 갱신한다." alt="" coords="215,5,376,48"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="167,24,202,26,197,27,167,29"/>
+<area shape="rect" id="Node000003" href="$class_u_summon_popup_widget.html#af47755bd9d40387c7b85f70bae618967" title="현재 보유 재화 정보를 갱신한다." alt="" coords="424,5,592,48"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="376,24,411,27,406,27,376,29"/>
+</map>

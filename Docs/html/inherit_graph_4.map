@@ -1,0 +1,47 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="Node000000" title=" " alt="" coords="5,233,123,260"/>
+<area shape="rect" id="Node000001" href="$struct_f_character_u_i_data.html" title="캐릭터 도감 표시용 데이터." alt="" coords="185,5,313,32"/>
+<area shape="poly" id="edge4_Node000000_Node000001" title=" " alt="" coords="70,218,83,179,103,131,132,83,169,42,190,31,187,35,172,46,136,87,108,134,88,180,75,219"/>
+<area shape="rect" id="Node000002" href="$struct_f_gacha_probability_data.html" title="데이터 테이블(DT_GachaProb)용 확률 정의 구조체." alt="" coords="171,56,327,83"/>
+<area shape="poly" id="edge5_Node000000_Node000002" title=" " alt="" coords="75,218,111,155,138,122,169,93,193,81,189,85,172,97,142,125,116,158,80,220"/>
+<area shape="rect" id="Node000003" href="$struct_f_item_base_assets.html" title="아이템의 외형(Visual)과 UI 리소스를 관리하는 부모 구조체" alt="" coords="186,107,312,133"/>
+<area shape="poly" id="edge6_Node000000_Node000003" title=" " alt="" coords="84,220,121,180,169,143,197,132,193,136,172,148,125,184,88,223"/>
+<area shape="rect" id="Node000006" href="$struct_f_item_base_stats.html" title="아이템의 수치(Data)와 로직적인 속성을 담당하는 최상위 부모 구조체입니다." alt="" coords="191,157,307,184"/>
+<area shape="poly" id="edge9_Node000000_Node000006" title=" " alt="" coords="103,224,170,194,204,183,200,186,172,198,107,228"/>
+<area shape="rect" id="Node000009" href="$struct_f_item_u_i_data.html" title="R&amp;D용 아이템 도감 데이터" alt="" coords="200,208,298,235"/>
+<area shape="poly" id="edge12_Node000000_Node000009" title=" " alt="" coords="137,234,202,226,198,230,139,239"/>
+<area shape="rect" id="Node000010" href="$struct_f_set_bonus_assets.html" title="세트 효과의 리소스 및 로직 데이터" alt="" coords="185,259,312,285"/>
+<area shape="poly" id="edge13_Node000000_Node000010" title=" " alt="" coords="137,254,187,262,182,265,139,259"/>
+<area shape="rect" id="Node000011" href="$struct_f_set_bonus_stats.html" title="세트 효과의 수치 및 규칙 데이터" alt="" coords="190,309,308,336"/>
+<area shape="poly" id="edge14_Node000000_Node000011" title=" " alt="" coords="105,265,172,295,205,308,200,310,170,300,105,270"/>
+<area shape="rect" id="Node000012" href="$struct_f_stage_data.html" title="스테이지 정보를 정의하는 데이터 테이블 행(Row) 구조체입니다." alt="" coords="203,360,294,387"/>
+<area shape="poly" id="edge15_Node000000_Node000012" title=" " alt="" coords="86,269,125,309,172,346,205,361,200,363,169,350,121,313,86,275"/>
+<area shape="rect" id="Node000013" href="$struct_f_unit_base_assets.html" title="모든 유닛(플레이어, 몬스터, 퍼밀리어)의 공통 리소스 정의한 부모 구조체" alt="" coords="187,411,311,437"/>
+<area shape="poly" id="edge16_Node000000_Node000013" title=" " alt="" coords="78,271,116,335,142,368,172,397,193,410,188,410,169,401,138,372,111,338,77,277"/>
+<area shape="rect" id="Node000018" href="$struct_f_unit_base_stats.html" title="모든 유닛(플레이어, 몬스터, 소환수)의 공통 기초 능력치를 정의하는 부모 구조체" alt="" coords="192,461,306,488"/>
+<area shape="poly" id="edge21_Node000000_Node000018" title=" " alt="" coords="73,272,88,313,108,360,136,407,172,447,194,462,188,462,169,451,132,410,103,362,83,315,72,278"/>
+<area shape="rect" id="Node000004" href="$struct_f_armor_assets.html" title="방어구 전용 에셋 데이터" alt="" coords="386,56,491,83"/>
+<area shape="poly" id="edge7_Node000003_Node000004" title=" " alt="" coords="315,100,388,82,384,85,318,104"/>
+<area shape="rect" id="Node000005" href="$struct_f_weapon_assets.html" title="무기 전용 에셋 데이터" alt="" coords="380,107,497,133"/>
+<area shape="poly" id="edge8_Node000003_Node000005" title=" " alt="" coords="327,118,382,119,377,121,329,122"/>
+<area shape="rect" id="Node000007" href="$struct_f_armor_stats.html" title="방어구 전용 수치 데이터 구조체" alt="" coords="392,157,486,184"/>
+<area shape="poly" id="edge10_Node000006_Node000007" title=" " alt="" coords="321,168,394,169,389,172,323,173"/>
+<area shape="rect" id="Node000008" href="$struct_f_weapon_stats.html" title="무기 전용 수치 데이터 구조체" alt="" coords="385,208,492,235"/>
+<area shape="poly" id="edge11_Node000006_Node000008" title=" " alt="" coords="316,186,388,206,383,208,317,191"/>
+<area shape="rect" id="Node000014" href="$struct_f_a_i_unit_assets.html" title="AI 제어 유닛(적, 퍼밀리어) 공통 리소스" alt="" coords="386,360,492,387"/>
+<area shape="poly" id="edge17_Node000013_Node000014" title=" " alt="" coords="316,404,388,386,383,388,317,409"/>
+<area shape="rect" id="Node000017" href="$struct_f_character_assets.html" title="플레이어 캐릭터 전용 리소스 (UI, 스킬 슬롯 등)" alt="" coords="375,411,502,437"/>
+<area shape="poly" id="edge20_Node000013_Node000017" title=" " alt="" coords="326,421,377,423,372,425,327,427"/>
+<area shape="rect" id="Node000015" href="$struct_f_enemy_assets.html" title="몬스터 전용 에셋 테이블 구조체" alt="" coords="553,323,664,349"/>
+<area shape="poly" id="edge18_Node000014_Node000015" title=" " alt="" coords="506,356,555,347,550,349,508,361"/>
+<area shape="rect" id="Node000016" href="$struct_f_familiar_assets.html" title="몬스터 전용 스탯 테이블 구조체" alt="" coords="550,373,667,400"/>
+<area shape="poly" id="edge19_Node000014_Node000016" title=" " alt="" coords="507,376,552,382,547,382,508,381"/>
+<area shape="rect" id="Node000019" href="$struct_f_a_i_unit_stats.html" title="AI가 제어하는 유닛(몬스터, 패밀리어)이 추가로 가지는 전투 정보 구조체입니다." alt="" coords="390,461,487,488"/>
+<area shape="poly" id="edge22_Node000018_Node000019" title=" " alt="" coords="321,472,393,474,387,475,321,477"/>
+<area shape="rect" id="Node000022" href="$struct_f_character_stats.html" title="플레이어 캐릭터의 &#39;성장 규칙&#39;과 &#39;고유 스킬&#39; 데이터를 정의하는 구조체" alt="" coords="380,512,497,539"/>
+<area shape="poly" id="edge25_Node000018_Node000022" title=" " alt="" coords="317,490,389,511,383,511,316,495"/>
+<area shape="rect" id="Node000020" href="$struct_f_enemy_stats.html" title=" " alt="" coords="558,436,659,463"/>
+<area shape="poly" id="edge23_Node000019_Node000020" title=" " alt="" coords="502,463,555,457,560,457,503,468"/>
+<area shape="rect" id="Node000021" href="$struct_f_familiar_stats.html" title=" " alt="" coords="555,487,662,513"/>
+<area shape="poly" id="edge24_Node000019_Node000021" title=" " alt="" coords="502,481,558,492,552,492,502,487"/>
+</map>

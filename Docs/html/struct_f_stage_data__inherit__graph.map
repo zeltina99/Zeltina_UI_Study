@@ -1,0 +1,5 @@
+<map id="FStageData" name="FStageData">
+<area shape="rect" id="Node000001" title="스테이지 정보를 정의하는 데이터 테이블 행(Row) 구조체입니다." alt="" coords="18,80,110,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,123,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="66,46,67,80,61,79,62,50"/>
+</map>

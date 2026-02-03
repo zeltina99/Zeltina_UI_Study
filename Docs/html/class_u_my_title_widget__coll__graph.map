@@ -1,0 +1,5 @@
+<map id="UMyTitleWidget" name="UMyTitleWidget">
+<area shape="rect" id="Node000001" title="게임의 타이틀 화면을 관리하는 위젯 클래스입니다." alt="" coords="43,80,158,107"/>
+<area shape="rect" id="Node000002" title=" " alt="" coords="5,5,196,32"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="102,46,103,81,98,79,99,50"/>
+</map>
