@@ -5,11 +5,14 @@
 #include "Blueprint/UserWidget.h"
 #include "Framework/MyGameInstance.h"
 #include "Component/GachaComponent.h" // ★ 헤더 파일 포함 필수!
+#include "Engine/AssetManager.h"        // ★ 필수: 비동기 로더 접근용
+#include "Engine/StreamableManager.h"   // ★ 필수: 스트리머블 매니저
+
+#pragma region 초기화
 
 ALobbyPlayerController::ALobbyPlayerController()
 {
 	bShowMouseCursor = true;
-
 	GachaComponent = CreateDefaultSubobject<UGachaComponent>(TEXT("GachaComponent"));
 }
 
@@ -19,12 +22,11 @@ void ALobbyPlayerController::BeginPlay()
 
 	UMyGameInstance* GI = Cast<UMyGameInstance>(GetGameInstance());
 
-	// 1. "무엇을 띄울지" 결정 (여기선 아직 로딩 안 함, 주소만 결정)
+	// 1. 초기 화면 결정
 	TSoftClassPtr<UUserWidget> TargetSoftClass = MainMenuWidgetClass;
 
 	if (GI && GI->NextLobbyScreen == FName("StageMap"))
 	{
-		// 맵을 띄워야 한다면 맵 주소로 변경
 		if (!StageMapWidgetClass.IsNull())
 		{
 			TargetSoftClass = StageMapWidgetClass;
@@ -32,90 +34,99 @@ void ALobbyPlayerController::BeginPlay()
 		GI->NextLobbyScreen = FName("Main");
 	}
 
-	// 2. 결정된 녀석만 "진짜 로딩" (동기 로드)
-	// (MainMenu를 띄울 땐 StageMap은 메모리에 안 올라감! -> 최적화 성공)
-	if (!TargetSoftClass.IsNull())
-	{
-		UClass* WidgetClass = TargetSoftClass.LoadSynchronous(); // ★ 여기서 로딩!
-
-		if (WidgetClass)
-		{
-			CurrentWidgetInstance = CreateWidget<UUserWidget>(this, WidgetClass);
-			if (CurrentWidgetInstance)
-			{
-				CurrentWidgetInstance->AddToViewport();
-
-				// 4. 입력 모드 설정
-				FInputModeUIOnly Mode;
-				Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-				SetInputMode(Mode);
-				bShowMouseCursor = true;
-			}
-		}
-		else
-		{
-			UE_LOG(LogTemp, Error, TEXT("TargetClass is NULL! Check PC_Lobby Blueprint settings."));
-		}
-	}
+	// 2. 비동기 로딩 시작
+	ChangeWidgetAsync(TargetSoftClass);
 }
+
+#pragma endregion 초기화
+
+#pragma region UI 네비게이션
 
 void ALobbyPlayerController::ShowScreen(FName ScreenName)
 {
-	// 문자열(Name) 비교를 통해 어떤 위젯을 띄울지 결정
-	if (ScreenName == "Main")
-	{
-		ChangeWidget(MainMenuWidgetClass);
-	}
-	else if (ScreenName == "StageMap") // 배틀/스테이지
-	{
-		ChangeWidget(StageMapWidgetClass);
-	}
-	else if (ScreenName == "Character") // 편성 (인벤토리)
-	{
-		ChangeWidget(InventoryWidgetClass);
-	}
-	else if (ScreenName == "Summon") // ★ [수정] 이제 구현됨!
-	{
-		// 가챠 팝업 위젯으로 교체
-		ChangeWidget(SummonPopupWidgetClass);
-	}
+	TSoftClassPtr<UUserWidget> TargetClass = nullptr;
+
+	if (ScreenName == "Main")           TargetClass = MainMenuWidgetClass;
+	else if (ScreenName == "StageMap")  TargetClass = StageMapWidgetClass;
+	else if (ScreenName == "Character") TargetClass = InventoryWidgetClass;
+	else if (ScreenName == "Summon")    TargetClass = SummonPopupWidgetClass;
 	else
 	{
-		UE_LOG(LogTemp, Warning, TEXT("[LobbyController] Unknown Screen Name: %s"), *ScreenName.ToString());
+		UE_LOG(LogTemp, Warning, TEXT("[LobbyController] Unknown Screen: %s"), *ScreenName.ToString());
+		return;
 	}
+
+	// 비동기 전환 요청
+	ChangeWidgetAsync(TargetClass);
 }
 
-void ALobbyPlayerController::ChangeWidget(TSoftClassPtr<UUserWidget> NewWidgetClass)
+#pragma endregion UI 네비게이션
+
+#pragma region 비동기 로딩 로직
+
+void ALobbyPlayerController::ChangeWidgetAsync(TSoftClassPtr<UUserWidget> NewWidgetClass)
 {
 	// 1. 유효성 검사
 	if (NewWidgetClass.IsNull())
 	{
-		UE_LOG(LogTemp, Error, TEXT("[LobbyController] Widget Class is NULL! Check Blueprint Settings."));
+		UE_LOG(LogTemp, Error, TEXT("❌ [LobbyController] Widget Class is NULL! Check BP."));
 		return;
 	}
 
-	// 2. 기존 위젯 정리 (메모리 관리 및 화면 겹침 방지)
+	// 2. 최적화: 이미 로드된 에셋이라면 즉시 교체 (메모리에 있는 경우)
+	if (NewWidgetClass.IsValid())
+	{
+		OnWidgetLoaded(NewWidgetClass);
+		return;
+	}
+
+	// 3. 로딩 중 UI 표시 (여기서 '로딩중...' 위젯을 띄우면 완벽합니다)
+	UE_LOG(LogTemp, Log, TEXT("[AsyncLoad] Start loading widget..."));
+
+	// 4. 비동기 로드 요청 (RequestAsyncLoad)
+	FStreamableManager& Streamable = UAssetManager::Get().GetStreamableManager();
+
+	CurrentLoadHandle = Streamable.RequestAsyncLoad(
+		NewWidgetClass.ToSoftObjectPath(), // 로드할 경로
+		FStreamableDelegate::CreateUObject(this, &ALobbyPlayerController::OnWidgetLoaded, NewWidgetClass) // 콜백
+	);
+}
+
+void ALobbyPlayerController::OnWidgetLoaded(TSoftClassPtr<UUserWidget> LoadedWidgetClass)
+{
+	// 1. 클래스 가져오기 (이미 로드되었으므로 Get()은 즉시 리턴됨)
+	UClass* WidgetClass = LoadedWidgetClass.Get();
+
+	if (!WidgetClass)
+	{
+		UE_LOG(LogTemp, Error, TEXT("[AsyncLoad] Failed to resolve class from SoftPtr."));
+		return;
+	}
+
+	// 2. 기존 위젯 제거
 	if (CurrentWidgetInstance)
 	{
 		CurrentWidgetInstance->RemoveFromParent();
-		CurrentWidgetInstance = nullptr;	
+		CurrentWidgetInstance = nullptr;
 	}
 
-	// 3. 동기 로드 및 생성
-	// (규모가 커지면 비동기 로드 StreamableManager 권장)
-	UClass* WidgetClass = NewWidgetClass.LoadSynchronous();
-	if (WidgetClass)
+	// 3. 새 위젯 생성 및 부착
+	CurrentWidgetInstance = CreateWidget<UUserWidget>(this, WidgetClass);
+	if (CurrentWidgetInstance)
 	{
-		CurrentWidgetInstance = CreateWidget<UUserWidget>(this, WidgetClass);
-		if (CurrentWidgetInstance)
-		{
-			CurrentWidgetInstance->AddToViewport();
+		CurrentWidgetInstance->AddToViewport();
 
-			// 4. 입력 모드 설정 (UI 전용 모드)
-			FInputModeUIOnly Mode;
-			Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-			SetInputMode(Mode);
-			bShowMouseCursor = true;
-		}
+		// 입력 모드 설정
+		FInputModeUIOnly Mode;
+		Mode.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+		SetInputMode(Mode);
+		bShowMouseCursor = true;
+
+		UE_LOG(LogTemp, Log, TEXT("[AsyncLoad] Widget changed successfully!"));
 	}
+
+	// 4. 로딩 핸들 초기화 (메모리 관리)
+	CurrentLoadHandle.Reset();
 }
+
+#pragma endregion 비동기 로딩 로직

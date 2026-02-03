@@ -47,11 +47,11 @@ private:
 	UPROPERTY(meta = (BindWidget))
 	TObjectPtr<UButton> StageBtn;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> ShopBtn;
+	TObjectPtr<UButton> SummonBtn;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> CharacterBtn;
+	TObjectPtr<UButton> PartyBtn;
 	UPROPERTY(meta = (BindWidget))
-	TObjectPtr<UButton> EquipmentBtn;
+	TObjectPtr<UButton> EnhanceBtn;
 #pragma endregion
 
 	/**
@@ -63,9 +63,9 @@ private:
 
 #pragma region 내부 클릭 핸들러 (Delegate Broadcast용)
 	UFUNCTION() void OnStageClicked();
-	UFUNCTION() void OnShopClicked();
-	UFUNCTION() void OnCharacterClicked();
-	UFUNCTION() void OnEquipmentClicked();
+	UFUNCTION() void OnSummonClicked();
+	UFUNCTION() void OnPartyClicked();
+	UFUNCTION() void OnEnhanceClicked();
 #pragma endregion
 
 };

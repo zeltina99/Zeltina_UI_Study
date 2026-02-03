@@ -6,10 +6,11 @@
 #include "GameFramework/PlayerController.h"
 #include "LobbyPlayerController.generated.h"
 
-// 전방 선언
+#pragma region 전방선언
 class UUserWidget;
 class UGachaComponent;
-class ULobbyMainWidget;
+struct FStreamableHandle; // 비동기 로딩 핸들
+#pragma endregion 전방선언
 
 /**
  * @class ALobbyPlayerController
@@ -22,60 +23,68 @@ class UI_TEST_API ALobbyPlayerController : public APlayerController
 	GENERATED_BODY()
 
 public:
+#pragma region 초기화
 	ALobbyPlayerController();
-
-public:
-	/**
-	 * @brief 지정된 이름의 화면으로 UI를 교체한다.
-	 * @details 기존에 띄워진 위젯을 제거하고, 요청된 이름에 해당하는 새 위젯을 로드하여 띄운다.
-	 * @param ScreenName 전환할 화면의 식별자 (예: "Main", "StageMap", "Formation", "Summon").
-	 */
-	UFUNCTION(BlueprintCallable)
-	void ShowScreen(FName ScreenName);
 
 protected:
 	virtual void BeginPlay() override;
+#pragma endregion 초기화
+
+public:
+#pragma region UI 네비게이션
+	/**
+	 * @brief 화면 전환을 요청한다. (Main, StageMap, Character, Summon)
+	 * @param ScreenName 전환할 화면의 태그 이름
+	 */
+	UFUNCTION(BlueprintCallable, Category = "Lobby|UI")
+	void ShowScreen(FName ScreenName);
+#pragma endregion UI 네비게이션
+
+protected:
+#pragma region 비동기 로딩 로직 (Async Loading)
+	/**
+	 * @brief 기존 위젯을 내리고 새로운 위젯을 **비동기**로 로드하여 띄운다.
+	 * @details LoadSynchronous 대신 RequestAsyncLoad를 사용하여 메인 스레드 블로킹을 방지한다.
+	 * @param NewWidgetClass 띄울 위젯의 Soft Class Pointer
+	 */
+	void ChangeWidgetAsync(TSoftClassPtr<UUserWidget> NewWidgetClass);
+
+	/**
+	 * @brief 비동기 로딩이 완료되었을 때 호출되는 콜백 함수.
+	 * @param LoadedWidgetClass 로드가 완료된 위젯 클래스 정보
+	 */
+	void OnWidgetLoaded(TSoftClassPtr<UUserWidget> LoadedWidgetClass);
+#pragma endregion 비동기 로딩 로직
+
+protected:
+#pragma region 위젯 클래스 정보 (Data-Driven)
+	UPROPERTY(EditDefaultsOnly, Category = "Lobby|UI")
+	TSoftClassPtr<UUserWidget> MainMenuWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Lobby|UI")
+	TSoftClassPtr<UUserWidget> StageMapWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Lobby|UI")
+	TSoftClassPtr<UUserWidget> InventoryWidgetClass;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Lobby|UI")
+	TSoftClassPtr<UUserWidget> SummonPopupWidgetClass;
+#pragma endregion 위젯 클래스 정보
+
+public:
+#pragma region 컴포넌트
+	/** @brief 가챠 로직 컴포넌트 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
+	TObjectPtr<UGachaComponent> GachaComponent = nullptr;
+#pragma endregion 컴포넌트
 
 private:
-	/**
-	 * @brief 기본 로비 UI (WBP_Lobby).
-	 */
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSoftClassPtr<UUserWidget> MainMenuWidgetClass = nullptr;
-
-	/**
-	 * @brief 스테이지 맵 UI (WBP_StageMap)
-	 */
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSoftClassPtr<UUserWidget> StageMapWidgetClass = nullptr;
-
-	/**
-	 * @brief 편성(인벤토리) 및 도감 위젯 클래스.
-	 */
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSoftClassPtr<UUserWidget> InventoryWidgetClass = nullptr;
-
-	/**
-	 * @brief 가챠 소환 팝업 위젯 클래스.
-	 */
-	UPROPERTY(EditDefaultsOnly, Category = "UI")
-	TSoftClassPtr<UUserWidget> SummonPopupWidgetClass = nullptr;
-
-	/**
-	 * @brief 현재 화면에 띄워져 있는 위젯 인스턴스 (관리용).
-	 */
+#pragma region 내부 상태
+	/** @brief 현재 화면에 떠 있는 위젯 인스턴스 */
 	UPROPERTY()
 	TObjectPtr<UUserWidget> CurrentWidgetInstance = nullptr;
 
-	/**
-	 * @brief 실제 위젯 교체 로직을 수행하는 내부 함수.
-	 * @details 동기 로드(LoadSynchronous)를 통해 에셋을 로드하고, 뷰포트에 추가한다.
-	 * @param NewWidgetClass 교체할 위젯의 Soft Class Pointer.
-	 */
-	void ChangeWidget(TSoftClassPtr<UUserWidget> NewWidgetClass);
-
-public:
-	/** @brief 가챠 로직을 담당하는 컴포넌트 */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	TObjectPtr<UGachaComponent> GachaComponent = nullptr;
+	/** @brief 현재 진행 중인 로딩 핸들 (로딩 취소 등에 사용 가능) */
+	TSharedPtr<FStreamableHandle> CurrentLoadHandle;
+#pragma endregion 내부 상태
 };
